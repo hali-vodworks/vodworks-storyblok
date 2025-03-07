@@ -15,8 +15,6 @@
                 <div class="text-card rendered-list" v-html="$md.render(data.content.list)"></div>
 
 
-
-
                 <div v-if="button.btnURL === 'isStatic'">
    
                     <div v-scroll-to="'#GetInTouchWithUs'" class="btn-primary btn-md btn-lg mt-8 inline-block cursor-pointer">
@@ -25,7 +23,7 @@
 
                 </div>
                 <div v-if="button.btnURL === 'isDynamic'">
-                    <NuxtLink :to="'/services/' + data.slug" class="btn-text mt-8 inline-block">
+                    <NuxtLink :to="'/services/' + data.slug + '/'" class="btn-text mt-8 inline-block">
                         Read More
                     </NuxtLink>
                 </div>
