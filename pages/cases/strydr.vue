@@ -1,141 +1,96 @@
 <!-- eslint-disable vue/no-v-html -->
 <template>
   <div>
+    <!-----------  Hero section --------------------------------------------------------->
+    <CsHero :data="{
+      content: getSingleCsHero,
+      hasMorePadding: true,
+    }" />
+    <!----------------------------------------------------------------------------------->
 
-    <!-----------  Hero section ---------------------------->
-    <section v-if="getSingleCsHero" class="single-cs bgColor-tertiary-black color-white">
+    <!-------------- About the Client --------------------------------------------------->
+    <CsBrief :data="Brief" />
+    <!----------------------------------------------------------------------------------->
 
-      <div class="hero">
-        <div class="grid items-center md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 mx-auto gap-0 md:gap-8">
-          <div class="py-8 lg:py-4 order-2 lg:order-1 content">
+    <!--------------- The Scope  -------------------------------------------------------->
+    <CsScope :data="Scope" />
+    <!----------------------------------------------------------------------------------->
 
-            <div class="overview md:w-4/5 relative">
-              <h1 class="cs-title">{{ getSingleCsHero.cs_title }} </h1>
-              <template v-if="getSingleCsHero.client_logo.filename">
-                <a :href="getSingleCsHero.client_url" target="_blank" rel="noopener noreferrer nofollow">
-                  <img :src="getSingleCsHero.client_logo.filename" :alt="getSingleCsHero.client_logo.alt" />
-                </a>
-              </template>
-            </div>
-            <div v-if="getSingleCsHero.cs_overview" class="mt-8 md:w-4/5"
-              v-html="$md.render(getSingleCsHero.cs_overview)"></div>
+    <!-------------- Featured Image ---------------------------------------------------->
+    <CsFeaturedImage :data="getSingleCsFeaturedImage" />
+    <!----------------------------------------------------------------------------------->
 
-          </div>
-          <div class="order-1 lg:order-2">
-            <img class="w-full" :src="getSingleCsHero.hero_featured_image.filename"
-              :alt="getSingleCsHero.hero_featured_image.alt" />
-          </div>
-        </div>
-      </div>
-    </section>
-    <!----------------------------------------------------------------------------->
-
-    <!------------- Section 8 by 4 cols with Grey background --------------------------->
-    <section v-if="Section8by4ColsWithGreyBackground" class="single-cs lg:py-32 py-14 bgColor-normal-grey">
-      <div class="mx-auto container">
-        <div class="grid md:grid-cols-12 lg:grid-cols-12 xl:grid-cols-12 gap-12">
-
-          <div class="md:col-span-8 my-auto">
-            <h2 class="text-center lg:text-left">{{ Section8by4ColsWithGreyBackground.title_1 }}</h2>
-            <div class="lg:w-4/5" v-html="$md.render(Section8by4ColsWithGreyBackground.description_1)">
-            </div>
-          </div>
-
-          <div class="md:col-span-4">
-            <h2 class="text-center lg:text-left">{{ Section8by4ColsWithGreyBackground.title_2 }}</h2>
-            <div v-html="$md.render(Section8by4ColsWithGreyBackground.description_2)">
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-    <!----------------------------------------------------------------------------->
-
-    <!--------------Challenge --------------------------------------->
-    <section v-if="getSingleCsChallenge" class="single-cs lg:py-32 py-14">
+    <!--------------- Approach  --------------------------------------------------------->
+    <section v-if="Approach" class="single-cs lg:py-32 py-14 bgColor-normal-grey">
       <div class="mx-auto container">
         <div class="md:max-w-4/5 mx-auto">
-          <div class="text-center">
-            <h2>{{ getSingleCsChallenge.title }}</h2>
-          </div>
-
-          <div v-html="$md.render(getSingleCsChallenge.description)">
-          </div>
-
-        </div>
-      </div>
-    </section>
-    <!----------------------------------------------------------------------------------->
-
-    <!-------------- Featured Dark Section -------------------------------------->
-    <section v-if="getSingleCsFullWidthDarkSection" class="single-cs lg:py-32 py-14 bgColor-tertiary-black">
-      <div class="container mx-auto">
-        <div class="grid lg:grid-cols-1 xl:grid-cols-1 items-center mx-auto">
-          <div class="md:max-w-4/5 mx-auto color-white">
-
-            <div class="text-center">
-              <h2>{{ getSingleCsFullWidthDarkSection.title }}</h2>
-            </div>
-
-            <div v-html="$md.render(getSingleCsFullWidthDarkSection.description)">
-            </div>
-
-          </div>
-
-        </div>
-      </div>
-    </section>
-    <!----------------------------------------------------------------------------------->
-
-    <!---------------Featured Image 2---------------------------------------->
-    <section v-if="getSingleCsFeaturedImage2" class="single-cs">
-      <img class="w-full" :src="getSingleCsFeaturedImage2.image.filename" :alt="getSingleCsFeaturedImage2.image.alt" />
-    </section>
-    <!----------------------------------------------------------------------------------->
-
-    <!--------------- Features  --------------------------------------->
-    <section v-if="getSingleCsFeatures" class="single-cs lg:py-32 py-14 bgColor-normal-grey">
-      <div class="mx-auto container">
-        <div class="md:max-w-4/5 mx-auto">
-          <div class="text-center">
-            <h2 v-in-viewport><span class="bgFill"><span class="textClip">{{ getSingleCsFeatures.title }}</span></span>
+          <div class="text-center md:max-w-4/5 mx-auto">
+            <h2 v-in-viewport.once><span class="bgFill"><span class="textClip">{{ Approach.title }}</span></span>
             </h2>
           </div>
+          <div class="mt-8 lg:mt-16" v-html="$md.render(Approach.description)"> </div>
 
-          <div v-html="$md.render(getSingleCsFeatures.description)"> </div>
+          <!-- Development Lifecycle -->
+          <div class="bg-no-repeat dev_life_cycle grid lg:grid-cols-4 xl:grid-cols-4 gap-4 mx-auto mt-8 lg:mt-16">
+            <template v-for="card, i in Approach.cards">
+              <div :key="i" class="default-card card-utilities hvr-effect overflow-visible">
+                <img class="card-icon hvr-top lazyload" :src="card.icon.filename" :alt="card.icon.alt" />
+                <h4 class="mt-4 lg:mt-8 mb-4 lg:mb-4 text-big">{{ card.title }}</h4>
+                <div class="text-card flex-grow-1" v-html="$md.render(card.description)"></div>
+              </div>
+            </template>
+          </div>
 
         </div>
       </div>
     </section>
     <!----------------------------------------------------------------------------------->
 
-    <!---------------  Results and Image -------------------------------------->
-    <section v-if="getSingleCsFeaturedTextPlusImage" class="single-cs bgColor-tertiary-black color-white">
+    <!--------------- How Vodworks Helped and Project Management  ----------------------->
+    <section v-if="FullWidthWhiteBgSection" class="lg:py-32 py-14 single-cs">
+      <div class="mx-auto container">
+        <div class="row md:max-w-4/5 mx-auto">
 
-      <div class="hero">
-        <div class="grid items-center md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 mx-auto gap-0 md:gap-8">
-          <div class="py-8 lg:py-4 order-2 lg:order-1 content">
-
-            <h2 class="text-center lg:text-left">{{ getSingleCsFeaturedTextPlusImage.title }}</h2>
-            <div class="white-box" v-html="$md.render(getSingleCsFeaturedTextPlusImage.description)"></div>
-
+          <div class="mx-auto mt-8 lg:mt-16 grid">
+            <div class="text-center">
+              <h3>{{ FullWidthWhiteBgSection.title }}</h3>
+            </div>
+            <div class="mt-8" v-html="$md.render(FullWidthWhiteBgSection.description)"></div>
           </div>
-          <div class="order-1 lg:order-2">
-            <img class="w-full" :src="getSingleCsFeaturedTextPlusImage.featured_image.filename"
-              :alt="getSingleCsFeaturedTextPlusImage.featured_image.alt" />
-          </div>
+
         </div>
       </div>
     </section>
+    <!----------------------------------------------------------------------------------->
 
-    <!------------------------------- Get in Touch with us-------------------------------------->
+    <!---------------  Technical Stack -------------------------------------------------->
+    <CsTechStack :data="{
+      content: TechnicalStack,
+      layout: 'cols-3',
+    }" />
+    <!----------------------------------------------------------------------------------->
+
+    <!------------ The Vodworks project team -------------------------------------------->
+    <CsTeam :data="{
+      content: Team,
+      layout: 'md:grid-cols-2 lg:grid-cols-5 xl:grid-cols-5'
+    }" />
+    <!----------------------------------------------------------------------------------->
+
+    <!--------------- The Result -------------------------------------------------------->
+    <CsResult :data="Result" />
+    <!----------------------------------------------------------------------------------->
+
+    <!-------------------------------------------FAQs------------------------------------>
+    <FAQs :payload="FAQs" />
+    <!----------------------------------------------------------------------------------->
+
+    <!------------------------------- Get in Touch with us------------------------------->
     <GetInTouchWithUs :data="{
       title: 'Get in Touch with us',
       isDarkSectionAtTop: true
     }" />
-    <!------------------------------------------------------------------------------------------>
+    <!---------------------------------------------------------------------------------->
 
   </div>
 </template>
@@ -153,7 +108,7 @@ const loadData = function ({
     .get(`cdn/stories${path}`, {
       version,
       resolve_links: 'story,url',
-      resolve_relations: 'case-studies-container.case_studies,case_studies.case-study,case-studies-container.case-study',
+      resolve_relations: 'case-studies-container.case_studies,case_studies.case-study,case-studies-container.case-study,faqs-container.list_of_faqs',
       cv: cacheVersion,
     })
     .then((res) => {
@@ -205,10 +160,6 @@ export default {
   },
 
 
-  data() {
-    return { story: { content: {} } }
-  },
-
   head() {
     return {
       title: `${this.story.content.title}`,
@@ -250,104 +201,68 @@ export default {
           name: 'twitter:card',
           content: `${this.story.content.thumbnail.filename}`,
         },
-
+      ],
+      script: [
+        {
+          type: 'application/ld+json',
+          json: this.generateFaqSchema(),
+        },
       ],
     }
   },
 
 
   computed: {
-
-    // Hero
     getSingleCsHero() {
       return this.story.content.cs_full_details.find(function (obj) {
         return obj.component === 'single-cs-hero';
       })
     },
-
-    // Section 8 by 4 cols with whit background
-    Section8by4ColsWithGreyBackground() {
+    Brief() {
       return this.story.content.cs_full_details.find(function (obj) {
-        return obj.component === 'single-cs-section-eight-by-four-with-grey-bg';
+        return obj.component === 'cs-fw-brief';
       })
     },
-
-    // Section 12 cols with white background
-    Section12ColsWithGreyBackground() {
+    Scope() {
       return this.story.content.cs_full_details.find(function (obj) {
-        return obj.component === 'single-cs-section-12-cols-with-grey-bg';
+        return obj.component === 'cs-scope';
       })
     },
-
-    //  Featured section blue and white 0
-    FeaturedSectionBlueAndWhite_0() {
+    getSingleCsFeaturedImage() {
       return this.story.content.cs_full_details.find(function (obj) {
-        return obj.component === 'single-cs-featured-section-blue-and-white-0';
+        return obj.component === 'cs-fw-featured-image';
       })
     },
-
-    // Featured Image 1
-    getSingleCsFeaturedImage1() {
+    Approach() {
       return this.story.content.cs_full_details.find(function (obj) {
-        return obj.component === 'single-cs-featured-image-1';
+        return obj.component === 'cs-approach_with_cards';
       })
     },
-
-    // Challenge
-    getSingleCsChallenge() {
-      return this.story.content.cs_full_details.find(function (obj) {
-        return obj.component === 'single-cs-challenge';
-      })
-    },
-
-
-    //  Featured section blue and white 1
-    FeaturedSectionBlueAndWhite_1() {
-      return this.story.content.cs_full_details.find(function (obj) {
-        return obj.component === 'single-cs-featured-section-blue-and-white-1';
-      })
-    },
-
-    // Full Width Dark Section
-    getSingleCsFullWidthDarkSection() {
-      return this.story.content.cs_full_details.find(function (obj) {
-        return obj.component === 'single-cs-full-width-dark-section';
-      })
-    },
-
-    // Full Width White Background
-    getSingleCsFullWidthWhiteBackground() {
+    FullWidthWhiteBgSection() {
       return this.story.content.cs_full_details.find(function (obj) {
         return obj.component === 'single-cs-full-width-white-bg';
       })
     },
-
-    // Featured Image 2
-    getSingleCsFeaturedImage2() {
+    TechnicalStack() {
       return this.story.content.cs_full_details.find(function (obj) {
-        return obj.component === 'single-cs-featured-image-2';
+        return obj.component === 'cs-technical-stack';
       })
     },
-
-    // Features
-    getSingleCsFeatures() {
+    Team() {
       return this.story.content.cs_full_details.find(function (obj) {
-        return obj.component === 'single-cs-features';
+        return obj.component === 'cs_team';
       })
     },
-
-    // Results And Review
-    getSingleCsResultsAndReview() {
+    Result() {
       return this.story.content.cs_full_details.find(function (obj) {
-        return obj.component === 'single-cs-results-and-review';
+        return obj.component === 'cs-result';
       })
     },
-
-    getSingleCsFeaturedTextPlusImage() {
+    FAQs() {
       return this.story.content.cs_full_details.find(function (obj) {
-        return obj.component === 'single-cs-featured-text-plus-image';
+        return obj.component === 'faqs-container';
       })
-    }
+    },
 
   },
 
@@ -362,6 +277,24 @@ export default {
       }
     })
   },
+
+  methods: {
+    generateFaqSchema() {
+      return {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": this.FAQs.list_of_faqs.map(faq => ({
+          "@type": "Question",
+          "name": faq.content.question,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": faq.content.answer
+          }
+        }))
+      };
+    }
+  }
+
 }
 
 </script>
