@@ -747,7 +747,7 @@
         p {
             font-size: 16px;
         }
-        ul {
+        ul, ol {
             li {
                 font-size: 16px;
             }
@@ -822,6 +822,12 @@
                 padding: 18px;
                 gap: 16px;
             }
+        }
+        h3{
+            font-size: 24px !important;
+        }
+        h4{
+            font-size: 18px;
         }
     }
 

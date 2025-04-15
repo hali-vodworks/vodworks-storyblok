@@ -55,6 +55,11 @@ h1, .heading-1 {
   .text-card {
     font-size: 16px;
     letter-spacing: -0.8px;
+    p{
+      font-size: 16px !important;
+      letter-spacing: -0.8px;
+      margin-top: 0 !important;
+    }
   }
   .text-small {
     font-size: 14px;
