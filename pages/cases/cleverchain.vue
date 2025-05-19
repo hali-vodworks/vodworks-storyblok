@@ -5,6 +5,7 @@ te<!-- eslint-disable vue/no-v-html -->
     <CsHero :data="{
       content: getSingleCsHero,
       hasMorePadding: false,
+      imageHeightFull: false,
     }" />
     <!----------------------------------------------------------------------------->
 

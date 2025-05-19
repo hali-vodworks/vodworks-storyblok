@@ -7,7 +7,7 @@
                     <div v-if="data.content.cs_overview" class="mt-8"
                         v-html="$md.render(data.content.cs_overview)"></div>
                 </div>
-                <div class="md:col-span-5">
+                <div class="md:col-span-5" :class="data.imageHeightFull ? 'fullheightImage': ''">
                     <img class="w-full featured-img" :src="data.content.hero_featured_image.filename"
                         :alt="data.content.hero_featured_image.alt" />
                 </div>
@@ -28,8 +28,6 @@
 </template>
 
 <script>
-import { data } from 'jquery';
-
 
 export default {
     name: 'CsHero',

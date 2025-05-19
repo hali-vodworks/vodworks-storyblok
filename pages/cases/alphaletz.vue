@@ -5,6 +5,7 @@
         <CsHero :data="{
             content: getSingleCsHero,
             hasMorePadding: true,
+            imageHeightFull: false,
         }" />
         <!----------------------------------------------------------------------------------->
 

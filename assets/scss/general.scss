@@ -229,6 +229,11 @@ li {
     left: 0;
     right: 0;
   }
+  .fullheightImage{
+    img{
+      height: 100%;
+    }
+  }
 }
 .single-cs{
   .hero-content{
