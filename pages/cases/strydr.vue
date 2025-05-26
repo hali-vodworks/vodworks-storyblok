@@ -21,6 +21,10 @@
     <CsFeaturedImage :data="getSingleCsFeaturedImage" />
     <!----------------------------------------------------------------------------------->
 
+    <!---------------  Review ----------------------------------------------------------->
+    <CsReview :data="Review" />
+    <!----------------------------------------------------------------------------------->
+
     <!--------------- Approach  --------------------------------------------------------->
     <section v-if="Approach" class="single-cs lg:py-32 py-14 bgColor-normal-grey">
       <div class="mx-auto container">
@@ -232,6 +236,11 @@ export default {
     getSingleCsFeaturedImage() {
       return this.story.content.cs_full_details.find(function (obj) {
         return obj.component === 'cs-fw-featured-image';
+      })
+    },
+    Review() {
+      return this.story.content.cs_full_details.find(function (obj) {
+        return obj.component === 'cs-review';
       })
     },
     Approach() {
