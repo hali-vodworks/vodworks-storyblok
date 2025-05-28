@@ -594,8 +594,9 @@
     .four-ele-in-grid .industrues-card {
         flex: 0 0 calc(100% - 0px);
     }
-    .four-ele-in-grid .cta-card{
-        flex: 0 0 calc(100%); 
+    .four-ele-in-grid.two-on-mobile{
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
     }
     .cta-card {
         padding: 24px;
