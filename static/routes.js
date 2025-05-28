@@ -61,10 +61,10 @@ export default {
                     name: "Ecommerce & Retail",
                     path: "/industries/ecommerce-and-retail/",
                 },
-                {
-                    name: "Web3",
-                    path: "/industries/web3/",
-                },
+                // {
+                //     name: "Web3",
+                //     path: "/industries/web3/",
+                // },
                 {
                     name: "Sustainability",
                     path: "/industries/sustainability/",

@@ -86,14 +86,9 @@ li {
   object-fit: cover;
 }
 
-
-
-
 .grid-cols-2 {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
-
-
 .center-two-ele-in-grid {
   display: flex;
   flex-wrap: wrap;
@@ -103,6 +98,43 @@ li {
     flex: 0 0 calc(33% - 20px);
     padding: 24px;
   }
+}
+
+// .four-ele-in-grid {
+//   display: flex;
+//   flex-wrap: wrap;
+//   justify-content: center;
+//   gap: 16px;
+
+//   .industrues-card {
+//     flex: 0 0 calc(25% - 20px);
+//     padding: 16px;
+//     h5{
+//       font-size: 18px;
+//     }
+//   }
+//   .cta-card{
+//     flex: 0 0 calc(25% - 20px);
+//   }
+
+// }
+
+.four-ele-in-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  .industrues-card {
+    flex: 0 0 calc(25% - 20px);
+    padding: 16px;
+    h5{
+      font-size: 18px;
+    }
+  }
+  .cta-card{
+    flex: 0 0 calc(25% - 20px);
+  }
+
 }
 
 

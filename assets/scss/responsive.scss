@@ -590,16 +590,16 @@
 
     .center-two-ele-in-grid .item {
         flex: 0 0 calc(100% - 0px);
-
     }
-
+    .four-ele-in-grid .industrues-card {
+        flex: 0 0 calc(100% - 0px);
+    }
+    .four-ele-in-grid .cta-card{
+        flex: 0 0 calc(100%); 
+    }
     .cta-card {
         padding: 24px;
     }
-
-
-
-
 
     /* =====================Journey In Web3======================== */
 

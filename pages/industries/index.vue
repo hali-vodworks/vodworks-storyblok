@@ -18,7 +18,8 @@
           </NuxtLink>
         </div>
         <div class="text-center mx-auto md:max-w-4/5 mt-8 lg:mt-16">
-          <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 mx-auto gap-2 md:gap-4 lg:gap-6">
+          <!--grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 mx-auto gap-2 md:gap-4 lg:gap-6-->
+          <div class="four-ele-in-grid mx-auto gap-2 md:gap-4 lg:gap-6">
             <template v-for="(card, i) in getIndustriesData.industries">
               <IndustryCtaCard :key="i" :data="card" />
             </template>

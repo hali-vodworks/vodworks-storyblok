@@ -133,12 +133,12 @@
                 ECOMMERCE & RETAIL
               </NuxtLink>
             </li>
-
+            <!--
             <li>
               <NuxtLink to="/industries/web3/" class="rounded-md inline-block" @click.native="showMenu = false">
                 WEB3
               </NuxtLink>
-            </li>
+            </li>-->
             <li>
               <NuxtLink to="/industries/sustainability/" class="rounded-md inline-block" @click.native="showMenu = false">
                 SUSTAINABILITY
