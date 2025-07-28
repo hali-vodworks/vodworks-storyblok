@@ -896,5 +896,12 @@
             }
         }
     }
-
+    .myTvMovies-cs-cards{
+        gap: 8px;
+        
+        .operator{
+            width: 12px;
+            height: 12px;
+        }
+    }
 }

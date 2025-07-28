@@ -1410,3 +1410,18 @@ li {
 .leadinModal-49495{
   display: none !important;
 }
+
+.myTvMovies-cs-cards{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap:24px;
+  
+  .card{
+    padding: 8px !important;
+  }
+  .operator{
+    width: 19px;
+    height: 19px;
+  }
+}
