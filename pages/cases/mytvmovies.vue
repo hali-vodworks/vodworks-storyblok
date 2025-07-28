@@ -37,7 +37,6 @@
           </div>
 
           <div class="myTvMovies-cs-cards">
-            
             <NuxtLink to="/cases/vidscape/"><img class="default-card card-utilities card" src="~/assets/img/cases/mytvmovies/VS-wv.png" alt="image" /></NuxtLink>
             <img class="operator" src="~/assets/img/cases/mytvmovies/plus.svg" alt="image" />
             <img class="default-card card-utilities card" src="~/assets/img/cases/mytvmovies/roe-r1.png" alt="image" />
