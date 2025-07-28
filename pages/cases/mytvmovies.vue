@@ -13,12 +13,16 @@
     <CsBrief :data="Brief" />
     <!----------------------------------------------------------------------------------->
 
+    <!-------------- Featured Image 1---------------------------------------------------->
+    <CsFeaturedImage :data="getSingleCsFeaturedImage1" />
+    <!----------------------------------------------------------------------------------->
+
     <!--------------- The Scope  -------------------------------------------------------->
     <CsScope :data="Scope" />
     <!----------------------------------------------------------------------------------->
 
-    <!-------------- Featured Image 1---------------------------------------------------->
-    <CsFeaturedImage :data="getSingleCsFeaturedImage1" />
+    <!---------------  Review ----------------------------------------------------------->
+    <CsReview :data="Review" />
     <!----------------------------------------------------------------------------------->
 
     <!--------------- The clients VidScape Helped  -------------------------------------->
@@ -32,14 +36,13 @@
 
           </div>
 
-          <!-- CARDs -->
-          <div class="grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 mx-auto gap-8 mt-8 lg:mt-16">
-            <template v-for="(card, index) in Approach.cards">
-              <div :key="index" class="default-card card-utilities text-left">
-                <h4> {{ card.title }}</h4>
-                <p class="flex-grow-1" v-html="$md.render(card.description)"></p>
-              </div>
-            </template>
+          <div class="myTvMovies-cs-cards">
+            
+            <NuxtLink to="/cases/vidscape/"><img class="default-card card-utilities card" src="~/assets/img/cases/mytvmovies/VS-wv.png" alt="image" /></NuxtLink>
+            <img class="operator" src="~/assets/img/cases/mytvmovies/plus.svg" alt="image" />
+            <img class="default-card card-utilities card" src="~/assets/img/cases/mytvmovies/roe-r1.png" alt="image" />
+            <img class="operator" src="~/assets/img/cases/mytvmovies/arrow-right.svg" alt="image" />
+            <img class="default-card card-utilities card" src="~/assets/img/cases/mytvmovies/mytvmovies-com.png" alt="image" />
           </div>
 
         </div>
@@ -47,23 +50,20 @@
     </section>
     <!----------------------------------------------------------------------------------->
 
+    <!-------------- Featured Image 2---------------------------------------------------->
+    <CsFeaturedImage :data="getSingleCsFeaturedImage2" />
+    <!----------------------------------------------------------------------------------->
+
     <!---------------  Technical Stack -------------------------------------------------->
     <CsTechStack :data="{
       content: TechnicalStack,
-      layout: 'cols-5',
+      layout: 'cols-4 vidscape',
     }" />
     <!----------------------------------------------------------------------------------->
 
     <!----------------------------------Team--------------------------------------------->
     <CsTeam :data="{
       content: Team,
-      layout: 'center-two-ele-in-grid'
-    }" />
-    <!----------------------------------------------------------------------------------->
-
-    <!--------------- Features  --------------------------------------------------------->
-    <CsFeatures :data="{
-      Features,
       layout: 'center-two-ele-in-grid'
     }" />
     <!----------------------------------------------------------------------------------->
@@ -219,6 +219,11 @@ export default {
         return obj.component === 'cs-scope';
       })
     },
+    Review() {
+      return this.story.content.cs_full_details.find(function (obj) {
+        return obj.component === 'cs-review';
+      })
+    },
     getSingleCsFeaturedImage1() {
       return this.story.content.cs_full_details.find(function (obj) {
         return obj.component === 'single-cs-featured-image-1';
@@ -229,6 +234,11 @@ export default {
         return obj.component === 'cs-approach_with_cards';
       })
     },
+    getSingleCsFeaturedImage2() {
+      return this.story.content.cs_full_details.find(function (obj) {
+        return obj.component === 'single-cs-featured-image-2';
+      })
+    },
     TechnicalStack() {
       return this.story.content.cs_full_details.find(function (obj) {
         return obj.component === 'cs-technical-stack';
@@ -237,11 +247,6 @@ export default {
     Team() {
       return this.story.content.cs_full_details.find(function (obj) {
         return obj.component === 'cs_team';
-      })
-    },
-    Features() {
-      return this.story.content.cs_full_details.find(function (obj) {
-        return obj.component === 'cs_features';
       })
     },
     Result() {
