@@ -178,7 +178,7 @@ export default {
       }),
       context.app.$storyapi.get('cdn/stories/', {
         version: 'published',
-        starts_with: 'teams/',
+        starts_with: 'team/',
         per_page: 8,
         resolve_relations: 'teams-container.teams',
       }),

@@ -113,7 +113,7 @@ export default {
       // Telecom: 283c74a3-8df8-4a52-b2ef-afbc776b2400
       context.app.$storyapi.get('cdn/stories/', {
         version: 'published',
-        starts_with: 'teams/',
+        starts_with: 'team/',
         resolve_relations: 'teams-container.teams',
         'filter_query[teams_categories][exists]': '283c74a3-8df8-4a52-b2ef-afbc776b2400'
       }),

@@ -164,7 +164,7 @@ export default {
       // Web3: 09d71ae5-67eb-4d4b-b250-3a69421b527f
       context.app.$storyapi.get('cdn/stories/', {
         version: 'published',
-        starts_with: 'teams/',
+        starts_with: 'team/',
         resolve_relations: 'teams-container.teams',
         'filter_query[teams_categories][exists]': '09d71ae5-67eb-4d4b-b250-3a69421b527f'
       }),

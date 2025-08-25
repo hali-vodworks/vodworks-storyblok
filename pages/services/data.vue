@@ -142,7 +142,7 @@ export default {
       // Consulting: 6e27734f-2f09-4108-9292-b27bd8a17870
       context.app.$storyapi.get('cdn/stories/', {
         version: 'published',
-        starts_with: 'teams/',
+        starts_with: 'team/',
         resolve_relations: 'teams-container.teams',
         'filter_query[teams_categories][exists]': '87a4dfac-ca7d-4605-92d1-b95a7bee0a85'
       }),
