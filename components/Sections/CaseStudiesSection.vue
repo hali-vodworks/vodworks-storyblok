@@ -3,7 +3,7 @@
   <section v-if="data.getCasesData" class="lg:py-32 py-14" :class="data.isDarkMode?'bgColor-tertiary-black color-white':''">
     <div class="mx-auto container">
       <div class="text-center">
-        <h2 v-in-viewport>{{ data.title }} <span class="bgFill"><span class="textClip" :class="data.isDarkMode?'color-white':''"> {{ data.animated_word }}</span></span>
+        <h2 v-in-viewport.once>{{ data.title }} <span class="bgFill"><span class="textClip" :class="data.isDarkMode?'color-white':''"> {{ data.animated_word }}</span></span>
           </h2>
       </div>
 

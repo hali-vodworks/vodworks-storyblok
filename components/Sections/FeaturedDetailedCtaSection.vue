@@ -14,7 +14,7 @@
                 </div>
                 <div class="md:col-span-5 empowerment">
                     <div v-for="(benefit, i) in data.list" :key="i" class="my-8">
-                        <p v-in-viewport class="color-white"> <span class="bgFill"><span
+                        <p v-in-viewport.once class="color-white"> <span class="bgFill"><span
                                     class="textClip color-white font-semibold">{{ benefit.intial_title }}</span></span> {{
                                         benefit.remaning_title }}</p>
                     </div>

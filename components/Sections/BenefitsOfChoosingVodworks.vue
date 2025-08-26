@@ -11,7 +11,7 @@
 
         <template v-for="(card, i) in why_choose_vodworks.list">
           <div :key="i" class="my-4 lg:my-4 text-center md:text-left">
-            <h3 v-in-viewport class="mb-4 inline-block capitalize"> <span class="bgFill"><span class="textClip"
+            <h3 v-in-viewport.once class="mb-4 inline-block capitalize"> <span class="bgFill"><span class="textClip"
                   :class="data.isDarkMode ? 'color-white' : ''">{{ card.title }}</span></span> </h3>
             <p class="text-regular">{{ card.description }}</p>
           </div>

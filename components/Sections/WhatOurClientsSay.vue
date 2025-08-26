@@ -5,7 +5,7 @@
 
             <div class="mx-auto container lg:max-w-3/5">
                 <div class="text-center">
-                    <h2 v-in-viewport :class="data.isDarkMode? 'color-white': ''">{{ data.title }} <span class="bgFill"><span class="textClip" :class="data.isDarkMode? 'color-white': ''">{{
+                    <h2 v-in-viewport.once :class="data.isDarkMode? 'color-white': ''">{{ data.title }} <span class="bgFill"><span class="textClip" :class="data.isDarkMode? 'color-white': ''">{{
                         data.animated_word }}</span></span></h2>
                 </div>
             </div>

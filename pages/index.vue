@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <!------------------------------Hero section start---------------------------->
     <section class="bgColor-normal-grey">
 
@@ -23,7 +22,6 @@
       </div>
     </section>
     <!----------------------------------------------------------------------------->
-
 
     <!-------------------------------Statistics section-------------------------------->
     <section class="lg:py-8 py-6 bgColor-tertiary-black">
@@ -48,16 +46,11 @@
     </section>
     <!----------------------------------------------------------------------------------->
 
-
-
-
-
-
     <!----------------------------------Services Listing---------------------------------->
     <section v-if="getServicesData" class="lg:py-32 py-14 bgColor-normal-grey">
       <div class="mx-auto container">
         <div class="text-center">
-          <h2 v-in-viewport>{{ getServicesData.title }} <span class="bgFill"><span class="textClip">{{
+          <h2 v-in-viewport.once>{{ getServicesData.title }} <span class="bgFill"><span class="textClip">{{
             getServicesData.animated_word }}</span></span></h2>
           <p class="mt-4 lg:mt-8 text-big mx-auto md:max-w-1/2">
             {{ getServicesData.description }}
@@ -75,27 +68,21 @@
     </section>
     <!----------------------------------------------------------------------------------->
 
-
     <!---------------------- Our Clients Logos-------------------------------------------->
     <OurClientsLogos :data="{
       ourClients,
     }" />
     <!----------------------------------------------------------------------------------->
 
-
-
     <!-------------------------Empower your business today------------------------------->
     <FeaturedDetailedCtaSection :data="benefits" />
     <!----------------------------------------------------------------------------------->
-
 
     <!--------------------------- Custom Software for Your Business---------------------->
     <CustomSoftwareForYourBusiness />
     <!----------------------------------------------------------------------------------->
 
-
-
-    <!--------------------------------Our Success Stories---------------------------------->
+    <!--------------------------------Our Success Stories-------------------------------->
     <CaseStudiesSection :data="{
       title: 'Our Success',
       animated_word: 'Stories',
@@ -103,18 +90,16 @@
       getCasesData,
       isDarkMode: true,
     }" />
-    <!------------------------------------------------------------------------------------->
+    <!----------------------------------------------------------------------------------->
 
-
-    <!----------------------------- What Our Clients Say ------------------------------------->
+    <!----------------------------- What Our Clients Say -------------------------------->
     <WhatOurClientsSay :data="{
       title: 'What Our Clients',
       animated_word: 'Say',
       getTestimonialsData,
       isDarkMode: false
     }" />
-    <!----------------------------------------------------------------------------------------->
-
+    <!----------------------------------------------------------------------------------->
 
     <!------------------------------ Why Choose Vodworks?-------------------------------->
     <BenefitsOfChoosingVodworks :data="{
@@ -123,8 +108,7 @@
       " />
     <!----------------------------------------------------------------------------------->
 
-
-    <!--------------------------- Meet Our Team --------------------------->
+    <!--------------------------- Meet Our Team ----------------------------------------->
     <MeetOurTeamSection :data="{
       title: 'Meet Our',
       animated_word: 'Team',
@@ -136,7 +120,6 @@
       isDarkMode: false,
     }" />
     <!----------------------------------------------------------------------------------->
-
 
     <!----------------------------- Get in Touch with us--------------------------------->
     <GetInTouchWithUs :data="{

@@ -3,7 +3,7 @@
     <section class="lg:py-32 py-14 bgColor-normal-grey">
         <div class="mx-auto container">
             <div class="text-center">
-                <h2 v-in-viewport>Custom Software for Your <span class="bgFill"><span
+                <h2 v-in-viewport.once>Custom Software for Your <span class="bgFill"><span
                             class="textClip">Business</span></span>
                 </h2>
                 <p class="mt-4 lg:mt-8 text-big mx-auto md:max-w-3/5">

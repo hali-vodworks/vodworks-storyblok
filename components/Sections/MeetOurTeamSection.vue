@@ -4,7 +4,7 @@
         :class="data.isDarkMode ? 'bgColor-tertiary-black' : ' bgColor-normal-grey'">
         <div class="mx-auto container">
             <div class="text-center">
-                <h2 v-in-viewport :class="data.isDarkMode?'color-white':''">{{ data.title }} <span class="bgFill"><span class="textClip" :class="data.isDarkMode?'color-white':''"> {{ data.animated_word }}</span></span>
+                <h2 v-in-viewport.once :class="data.isDarkMode?'color-white':''">{{ data.title }} <span class="bgFill"><span class="textClip" :class="data.isDarkMode?'color-white':''"> {{ data.animated_word }}</span></span>
                 </h2>
                 <p class="mt-4 lg:mt-8 text-big mx-auto md:max-w-3/5">
                     {{ data.description }}

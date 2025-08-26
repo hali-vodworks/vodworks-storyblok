@@ -1,7 +1,6 @@
 <!-- eslint-disable vue/valid-v-for -->
 <template>
   <div>
-
     <!-----------------------------------HERO-------------------------------------------->
     <PageHeroWithAnimatedTitle :data="{
       title: 'Case',
@@ -10,32 +9,30 @@
     }" />
     <!----------------------------------------------------------------------------------->
 
-
-    <!---------------------------Case Studies Listing------------------------------------------>
+    <!---------------------------Case Studies Listing------------------------------------>
     <div class="lg:py-32 py-14 bgColor-normal-grey">
-
       <div class="mx-auto container">
-
         <div class="grid lg:grid-cols-2 xl:grid-cols-2 gap-4 lg:gap-8 w-full mx-auto lg:w-4/5">
-
           <article v-for="(caseStudy, i) in publishedCaseStudies" :key="i"
-            class="zoom-in overflow-hidden cursor-pointer mb-8" @click="gotoSingleCaseStudy(caseStudy.slug)">
-            <div v-if="getFeaturedImage(caseStudy)" class="blog-thumbnail-wrapper">
-              <img :src="getFeaturedImage(caseStudy).filename" class="scaleable-img"
-                :alt="getFeaturedImage(caseStudy).alt" />
-            </div>
-            <div class="article-content">
-              <h4 class="line-clamp-2 mt-4">
-                {{ caseStudy.content.title }}
-              </h4>
-              <p class="line-clamp-3 mt-2">{{ caseStudy.content.description }}</p>
-              <p class="btn-text mt-4 inline-block">Read More</p>
-            </div>
+            class="zoom-in overflow-hidden cursor-pointer mb-8">
+
+            <NuxtLink :to="`/cases/${caseStudy.slug}` + '/'">
+              <div v-if="getFeaturedImage(caseStudy)" class="blog-thumbnail-wrapper">
+                <img :src="getFeaturedImage(caseStudy).filename" class="scaleable-img"
+                  :alt="getFeaturedImage(caseStudy).alt" />
+              </div>
+              <div class="article-content">
+                <h4 class="line-clamp-2 mt-4">
+                  {{ caseStudy.content.title }}
+                </h4>
+                <p class="line-clamp-3">{{ caseStudy.content.description }}</p>
+                <p class="btn-text mt-4 inline-block">Read More</p>
+              </div>
+              </NuxtLink>
+
           </article>
         </div>
-
       </div>
-
     </div>
     <!----------------------------------------------------------------------------------->
 
@@ -46,7 +43,6 @@
     }
       " />
     <!----------------------------------------------------------------------------------->
-
   </div>
 </template>
 
@@ -63,7 +59,6 @@ export default {
         starts_with: 'cases/',
         resolve_relations: 'case-studies-container.case_studies',
       }),
-
       context.app.$storyapi.get('cdn/stories/', {
         version: 'published',
         starts_with: 'testimonials/',
@@ -75,14 +70,11 @@ export default {
       allCases: allCasesRes.data,
       allTestimonials: allTestimonialsRes.data,
     }
-
   },
-
 
   data() {
     return { story: { content: {} } }
   },
-
 
   head() {
     return {
@@ -126,11 +118,7 @@ export default {
     }
   },
 
-
   computed: {
-    // getCasesData() {
-    //   return this.allCases
-    // },
     publishedCaseStudies() {
       return this.allCases.stories.filter(
         (story) => story.content.is_published_on_production
@@ -139,23 +127,18 @@ export default {
     getTestimonialsData() {
       return this.allTestimonials
     },
-
   },
 
   methods: {
     getFeaturedImage(caseStudy) {
       return caseStudy.content.thumbnail
     },
-
     gotoSingleCaseStudy(slug) {
       this.$router.push({
         path: '/cases/' + slug + '/',
       })
     },
-
   }
-
-
 
 }
 </script>

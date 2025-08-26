@@ -3,7 +3,7 @@
     <section class="bgColor-white lg:py-32 py-14">
 
         <div class="mx-auto container text-center">
-            <h2 v-in-viewport>Trusted by Global <span class="bgFill"><span class="textClip">Clients</span></span></h2>
+            <h2 v-in-viewport.once>Trusted by Global <span class="bgFill"><span class="textClip">Clients</span></span></h2>
         </div>
         <div class="clients">
             <client-only>
