@@ -3,7 +3,7 @@
         <div class="mx-auto container">
             <div class="mx-auto w-full lg:w-3/5">
                 <div class="text-center">
-                    <h2 v-in-viewport> {{ payload.title }} <span class="bgFill"><span class="textClip">
+                    <h2 v-in-viewport.once> {{ payload.title }} <span class="bgFill"><span class="textClip">
                                 {{ payload.animated_word }}
                             </span></span></h2>
                 </div>

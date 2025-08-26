@@ -1,23 +1,40 @@
-te<!-- eslint-disable vue/no-v-html -->
+<!-- eslint-disable vue/no-v-html -->
 <template>
   <div>
-    <!-----------  Hero section --------------------------------------------------->
+    <!-----------  Hero section -------------------------------------------------------->
     <CsHero :data="{
       content: getSingleCsHero,
-      hasMorePadding: false,
+      hasMorePadding: true,
       imageHeightFull: false,
     }" />
-    <!----------------------------------------------------------------------------->
+    <!----------------------------------------------------------------------------------->
 
-    <!-------------- Brief ----------------------------------------------------->
+    <!-------------- About the Client --------------------------------------------------->
     <CsBrief :data="Brief" />
     <!----------------------------------------------------------------------------------->
 
-    <!-------------- Featured Image------------------------------------------------------>
-    <CsFeaturedImage :data="getSingleCsFeaturedImage" />
+    <!--------------- The Scope  -------------------------------------------------------->
+    <CsScope :data="Scope" />
     <!----------------------------------------------------------------------------------->
 
-    <!--------------- Approach  --------------------------------------->
+    <!-------------- Featured Image 1---------------------------------------------------->
+    <CsFeaturedImage :data="getSingleCsFeaturedImage1" />
+    <!----------------------------------------------------------------------------------->
+
+    <!--------------- Why Cleverchain Chose Vodworks ------------------------------------>
+    <section v-if="FullWidthWhiteBgSection" class="lg:py-32 py-14 single-cs">
+      <div class="container mx-auto">
+        <div class="row">
+          <div class="text-center md:max-w-4/5 mx-auto">
+            <h3>{{ FullWidthWhiteBgSection.title}}</h3>
+            <div class="mt-8 text-left" v-html="$md.render(FullWidthWhiteBgSection.description)"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!----------------------------------------------------------------------------------->
+
+    <!---------------------- How Vodworks Helped ---------------------------------------->
     <section v-if="Approach" class="single-cs lg:py-32 py-14 bgColor-normal-grey">
       <div class="mx-auto container">
         <div class="">
@@ -28,8 +45,7 @@ te<!-- eslint-disable vue/no-v-html -->
           </div>
 
           <!-- Development Lifecycle -->
-          <div
-            class="bg-no-repeat dev_life_cycle grid lg:grid-cols-4 xl:grid-cols-4 gap-4 mx-auto mt-8 lg:mt-16">
+          <div class="bg-no-repeat dev_life_cycle grid lg:grid-cols-4 xl:grid-cols-4 gap-4 mx-auto mt-8 lg:mt-16">
             <template v-for="card, i in Approach.cards">
               <div :key="i" class="default-card card-utilities hvr-effect overflow-visible">
                 <img class="card-icon hvr-top lazyload" :src="card.icon.filename" :alt="card.icon.alt" />
@@ -39,13 +55,12 @@ te<!-- eslint-disable vue/no-v-html -->
             </template>
           </div>
         </div>
-        
+
       </div>
     </section>
     <!----------------------------------------------------------------------------------->
 
-
-    <!----------------------------------Team--------------------------------------------->
+    <!--------------------------------- Team -------------------------------------------->
     <CsTeam :data="{
       content: Team,
       layout: 'md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5'
@@ -60,50 +75,27 @@ te<!-- eslint-disable vue/no-v-html -->
     <!----------------------------------------------------------------------------------->
 
 
-    <!----------------------------------Services We Provided----------------------------->
-    <CsServicesWeProvide :data="{
-      content: ServicesWeProvided,
-      layout: 'md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3'
-    }" />
-    <!----------------------------------------------------------------------------------->
-
-    <!---------------  Outcome -------------------------------------->
-    <section v-if="Outcome" class="lg:py-32 py-14 single-cs bgColor-tertiary-black">
-      <div class="outcome mx-auto container">
-
-        <div class="text-center">
-          <h2 v-in-viewport.once><span class="bgFill"><span class="textClip color-white">{{ Outcome.title
-                }}</span></span>
-          </h2>
-        </div>
-
-        <div class="bgColor-white px-4 py-4 lg:px-8 lg:py-8 rounded-md mt-8 lg:mt-16">
-          <div class="awards-logos flex flex-wrap gap-8 justify-between">
-            <template v-for="card, i in Outcome.cards">
-              <div :key="i" class="item flex items-center justify-center">
-                <img :src="card.image.filename" :alt="card.image.alt" />
-              </div>
-            </template>
-          </div>
-        </div>
-      </div>
-
-    </section>
-    <!----------------------------------------------------------------------------------->
-
-    <!--------------- Features  --------------------------------------->
+    <!--------------------------------- Features  --------------------------------------->
     <CsFeatures :data="{
       Features,
-      layout: 'center-two-ele-in-grid'
+      layout: 'center-two-ele-in-grid',
     }" />
-    <!----------------------------------------------------------------->
+    <!---------------------------------------------------------------------------------->
 
-    <!------------------------------- Get in Touch with us-------------------------------------->
+    <!--------------- The Result -------------------------------------------------------->
+    <CsResult :data="Result" />
+    <!----------------------------------------------------------------------------------->
+
+    <!-------------------------------------------FAQs------------------------------------>
+    <FAQs :payload="FAQs" />
+    <!----------------------------------------------------------------------------------->
+
+    <!------------------------------- Get in Touch with us------------------------------->
     <GetInTouchWithUs :data="{
       title: 'Get in Touch with us',
-      isDarkSectionAtTop: false
+      isDarkSectionAtTop: true
     }" />
-    <!------------------------------------------------------------------------------------------>
+    <!------------------------------------------------------------------------------------>
 
   </div>
 </template>
@@ -214,7 +206,12 @@ export default {
           name: 'twitter:card',
           content: `${this.story.content.thumbnail.filename}`,
         },
-
+      ],
+      script: [
+        {
+          type: 'application/ld+json',
+          json: this.generateFaqSchema(),
+        },
       ],
     }
   },
@@ -226,14 +223,24 @@ export default {
         return obj.component === 'single-cs-hero';
       })
     },
-    getSingleCsFeaturedImage() {
-      return this.story.content.cs_full_details.find(function (obj) {
-        return obj.component === 'cs-fw-featured-image';
-      })
-    },
     Brief() {
       return this.story.content.cs_full_details.find(function (obj) {
         return obj.component === 'cs-fw-brief';
+      })
+    },
+    Scope() {
+      return this.story.content.cs_full_details.find(function (obj) {
+        return obj.component === 'cs-scope';
+      })
+    },
+    getSingleCsFeaturedImage1() {
+      return this.story.content.cs_full_details.find(function (obj) {
+        return obj.component === 'single-cs-featured-image-1';
+      })
+    },
+    FullWidthWhiteBgSection() {
+      return this.story.content.cs_full_details.find(function (obj) {
+        return obj.component === 'single-cs-full-width-white-bg';
       })
     },
     Approach() {
@@ -241,55 +248,31 @@ export default {
         return obj.component === 'cs-approach_with_cards';
       })
     },
-    TechnicalStack() {
-      return this.story.content.cs_full_details.find(function (obj) {
-        return obj.component === 'cs-technical-stack';
-      })
-    },
     Team() {
       return this.story.content.cs_full_details.find(function (obj) {
         return obj.component === 'cs_team';
       })
     },
-    ServicesWeProvided() {
+    TechnicalStack() {
       return this.story.content.cs_full_details.find(function (obj) {
-        return obj.component === 'services_we_provided';
+        return obj.component === 'cs-technical-stack';
       })
     },
-    Review() {
-      return this.story.content.cs_full_details.find(function (obj) {
-        return obj.component === 'cs-review';
-      })
-    },
-
-    FullWidthWhiteBgSection() {
-      return this.story.content.cs_full_details.find(function (obj) {
-        return obj.component === 'single-cs-full-width-white-bg';
-      })
-    },
-
     Features() {
       return this.story.content.cs_full_details.find(function (obj) {
         return obj.component === 'cs_features';
       })
     },
-
-    Outcome() {
+    Result() {
       return this.story.content.cs_full_details.find(function (obj) {
-        return obj.component === 'cs-outcome';
+        return obj.component === 'cs-result';
       })
     },
-
     FAQs() {
       return this.story.content.cs_full_details.find(function (obj) {
         return obj.component === 'faqs-container';
       })
     },
-
-
-
-
-
 
   },
 
@@ -306,9 +289,20 @@ export default {
   },
 
   methods: {
-    resolveBackground(path) {
-      return `background-image: url(${require('~/assets' + path)});`
-    },
+    generateFaqSchema() {
+      return {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": this.FAQs.list_of_faqs.map(faq => ({
+          "@type": "Question",
+          "name": faq.content.question,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": faq.content.answer
+          }
+        }))
+      };
+    }
   }
 
 }

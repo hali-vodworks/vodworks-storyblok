@@ -1,4 +1,4 @@
-te<!-- eslint-disable vue/no-v-html -->
+<!-- eslint-disable vue/no-v-html -->
 <template>
   <div>
     <!-----------  Hero section --------------------------------------------------->
@@ -9,27 +9,31 @@ te<!-- eslint-disable vue/no-v-html -->
     }" />
     <!----------------------------------------------------------------------------->
 
-    <!-------------- Brief ----------------------------------------------------->
+    <!-------------- About the Client --------------------------------------------------->
     <CsBrief :data="Brief" />
     <!----------------------------------------------------------------------------------->
 
-    <!-------------- Featured Image------------------------------------------------------>
-    <CsFeaturedImage :data="getSingleCsFeaturedImage" />
+    <!--------------- The Scope  -------------------------------------------------------->
+    <CsScope :data="Scope" />
     <!----------------------------------------------------------------------------------->
 
-    <!--------------- Approach  --------------------------------------->
+
+    <!-------------- Featured Image 1---------------------------------------------------->
+    <CsFeaturedImage :data="getSingleCsFeaturedImage1" />
+    <!----------------------------------------------------------------------------------->
+
+    <!---------------  The clients VidScape Helped  -------------------------------------->
     <section v-if="Approach" class="single-cs lg:py-32 py-14 bgColor-normal-grey">
       <div class="mx-auto container">
-        <div class="md:max-w-4/5 mx-auto">
+        <div class="row md:max-w-4/5 mx-auto">
           <div class="text-center">
             <h2 v-in-viewport.once><span class="bgFill"><span class="textClip">{{ Approach.title }}</span></span>
             </h2>
           </div>
-          <div class="mt-8 lg:mt-16" v-html="$md.render(Approach.description)"> </div>
+          <div class="mt-8 lg:mt-16 text-left" v-html="$md.render(Approach.description)"> </div>
         </div>
       </div>
     </section>
-
     <!----------------------------------------------------------------------------------->
 
     <!---------------  Technical Stack -------------------------------------------------->
@@ -39,47 +43,17 @@ te<!-- eslint-disable vue/no-v-html -->
     }" />
     <!----------------------------------------------------------------------------------->
 
-
-    <!--------------- Project Management  --------------------------------------->
-    <section v-if="FullWidthWhiteBgSection" class="lg:py-32 py-14 single-cs">
-      <div class="mx-auto container ">
-        <div class="row ">
-          <div class="md:max-w-4/5 mx-auto text-center">
-            <h2>{{ FullWidthWhiteBgSection.title }}</h2>
-            <div class="mt-8" v-html="$md.render(FullWidthWhiteBgSection.description)"></div>
-          </div>
-        </div>
-      </div>
-    </section>
+    <!--------------- The Result -------------------------------------------------------->
+    <CsResult :data="Result" />
     <!----------------------------------------------------------------------------------->
 
-
-    <!---------------  Outcome -------------------------------------->
-    <section v-if="Outcome" class="lg:py-32 py-14 single-cs bgColor-tertiary-black">
-      <div class="outcome mx-auto container">
-        <div class="md:max-w-4/5 mx-auto">
-          <div class="text-center">
-            <h2 v-in-viewport.once><span class="bgFill"><span class="textClip color-white">{{ Outcome.title
-                  }}</span></span>
-            </h2>
-          </div>
-          <ul class=" lg:pt-16 grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 mx-auto gap-0 lg:gap-8">
-            <template v-for="card, i in Outcome.cards">
-              <li :key="i">
-                <h4 class="color-primary-red">{{ card.title }}</h4>
-                <div class="color-white" v-html="$md.render(card.description)"> </div>
-              </li>
-            </template>
-          </ul>
-        </div>
-      </div>
-    </section>
+    <!---------------  Review ----------------------------------------------------------->
+    <CsReview :data="Review" />
     <!----------------------------------------------------------------------------------->
 
-
-    <!-------------------------------------------FAQs----------------------------------------------------->
+    <!-------------------------------------------FAQs------------------------------------>
     <FAQs :payload="FAQs" />
-    <!---------------------------------------------------------------------------------------------------->
+    <!----------------------------------------------------------------------------------->
 
     <!------------------------------- Get in Touch with us-------------------------------------->
     <GetInTouchWithUs :data="{
@@ -155,7 +129,6 @@ export default {
     })
   },
 
-
   head() {
     return {
       title: `${this.story.content.title}`,
@@ -207,7 +180,6 @@ export default {
     }
   },
 
-
   computed: {
     getSingleCsHero() {
       return this.story.content.cs_full_details.find(function (obj) {
@@ -219,9 +191,14 @@ export default {
         return obj.component === 'cs-fw-brief';
       })
     },
-    getSingleCsFeaturedImage() {
+    Scope() {
       return this.story.content.cs_full_details.find(function (obj) {
-        return obj.component === 'cs-fw-featured-image';
+        return obj.component === 'cs-scope';
+      })
+    },
+    getSingleCsFeaturedImage1() {
+      return this.story.content.cs_full_details.find(function (obj) {
+        return obj.component === 'single-cs-featured-image-1';
       })
     },
     Approach() {
@@ -234,14 +211,14 @@ export default {
         return obj.component === 'cs-technical-stack';
       })
     },
-    FullWidthWhiteBgSection() {
+    Result() {
       return this.story.content.cs_full_details.find(function (obj) {
-        return obj.component === 'single-cs-full-width-white-bg';
+        return obj.component === 'cs-result';
       })
     },
-    Outcome() {
+    Review() {
       return this.story.content.cs_full_details.find(function (obj) {
-        return obj.component === 'cs-outcome';
+        return obj.component === 'cs-review';
       })
     },
     FAQs() {
@@ -249,7 +226,6 @@ export default {
         return obj.component === 'faqs-container';
       })
     },
-
 
   },
 
