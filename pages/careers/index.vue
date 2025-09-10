@@ -45,10 +45,10 @@
       <div class="mx-auto container">
         <div class="text-center mx-auto w-full lg:w-3/5">
           <AnimatedHeading :data="{
-              simpleWords: our_values.title,
-              animatedWords: our_values.animated_word,
-              isBgDark: false
-            }" />
+            simpleWords: our_values.title,
+            animatedWords: our_values.animated_word,
+            isBgDark: false
+          }" />
           <p class="mt-4 lg:mt-8 text-big">{{ our_values.description }}</p>
         </div>
         <div class="grid mx-auto gap-4 mt-8 lg:mt-16 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4">
@@ -80,7 +80,8 @@
           </div>
           <div>
             <div class="zoom-in overflow-hidden">
-              <img class="hvr-top w-full" :src="`${require('~/assets/img/' + join_our_team.img)}`" :alt="join_our_team.alt" />
+              <img class="hvr-top w-full" :src="`${require('~/assets/img/' + join_our_team.img)}`"
+                :alt="join_our_team.alt" />
             </div>
           </div>
         </div>
@@ -95,7 +96,11 @@
     <section id="OurOpenings" class="lg:py-32 py-14 ">
       <div class="mx-auto container">
         <div class="text-center mx-auto w-full lg:w-3/5">
-          <h2 v-in-viewport>Our <span class="bgFill"><span class="textClip">Openings</span></span></h2>
+          <AnimatedHeading :data="{
+            simpleWords: 'Our',
+            animatedWords: 'Openings',
+            isBgDark: false
+          }" />
         </div>
         <div class="mt-8 lg:mt-16">
           <div id='bzOpeningsContainer'></div>
@@ -107,7 +112,7 @@
 
     <!------------------------------- Get in Touch with us----------------------------->
     <GetInTouchWithUs :data="{
-      title:'Get in Touch with us',
+      title: 'Get in Touch with us',
       isDarkSectionAtTop: true
     }" />
     <!--------------------------------------------------------------------------------->
@@ -238,7 +243,7 @@ export default {
           property: 'og:description',
           content: "Join Vodworks team and work on projects with advanced technologies from AI and ML to Web3.",
         },
-        
+
         {
           hid: 'og:image',
           property: 'og:image',
@@ -256,5 +261,3 @@ export default {
 
 }
 </script>
-
-
