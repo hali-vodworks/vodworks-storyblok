@@ -1,21 +1,19 @@
 <template>
   <div>
-
+    <!-------------------------------- Hero --------------------------------------------------------------->
     <IndustriesHeroSection :industries="getIndustriesData" :page="getPageDetails" :button="{
       btnURL: false
     }" />
-
-
     <!---------------------------------------------------------------------------------------------------->
+
+    <!---------------------- Compliance and Security Industry Solutions ---------------------------------->
     <IndustriesSolutionCardsSection :data="{
       SingleIndustrySolutionData,
       gridlayout: 'three-cols'
     }" />
     <!---------------------------------------------------------------------------------------------------->
 
-    
-    
-    <!--------------------------------Our Success Stories---------------------------------->
+    <!--------------------------------Our Success Stories------------------------------------------------->
     <CaseStudiesSection :data="{
       // title: 'Our Case Studies for Compliance and Security',
       title:'Our Case Studies',
@@ -24,8 +22,7 @@
       getCasesData,
       isDarkMode: false,
     }" />
-    <!------------------------------------------------------------------------------------->
-
+    <!---------------------------------------------------------------------------------------------------->
 
     <!------------------------------------Featured CTA Version-1 ----------------------------------------->
     <div class="bgColor-normal-grey">
@@ -36,21 +33,18 @@
         imgSrc: 'john-and-karoly.png',
         col_1: 'md:col-span-7',
         col_2: 'md:col-span-5',
-
       }" />
     </div>
     <!---------------------------------------------------------------------------------------------------->
 
-
-    <!------------------------------ Why Choose Vodworks?-------------------------------->
+    <!------------------------------ Why Choose Vodworks?------------------------------------------------->
     <FeaturedCards3sInRow :data="{
       content: why_choose_us,
       isDarkMode: true
     }" />
-    <!----------------------------------------------------------------------------------->
+    <!----------------------------------------------------------------------------------------------------->
 
-
-    <!----------------------------------------- Blog ----------------------------------------------------->
+    <!----------------------------------------- Blog ------------------------------------------------------>
     <ArticlesSections :data="{
       title: 'Our Articles',
       animated_word: '',
@@ -59,28 +53,21 @@
     }" />
     <!---------------------------------------------------------------------------------------------------->
 
-
-
-    <!----------------------------- Get in Touch with us--------------------------------->
+    <!----------------------------- Get in Touch with us-------------------------------------------------->
     <GetInTouchWithUs :data="{
       title:'Get in Touch with us',
       isDarkSectionAtTop: true
     }" />
-    <!----------------------------------------------------------------------------------->
+    <!--------------------------------------------------------------------------------------------------->
 
   </div>
 </template>
   
-
 <script>
-
-
 export default {
-
   async asyncData(context) {
     const path = context.route.path === '/' ? '/home' : context.route.path
     const [pageDataRes, allCasesRes, allArticlesRes] = await Promise.all([
-
       context.app.$storyapi.get(`cdn/stories/${path}`, {
         version: 'published',
         resolve_relations: 'industries-container.industries'
@@ -96,16 +83,13 @@ export default {
         per_page: 10,
         resolve_relations: 'blog-container.blog',
       }),
-
     ])
     return {
       pageData: pageDataRes.data,
       allCases: allCasesRes.data,
       allArticles: allArticlesRes.data,
     }
-
   },
-
 
   data() {
     return {
@@ -175,7 +159,6 @@ export default {
             btnText: "Let's talk",
             btnURL: "#GetInTouchWithUs",
           },
-
         ]
       },
 
@@ -201,10 +184,8 @@ export default {
     }
   },
 
-
   head() {
     return {
-      // this title needs to be change
       title: 'Compliance and Security Software Development ',
 
       meta: [
@@ -236,7 +217,6 @@ export default {
     }
   },
 
-
   computed: {
     getPageDetails() {
       return this.pageData.story.content
@@ -252,9 +232,6 @@ export default {
     getCasesData() {
       return this.allCases
     },
-
   }
-
-
 }
 </script>

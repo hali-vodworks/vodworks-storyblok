@@ -1,24 +1,23 @@
 <template>
   <div>
-
+    <!------------------------------ Hero --------------------------------------------------------------->
     <IndustriesHeroSection :industries="getIndustriesData" :page="getPageDetails" :button="{
       btnURL: false
     }" />
+    <!---------------------------------------------------------------------------------------------------->
 
-
-
+    <!------------------------- Our Sustainability Software Development ---------------------------------->
     <section class="lg:py-32 py-14 bgColor-normal-grey">
       <div class="mx-auto container">
-
         <div class="mx-auto w-full lg:w-4/5">
           <div class="text-center">
             <h2>{{ SingleIndustrySolutionData.title }}</h2>
           </div>
-
           <div class="center-two-ele-in-grid mx-auto mt-8 lg:mt-16 gap-4">
             <template v-for="(card, i) in SingleIndustrySolutionData.list">
               <div :key="i" class="default-card card-utilities hvr-effect item">
-                <img class="hvr-top" :src="`${require('~/assets/img/icons/industries/' + card.icon)}`" :alt="card.alt" />
+                <img class="hvr-top" :src="`${require('~/assets/img/icons/industries/' + card.icon)}`"
+                  :alt="card.alt" />
                 <h4 class="mt-4 lg:mt-8 mb-4 lg:mb-4">{{ card.title }}</h4>
                 <p class="text-card flex-grow-1">{{ card.description }}</p>
 
@@ -29,23 +28,20 @@
             </template>
           </div>
         </div>
-
       </div>
     </section>
+    <!---------------------------------------------------------------------------------------------------->
 
-
-
-    <!--------------------------------Our Success Stories---------------------------------->
+    <!--------------------------------Our Success Stories------------------------------------------------->
     <CaseStudiesSection :data="{
       // title: 'Software Sustainability Success Stories',
-      title:'Our Case Studies',
+      title: 'Our Case Studies',
       animated_word: '',
       description: '',
       getCasesData,
       isDarkMode: true,
     }" />
-    <!------------------------------------------------------------------------------------->
-
+    <!---------------------------------------------------------------------------------------------------->
 
     <!------------------------------------Featured CTA Version-1 ----------------------------------------->
     <FeaturedCTA :data="{
@@ -58,76 +54,64 @@
     }" />
     <!---------------------------------------------------------------------------------------------------->
 
-
-    <!---------------------------------------------------------------------------------------------------->
+    <!---------------------------- Our Values ------------------------------------------------------------>
     <section class="lg:py-32 py-14 bgColor-normal-grey">
       <div class="mx-auto container">
-
         <div class="mx-auto w-full lg:w-4/5">
           <div class="text-center">
             <h2>{{ Our_Values.title }}</h2>
           </div>
-
           <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 mx-auto gap-4 mt-8 lg:mt-16">
             <template v-for="(card, i) in Our_Values.list">
               <IndustryCard :key="i" :data="card" />
             </template>
           </div>
         </div>
-
       </div>
     </section>
     <!---------------------------------------------------------------------------------------------------->
 
-
     <!-------------------------------------------FAQs----------------------------------------------------->
     <section class="lg:py-32 py-14">
       <div class="mx-auto container">
-
         <div class="mx-auto w-full lg:w-3/5">
           <div class="text-center">
-            <h2 v-in-viewport>{{ FaqsData.title }} <span class="bgFill"><span class="textClip">{{
-              FaqsData.animated_word }}</span></span></h2>
-
+            <AnimatedHeading :data="{
+              simpleWords: FaqsData.title,
+              animatedWords: FaqsData.animated_word,
+              isBgDark: false
+            }" />
           </div>
           <div class="mt-8 lg:mt-16">
             <Accordion :payload="FaqsData" category="sustainability" />
           </div>
         </div>
-
       </div>
     </section>
     <!---------------------------------------------------------------------------------------------------->
 
-
-    <!----------------------------- What Our Clients Say ------------------------------------->
+    <!----------------------------- What Our Clients Say ------------------------------------------------->
     <WhatOurClientsSay :data="{
       title: 'What Our Clients',
       animated_word: 'Say',
       getTestimonialsData,
       isDarkMode: false
     }" />
-    <!----------------------------------------------------------------------------------------->
+    <!--------------------------------------------------------------------------------------------------->
 
-
-
-    <!----------------------------- Get in Touch with us--------------------------------->
+    <!----------------------------- Get in Touch with us------------------------------------------------>
     <GetInTouchWithUs :data="{
-      title:'Get in Touch with us',
+      title: 'Get in Touch with us',
       isDarkSectionAtTop: false
     }" />
-    <!----------------------------------------------------------------------------------->
+    <!-------------------------------------------------------------------------------------------------->
 
   </div>
 </template>
-  
 
 <script>
-
 import FAQs from '~/static/faqs'
-
 export default {
-
   async asyncData(context) {
     const path = context.route.path === '/' ? '/home' : context.route.path
     const [pageDataRes, allCasesRes, allTestimonialsRes] = await Promise.all([
@@ -147,15 +131,12 @@ export default {
         starts_with: 'testimonials/',
         resolve_relations: 'testimonial-container.testimonials_list',
       }),
-
-
     ])
     return {
       pageData: pageDataRes.data,
       allCases: allCasesRes.data,
       allTestimonials: allTestimonialsRes.data,
     }
-
   },
 
   data() {

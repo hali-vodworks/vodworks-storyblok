@@ -1,12 +1,10 @@
 <template>
   <div>
-
-    <!---------------------------------------------------------------------------------------------------->
+    <!------------------------------ Hero --------------------------------------------------------------->
     <IndustriesHeroSection :industries="getIndustriesData" :page="getPageDetails" :button="{
       btnURL: false
     }" />
     <!---------------------------------------------------------------------------------------------------->
-
 
     <!---------------------------------------------------------------------------------------------------->
     <IndustriesSolutionCardsSection :data="{
@@ -15,8 +13,7 @@
     }" />
     <!---------------------------------------------------------------------------------------------------->
 
-
-    <!--------------------------------Our Success Stories---------------------------------->
+    <!--------------------------------Our Success Stories------------------------------------------------->
     <CaseStudiesSection :data="{
       // title: 'Our Media and Entertainment Case Studies',
       title: 'Our Case Studies',
@@ -25,8 +22,7 @@
       getCasesData,
       isDarkMode: true,
     }" />
-    <!------------------------------------------------------------------------------------->
-
+    <!---------------------------------------------------------------------------------------------------->
 
     <!------------------------------------Featured CTA Version-1 ----------------------------------------->
     <FeaturedCTA :data="{
@@ -39,14 +35,11 @@
     }" />
     <!---------------------------------------------------------------------------------------------------->
 
-
     <!---------------------------------------------------------------------------------------------------->
     <BenefitsOfChoosingVodworks :data="{
       isDarkMode: false
     }" />
     <!---------------------------------------------------------------------------------------------------->
-
-
 
     <!----------------------------------------- Blog ----------------------------------------------------->
     <ArticlesSections :data="{
@@ -57,7 +50,6 @@
     }" />
     <!---------------------------------------------------------------------------------------------------->
 
-
     <!----------------------------- What Our Clients Say ------------------------------------->
     <WhatOurClientsSay :data="{
       title: 'What Our Clients',
@@ -67,8 +59,6 @@
     }" />
     <!----------------------------------------------------------------------------------------->
 
-
-
     <!----------------------------- Get in Touch with us--------------------------------->
     <GetInTouchWithUs :data="{
       title:'Get in Touch with us',
@@ -76,17 +66,11 @@
     }" />
     <!----------------------------------------------------------------------------------->
 
-
   </div>
 </template>
-  
 
 <script>
-
-
 export default {
-
-
   async asyncData(context) {
     const path = context.route.path === '/' ? '/home' : context.route.path
     const [pageDataRes, allCasesRes, allArticlesRes, allTestimonialsRes] = await Promise.all([
@@ -111,8 +95,6 @@ export default {
         starts_with: 'testimonials/',
         resolve_relations: 'testimonial-container.testimonials_list',
       }),
-
-
     ])
     return {
       pageData: pageDataRes.data,
@@ -120,7 +102,6 @@ export default {
       allArticles: allArticlesRes.data,
       allTestimonials: allTestimonialsRes.data,
     }
-
   },
 
   data() {
@@ -249,9 +230,7 @@ export default {
     }
   },
 
-
   computed: {
-
     getPageDetails() {
       return this.pageData.story.content
     },
@@ -270,7 +249,5 @@ export default {
       return this.allTestimonials
     },
   }
-
-
 }
 </script>

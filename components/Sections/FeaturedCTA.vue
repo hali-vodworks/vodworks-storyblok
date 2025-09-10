@@ -1,7 +1,6 @@
 <!-- eslint-disable vue/no-multiple-template-root -->
 <template>
     <section class="overflow-hidden" :class="data.imgSrc=='expert.png'? 'featuredCtaVersion-2' :'featuredCtaVersion-1'">
-
         <div class="mx-auto container">
             <div class="grid md:grid-cols-12 lg:grid-cols-12 xl:grid-cols-12 gap-0 text-center md:text-left">
                 <div class="py-16" :class="data.col_1">
@@ -15,17 +14,12 @@
                 </div>
             </div>
         </div>
-
     </section>
 </template>
 
 <script>
-
-
 export default {
-
     name: 'FeaturedCTA',
-
     props: {
         data: {
             type: Object,

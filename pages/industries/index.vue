@@ -1,13 +1,12 @@
 <template>
   <div>
-
     <!-- 
     <IndustriesHeroSection :industries="getIndustriesData" :page="getPageDetails" :button="{
       btnURL: true
     }" />
      -->
 
-    <!--  Hero section with Industries cards  -->
+    <!----------------- Hero section with Industries cards  ------------------------------------>
     <section class="lg:py-32 py-14 bgColor-tertiary-black">
       <div class="mx-auto container">
         <div class="text-center mx-auto md:max-w-3/5">
@@ -27,23 +26,21 @@
         </div>
       </div>
     </section>
+    <!------------------------------------------------------------------------------------------>
 
-
-    <!----------------------------- Tools and Technologies we use ------------------------------->
+    <!----------------------------- Tools and Technologies we use ------------------------------>
     <ToolsAndTechs :data="{
       isDarkMode: false
     }" />
     <!------------------------------------------------------------------------------------------>
 
-
-    <!------------------------------ Why Choose Vodworks?-------------------------------->
+    <!------------------------------ Why Choose Vodworks?--------------------------------------->
     <BenefitsOfChoosingVodworks :data="{
       isDarkMode: true
     }" />
-    <!----------------------------------------------------------------------------------->
+    <!------------------------------------------------------------------------------------------>
 
-
-    <!------------------------------------Featured CTA Version-1 ----------------------------------------->
+    <!------------------------------------Featured CTA Version-1 ------------------------------->
     <FeaturedCTA :data="{
       title: `Consult with our tech experts`,
       btnText: 'Get in touch with us',
@@ -51,12 +48,10 @@
       imgSrc: 'team-members.png',
       col_1: 'md:col-span-5',
       col_2: 'md:col-span-7',
-
     }" />
-    <!---------------------------------------------------------------------------------------------------->
+    <!------------------------------------------------------------------------------------------>
 
-
-    <!----------------------------- What Our Clients Say ------------------------------------->
+    <!----------------------------- What Our Clients Say --------------------------------------->
     <WhatOurClientsSay :data="{
       title: 'What Our Clients',
       animated_word: 'Say',
@@ -65,23 +60,19 @@
     }" />
     <!----------------------------------------------------------------------------------------->
 
-
-    <!--------------------------------Our Success Stories---------------------------------->
+    <!--------------------------------Our Success Stories-------------------------------------->
     <CaseStudiesSection :data="{
-      title: 'Our Success Stories',
-      animated_word: '',
+      title: 'Our Success',
+      animated_word: 'Stories',
       description: '',
       getCasesData,
       isDarkMode: false,
     }" />
-    <!------------------------------------------------------------------------------------->
+    <!---------------------------------------------------------------------------------------->
 
-
-
-    <!---------------------------------  Meet our Vodworks team --------------------------------->
+    <!---------------------------------  Meet our Vodworks team ------------------------------>
     <OverviewAboutVodworksTeam />
-    <!------------------------------------------------------------------------------------------>
-
+    <!---------------------------------------------------------------------------------------->
 
     <!----------------------------- Get in Touch with us--------------------------------->
     <GetInTouchWithUs :data="{
@@ -90,18 +81,12 @@
     }" />
     <!----------------------------------------------------------------------------------->
 
-
   </div>
 </template>
 
 <script>
-
-
 import ogImage from '~/static/preview-industries.jpg';
-
 export default {
-
-
   async asyncData(context) {
     const path = context.route.path === '/' ? '/home' : context.route.path
     const [pageDataRes, allCasesRes, allTestimonialsRes] = await Promise.all([
@@ -120,15 +105,12 @@ export default {
         starts_with: 'testimonials/',
         resolve_relations: 'testimonial-container.testimonials_list',
       }),
-
-
     ])
     return {
       pageData: pageDataRes.data,
       allCases: allCasesRes.data,
       allTestimonials: allTestimonialsRes.data,
     }
-
   },
 
   data() {
@@ -188,7 +170,6 @@ export default {
   },
 
   computed: {
-
     getPageDetails() {
       return this.pageData.story.content
     },
@@ -203,7 +184,6 @@ export default {
     getTestimonialsData() {
       return this.allTestimonials
     },
-
   }
 
 }

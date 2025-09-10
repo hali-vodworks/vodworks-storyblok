@@ -1,21 +1,19 @@
 <template>
   <div>
-
+    <!-------------------------------- Hero --------------------------------------------------------------->
     <IndustriesHeroSection :industries="getIndustriesData" :page="getPageDetails" :button="{
       btnURL: false
     }" />
-
     <!---------------------------------------------------------------------------------------------------->
+
+    <!------------------- Our Software Solutions for Gaming ---------------------------------------------->
     <IndustriesSolutionCardsSection :data="{
       SingleIndustrySolutionData,
       gridlayout: 'three-cols'
     }" />
-    <!---------------------------------------------------------------------------------------------------->
+    <!--------------------------------------------------------------------------------------------------->
 
-
-
-
-    <!--------------------------------Our Success Stories---------------------------------->
+    <!-------------------------------- Our Success Stories----------------------------------------------->
     <CaseStudiesSection :data="{
       // title: 'Gaming Software Case Studies',
       title: 'Our Case Studies',
@@ -24,10 +22,9 @@
       getCasesData,
       isDarkMode: true,
     }" />
-    <!------------------------------------------------------------------------------------->
+    <!-------------------------------------------------------------------------------------------------->
 
-
-    <!------------------------------------Featured CTA Version-1 ----------------------------------------->
+    <!------------------------------------Featured CTA Version-1 --------------------------------------->
     <FeaturedCTA :data="{
       title: `Consult with our Gaming Industry Expert!`,
       btnText: 'Get in touch',
@@ -36,10 +33,9 @@
       col_1: 'md:col-span-7',
       col_2: 'md:col-span-4',
     }" />
-    <!---------------------------------------------------------------------------------------------------->
+    <!------------------------------------------------------------------------------------------------->
 
-
-    <!----------------------------------------- Blog ----------------------------------------------------->
+    <!----------------------------------------- Blog -------------------------------------------------->
     <div class="bgColor-normal-grey">
       <ArticlesSections :data="{
         title: 'Vodworks Related Blog ',
@@ -50,12 +46,9 @@
     </div>
     <!---------------------------------------------------------------------------------------------------->
 
-
-
-    <!---------------------------------------------------------------------------------------------------->
+    <!---------------Why Vodworks as your Gaming Development Partner? ------------------------------------>
     <section class="lg:py-32 py-14 bgColor-tertiary-black">
       <div class="mx-auto container">
-
         <div class="text-center mx-auto md:max-w-3/5 ">
           <h2 class="color-white">Why Vodworks as your Gaming Development Partner?</h2>
         </div>
@@ -77,61 +70,51 @@
               <img class="w-full" src="~/assets/img/IMG_9662_2.jpg" alt="Development Partner" />
             </div>
           </div>
-
         </div>
       </div>
     </section>
     <!---------------------------------------------------------------------------------------------------->
 
-
-
-    <!--------------------------------------FAQs-------------------------------------------------->
+    <!--------------------------------------FAQs---------------------------------------------------------->
     <section class="lg:py-32 py-14 bgColor-normal-grey">
       <div class="mx-auto container">
-
         <div class="mx-auto w-full lg:w-3/5">
           <div class="text-center">
-            <h2 v-in-viewport>{{ FaqsData.title }} <span class="bgFill"><span class="textClip">{{
-              FaqsData.animated_word }}</span></span></h2>
+              <AnimatedHeading :data="{
+              simpleWords: FaqsData.title ,
+              animatedWords: FaqsData.animated_word ,
+              isBgDark: false
+            }" />
           </div>
-
           <div class="mt-8 lg:mt-16">
             <Accordion :payload="FaqsData" category="gaming" />
           </div>
         </div>
-
       </div>
     </section>
     <!---------------------------------------------------------------------------------------------------->
 
-
-
-    <!----------------------------- What Our Clients Say ------------------------------------->
+    <!----------------------------- What Our Clients Say ------------------------------------------------->
     <WhatOurClientsSay :data="{
       title: 'What Our Clients',
       animated_word: 'Say',
       getTestimonialsData,
       isDarkMode: true
     }" />
-    <!----------------------------------------------------------------------------------------->
+    <!--------------------------------------------------------------------------------------------------->
 
-
-    <!----------------------------- Get in Touch with us--------------------------------->
+    <!----------------------------- Get in Touch with us------------------------------------------------->
     <GetInTouchWithUs :data="{
       title: 'Get in Touch with us',
       isDarkSectionAtTop: true
     }" />
-    <!----------------------------------------------------------------------------------->
+    <!-------------------------------------------------------------------------------------------------->
 
   </div>
 </template>
 
-
 <script>
-
 import FAQs from '~/static/faqs'
-
-
 export default {
 
   async asyncData(context) {
@@ -170,10 +153,8 @@ export default {
 
   },
 
-
   data() {
     return {
-
       story: { content: {} },
       SingleIndustrySolutionData: {
         title: "Our Software Solutions for",
@@ -288,7 +269,6 @@ export default {
           json: this.generateFaqSchema(),
         },
       ],
-      
     }
   },
 
@@ -327,8 +307,7 @@ export default {
         }))
       };
     }
-  }
-  ,
+  },
   
 }
 </script>

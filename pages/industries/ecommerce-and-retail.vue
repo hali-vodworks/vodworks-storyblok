@@ -1,12 +1,10 @@
 <template>
   <div>
-
+    <!-------------------------------- Hero --------------------------------------------------------------->
     <IndustriesHeroSection :industries="getIndustriesData" :page="getPageDetails" :button="{
       btnURL: false
     }" />
-
-
-
+    <!---------------------------------------------------------------------------------------------------->
 
     <!---------------------------------------------------------------------------------------------------->
     <IndustriesSolutionCardsSection :data="{
@@ -15,35 +13,29 @@
     }" />
     <!---------------------------------------------------------------------------------------------------->
 
-
-    <!--------------------------------Our Success Stories---------------------------------->
+    <!--------------------------------Our Success Stories------------------------------------------------->
     <CaseStudiesSection :data="{
       // title: 'Retail & Ecommerce Case Studies',
-      title:'Our Case Studies',
+      title: 'Our Case Studies',
       animated_word: '',
       description: '',
       getCasesData,
       isDarkMode: true,
     }" />
-    <!------------------------------------------------------------------------------------->
+    <!-------------------------------------------------------------------------------------------------->
 
-
-
-    <!------------------------------ Why Choose Vodworks?-------------------------------->
+    <!------------------------------ Why Choose Vodworks?----------------------------------------------->
     <FeaturedCards3sInRow :data="{
       content: why_choose_vodworks,
       isDarkMode: false
     }" />
-    <!----------------------------------------------------------------------------------->
+    <!-------------------------------------------------------------------------------------------------->
 
-
-    <!----------------------------------------------------------------------------------->
+    <!-------------------------------------------------------------------------------------------------->
     <FeaturedDetailedCtaSection :data="benefits" />
-    <!----------------------------------------------------------------------------------->
+    <!-------------------------------------------------------------------------------------------------->
 
-
-
-    <!----------------------------------------- Blog ----------------------------------------------------->
+    <!----------------------------------------- Blog --------------------------------------------------->
     <div class="bgColor-normal-grey">
       <ArticlesSections :data="{
         title: 'Ecommerce & Retail Insights',
@@ -54,56 +46,47 @@
     </div>
     <!---------------------------------------------------------------------------------------------------->
 
-
     <!-------------------------------------------FAQs----------------------------------------------------->
     <section class="lg:py-32 py-14">
       <div class="mx-auto container">
-
         <div class="mx-auto w-full lg:w-3/5">
           <div class="text-center">
-            <h2 v-in-viewport>{{ FaqsData.title }} <span class="bgFill"><span class="textClip">{{
-              FaqsData.animated_word }}</span></span></h2>
-
+            <AnimatedHeading :data="{
+              simpleWords: FaqsData.title,
+              animatedWords: FaqsData.animated_word,
+              isBgDark: false
+            }" />
           </div>
           <div class="mt-8 lg:mt-16">
             <Accordion :payload="FaqsData" category="ecommerce" />
           </div>
         </div>
-
       </div>
     </section>
     <!---------------------------------------------------------------------------------------------------->
 
-
-
-    <!----------------------------- What Our Clients Say ------------------------------------->
+    <!----------------------------- What Our Clients Say ------------------------------------------------->
     <WhatOurClientsSay :data="{
       title: 'What Our Customers ',
       animated_word: 'Have to Say',
       getTestimonialsData,
       isDarkMode: false
     }" />
-    <!----------------------------------------------------------------------------------------->
+    <!-------------------------------------------------------------------------------------------------->
 
-
-    <!----------------------------- Get in Touch with us--------------------------------->
+    <!----------------------------- Get in Touch with us------------------------------------------------>
     <GetInTouchWithUs :data="{
-      title:'Get in Touch with us',
+      title: 'Get in Touch with us',
       isDarkSectionAtTop: false
     }" />
-    <!----------------------------------------------------------------------------------->
+    <!-------------------------------------------------------------------------------------------------->
 
   </div>
 </template>
-  
 
 <script>
-
-
 import FAQs from '~/static/faqs'
-
 export default {
-
   async asyncData(context) {
     const path = context.route.path === '/' ? '/home' : context.route.path
     const [pageDataRes, allCasesRes, allArticlesRes, allTestimonialsRes] = await Promise.all([
@@ -301,9 +284,7 @@ export default {
       ],
     }
   },
-
-
-
+  
   computed: {
     getPageDetails() {
       return this.pageData.story.content

@@ -1,21 +1,19 @@
 <template>
   <div>
-
+    <!-------------------------------- Hero --------------------------------------------------------------->
     <IndustriesHeroSection :industries="getIndustriesData" :page="getPageDetails" :button="{
       btnURL: false
     }" />
-
-
     <!---------------------------------------------------------------------------------------------------->
+
+    <!------------------- Finance and Fintech Industry Solutions ----------------------------------------->
     <IndustriesSolutionCardsSection :data="{
       SingleIndustrySolutionData,
       gridlayout: 'four-cols'
     }" />
     <!---------------------------------------------------------------------------------------------------->
 
-
-
-    <!--------------------------------Our Success Stories---------------------------------->
+    <!--------------------------------Our Success Stories------------------------------------------------->
     <CaseStudiesSection :data="{
       // title: 'Our Finance and Fintech Case Studies',
       title:'Our Case Studies',
@@ -24,16 +22,14 @@
       getCasesData,
       isDarkMode: true,
     }" />
-    <!------------------------------------------------------------------------------------->
+    <!---------------------------------------------------------------------------------------------------->
 
-
-    <!------------------------------------------------------------->
+    <!------------------- Why Choose Vodworks? ----------------------------------------------------------->
     <FeaturedCards3sInRow :data="{
       content: why_choose_vodworks,
       isDarkMode: false
     }" />
-    <!----------------------------------------------------------------------------------->
-
+    <!--------------------------------------------------------------------------------------------------->
 
     <!------------------------------------Featured CTA Version-1 ----------------------------------------->
     <div class="bgColor-normal-grey">
@@ -44,11 +40,9 @@
         imgSrc: 'jaffer.png',
         col_1: 'md:col-span-7',
         col_2: 'md:col-span-4',
-
       }" />
     </div>
     <!---------------------------------------------------------------------------------------------------->
-
 
     <!----------------------------------------- Blog ----------------------------------------------------->
     <ArticlesSections :data="{
@@ -59,29 +53,21 @@
     }" />
     <!---------------------------------------------------------------------------------------------------->
 
-
-    <!----------------------------- Get in Touch with us--------------------------------->
+    <!----------------------------- Get in Touch with us-------------------------------------------------->
     <GetInTouchWithUs :data="{
       title: 'Get in Touch with us',
       isDarkSectionAtTop: true
     }" />
-    <!----------------------------------------------------------------------------------->
+    <!--------------------------------------------------------------------------------------------------->
 
   </div>
 </template>
   
-
 <script>
-
-
-
 export default {
-
-
   async asyncData(context) {
     const path = context.route.path === '/' ? '/home' : context.route.path
     const [pageDataRes, allCasesRes, allArticlesRes] = await Promise.all([
-
       context.app.$storyapi.get(`cdn/stories/${path}`, {
         version: 'published',
         resolve_relations: 'industries-container.industries'
@@ -104,7 +90,6 @@ export default {
       allCases: allCasesRes.data,
       allArticles: allArticlesRes.data,
     }
-
   },
 
   data() {
@@ -267,7 +252,6 @@ export default {
     },
 
   }
-
 
 }
 </script>
