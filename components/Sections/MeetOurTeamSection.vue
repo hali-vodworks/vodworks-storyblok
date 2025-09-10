@@ -4,24 +4,25 @@
         :class="data.isDarkMode ? 'bgColor-tertiary-black' : ' bgColor-normal-grey'">
         <div class="mx-auto container">
             <div class="text-center">
-                <h2 v-in-viewport.once :class="data.isDarkMode?'color-white':''">{{ data.title }} <span class="bgFill"><span class="textClip" :class="data.isDarkMode?'color-white':''"> {{ data.animated_word }}</span></span>
-                </h2>
+                <AnimatedHeading :data="{
+                    simpleWords: data.title,
+                    animatedWords: data.animated_word,
+                    isBgDark: data.isDarkMode
+                }" />
                 <p class="mt-4 lg:mt-8 text-big mx-auto md:max-w-3/5">
                     {{ data.description }}
                 </p>
             </div>
-
             <!-- card list -->
             <div class="mx-auto max-w-7/10">
                 <div class="mx-auto">
                     <div class="mt-8 lg:mt-16">
                         <client-only>
-                            <VueSlickCarousel class="our-team-slider" v-bind="$store.state.sliders_configurations.our_team">
-
+                            <VueSlickCarousel class="our-team-slider"
+                                v-bind="$store.state.sliders_configurations.our_team">
                                 <template v-for="(card, i) in data.getTeamsData.stories">
                                     <TeamSlidingCard :key="i" :data="card" />
                                 </template>
-
                             </VueSlickCarousel>
                         </client-only>
                     </div>
@@ -43,7 +44,6 @@
 </template>
 
 <script>
-
 import VueSlickCarousel from 'vue-slick-carousel'
 import 'vue-slick-carousel/dist/vue-slick-carousel.css'
 import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
@@ -61,6 +61,3 @@ export default {
     }
 }
 </script>
-  
-  
-  

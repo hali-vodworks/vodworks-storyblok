@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <!------------------------------------- Data Hero -------------------------------------->
     <section class="lg:py-32 py-14 bgColor-tertiary-black">
       <div class="mx-auto container">
@@ -12,13 +11,10 @@
             recommendations for tailored tools, guaranteeing consistent and dependable data delivery for seamless
             consumption every time.
           </p>
-
           <div v-scroll-to="'#GetInTouchWithUs'" class="btn-primary btn-lg inline-block cursor-pointer">
             Talk with our experts
           </div>
-
         </div>
-
         <div class="text-center mx-auto md:max-w-3/5 mt-8 lg:mt-16">
           <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 mx-auto gap-2 md:gap-4 lg:gap-6">
             <template v-for="(card, i) in getDataServiceData.service_data_details">
@@ -26,52 +22,45 @@
             </template>
           </div>
         </div>
-
-
       </div>
     </section>
-    <!------------------------------------------------------------------------------------------>
-
+    <!------------------------------------------------------------------------------------->
 
     <!---------------------------- Data details Cards (larg Cards) ------------------------>
     <section class="lg:py-32 py-14 bgColor-normal-grey">
       <div class="mx-auto container">
         <div class="text-center">
-
-          <h2 v-in-viewport>{{ getDataServiceData.title }} <span class="bgFill"><span class="textClip">{{
-            getDataServiceData.animated_word }}</span></span></h2>
-
+          <AnimatedHeading :data="{
+            simpleWords: getDataServiceData.title,
+            animatedWords: getDataServiceData.animated_word,
+            isBgDark: false
+          }" />
           <div class="mx-auto md:max-w-4/5  mt-4 lg:mt-12">
             <template v-for="(card, i) in getDataServiceData.service_data_details">
               <ServiceLargeCard :key="i" :data="card" :button="{ text: `Get in touch`, btnURL: 'isStatic' }" />
             </template>
-
           </div>
         </div>
       </div>
     </section>
-    <!------------------------------------------------------------------------------------------>
-
-
+    <!------------------------------------------------------------------------------------->
 
     <!--------------------------------Our Success Stories---------------------------------->
     <CaseStudiesSection :data="{
-      title: 'Our Success Stories',
-      animated_word: '',
+      title: 'Our Success',
+      animated_word: 'Stories',
       description: '',
       getCasesData,
       isDarkMode: true,
     }" />
     <!------------------------------------------------------------------------------------->
 
-
-    <!------------------------------------------------------------------------------------------>
+    <!------------------------------------------------------------------------------------->
     <section v-if="why_use_our_data_services" class="lg:py-32 py-14 bgColor-normal-grey">
       <div class="mx-auto container">
         <div class="text-center">
           <h2>{{ why_use_our_data_services.title }}</h2>
         </div>
-
         <div class="mt-4 lg:mt-12 center-two-ele-in-grid">
           <template v-for="(card, i) in why_use_our_data_services.list">
             <div :key="i" class="my-4 lg:my-4 text-center md:text-left item">
@@ -81,21 +70,17 @@
             </div>
           </template>
         </div>
-
       </div>
     </section>
-    <!------------------------------------------------------------------------------------------>
+    <!------------------------------------------------------------------------------------->
 
-
-
-    <!----------------------------We Work Across Industries---------------------------------------->
+    <!----------------------------We Work Across Industries-------------------------------->
     <IndustriesListingSection :data='{
       getIndustriesData
     }' />
-    <!---------------------------------------------------------------------------------------------->
+    <!------------------------------------------------------------------------------------->
 
-
-    <!------------------------------------------------------------------------------------------>
+    <!------------------------------------------------------------------------------------->
     <Web3ExpertsSection :data="{
       title: 'Meet Our',
       animated_word: 'Data Expert',
@@ -103,11 +88,9 @@
       getDataExpertsData,
       isDarkMode: false
     }" />
+    <!------------------------------------------------------------------------------------->
 
-    <!------------------------------------------------------------------------------------------>
-
-
-    <!------------------------------- Get in Touch with us-------------------------------------->
+    <!------------------------------- Get in Touch with us--------------------------------->
     <GetInTouchWithUs :data="{
       title:'Get in Touch with us',
       isDarkSectionAtTop: false
@@ -117,17 +100,11 @@
   </div>
 </template>
 
-
 <script>
-
 export default {
-
-
-
   async asyncData(context) {
     const path = context.route.path === '/' ? '/home' : context.route.path
     const [pageDataRes, allCasesRes, dataTeamRes] = await Promise.all([
-
       context.app.$storyapi.get(`cdn/stories/${path}`, {
         version: 'published',
         resolve_relations: 'service_data_details_container.service_data_details,industries-container.industries'
@@ -146,21 +123,17 @@ export default {
         resolve_relations: 'teams-container.teams',
         'filter_query[teams_categories][exists]': '87a4dfac-ca7d-4605-92d1-b95a7bee0a85'
       }),
-
     ])
     return {
       pageData: pageDataRes.data,
       allCases: allCasesRes.data,
       dataTeam: dataTeamRes.data,
     }
-
   },
-
 
   data() {
     return {
       story: { content: {} },
-
       why_use_our_data_services: {
 
         title: "Why Use Our Data Services",
@@ -253,8 +226,6 @@ export default {
     getDataExpertsData() {
       return this.dataTeam
     },
-
-
   },
 }
 </script>

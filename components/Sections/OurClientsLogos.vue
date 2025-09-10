@@ -1,13 +1,15 @@
 <!-- eslint-disable vue/no-multiple-template-root -->
 <template>
     <section class="bgColor-white lg:py-32 py-14">
-
         <div class="mx-auto container text-center">
-            <h2 v-in-viewport.once>Trusted by Global <span class="bgFill"><span class="textClip">Clients</span></span></h2>
+            <AnimatedHeading :data="{
+                simpleWords: 'Trusted by Global',
+                animatedWords: 'Clients',
+                isBgDark: false
+            }" />
         </div>
         <div class="clients">
             <client-only>
-
                 <VueSlickCarousel class="our-team-slider mt-8 lg:mt-16 pb-4"
                     v-bind="$store.state.sliders_configurations.clients">
                     <template v-for="(slide, i) in data.ourClients.stories">
@@ -17,21 +19,17 @@
                         </a>
                     </template>
                 </VueSlickCarousel>
-
             </client-only>
         </div>
     </section>
 </template>
 
 <script>
-
 import VueSlickCarousel from 'vue-slick-carousel'
 import 'vue-slick-carousel/dist/vue-slick-carousel.css'
 import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
 
-
 export default {
-
     name: 'OurClientsLogos',
     components: {
         VueSlickCarousel,
@@ -44,6 +42,3 @@ export default {
     }
 }
 </script>
-  
-  
-  

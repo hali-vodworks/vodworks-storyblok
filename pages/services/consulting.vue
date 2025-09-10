@@ -1,7 +1,5 @@
 <template>
   <div>
-
-
     <!------------------------------------- Services/Consulting Hero -------------------------------------->
     <section class="lg:py-32 py-14 bgColor-tertiary-black">
       <div class="mx-auto container">
@@ -12,12 +10,10 @@
             software project is customised to your unique needs, minimising risk and maximising return the return on your
             technology investments
           </p>
-
           <div v-scroll-to="'#GetInTouchWithUs'" class="btn-primary btn-lg inline-block cursor-pointer">
             Consult our experts
           </div>
         </div>
-
         <div class="text-center mx-auto md:max-w-4/5 mt-8 lg:mt-16">
           <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 mx-auto gap-2 md:gap-4 lg:gap-6">
             <template v-for="(card, i) in getConsultingServiceData.service_consulting_details">
@@ -25,53 +21,44 @@
             </template>
           </div>
         </div>
-
       </div>
     </section>
-    <!------------------------------------------------------------------------------------------>
-
+    <!---------------------------------------------------------------------------------------------------->
 
     <!---------------------------- Services/Consulting details Cards (larg Cards) ------------------------>
     <section v-if="getConsultingServiceData" class="lg:py-32 py-14 bgColor-normal-grey">
       <div class="mx-auto container">
         <div class="text-center">
-
-          <h2 v-in-viewport>{{ getConsultingServiceData.title }} <span class="bgFill"><span class="textClip">{{
-            getConsultingServiceData.animated_word }}</span></span></h2>
-
+          <AnimatedHeading :data="{
+            simpleWords: getConsultingServiceData.title,
+            animatedWords: getConsultingServiceData.animated_word,
+            isBgDark: false
+          }" />
           <div class="mx-auto md:max-w-4/5  mt-4 lg:mt-12">
-
             <template v-for="(card, i) in getConsultingServiceData.service_consulting_details">
               <ServiceLargeCard :key="i" :data="card" :button="{ text: `Let's Talk`, btnURL: 'isStatic' }" />
             </template>
-
           </div>
         </div>
       </div>
     </section>
-    <!------------------------------------------------------------------------------------------>
+    <!---------------------------------------------------------------------------------------------------->
 
-    <!--------------------------------- Our Consulting Approach --------------------------------->
+    <!--------------------------------- Our Consulting Approach ----------------------------------------->
     <section class="lg:py-32 py-14 bgColor-tertiary-black">
       <div class="mx-auto container">
-
         <div class="text-center mx-auto md:max-w-3/5 ">
           <h2 class="color-white">{{ consulting_approach.title }}</h2>
           <p class="mt-4 lg:mt-8 text-big color-white">{{ consulting_approach.description }}</p>
         </div>
-
         <div class="mt-8 lg:mt-16 color-white">
           <div class="consulting_timeline grid md:grid-cols-1 lg:grid-cols-3 xl:grid-cols-3 mx-auto gap-4">
-
             <template v-for="(approach, i) in consulting_approach.approaches">
-
               <div :key="i" class="approach_wrapper">
-
                 <div class="approach_heading">
                   <img :src="`${require('~/assets/img/icons/' + approach.icon)}`" alt="icon" />
                   <h3 class="mt-0 lg:mt-2 line-clamp-1">{{ approach.title }}</h3>
                 </div>
-
                 <div class="steps_wrapper">
                   <template v-for="(step, index) in approach.steps">
                     <div :key="index" class="approach_step hvr-top">
@@ -81,18 +68,15 @@
                     </div>
                   </template>
                 </div>
-
               </div>
             </template>
-
           </div>
         </div>
-
       </div>
     </section>
-    <!------------------------------------------------------------------------------------------>
+    <!--------------------------------------------------------------------------------------------------->
 
-    <!---------------------------------General CTA (Light) --------------------------->
+    <!---------------------------------General CTA (Light) ---------------------------------------------->
     <GeneralCTA :data="{
       title: 'Discuss your project with us!',
       btnText: 'Book a consultation',
@@ -102,10 +86,9 @@
       col_1: 'md:col-span-6',
       col_2: 'md:col-span-6',
     }" />
-    <!------------------------------------------------------------------------------------------>
+    <!--------------------------------------------------------------------------------------------------->
 
-
-
+    <!----------------------------- Meet Our Consulting Experts------------------------------------------>
     <MeetOurTeamSection :data="{
       title: 'Meet Our',
       animated_word: 'Consulting Experts',
@@ -116,34 +99,26 @@
       btnURL: '#GetInTouchWithUs',
       isDarkMode: true
     }" />
+    <!------------------------------------------------------------------------------------------------->
 
-
-
-    <!----------------------------- Get in Touch with us--------------------------------->
+    <!----------------------------- Get in Touch with us----------------------------------------------->
     <GetInTouchWithUs :data="{
       title:'Get in Touch with us',
       isDarkSectionAtTop: true
     }" />
     <!----------------------------------------------------------------------------------->
-
   </div>
 </template>
 
-
-
 <script>
-
 export default {
-
   async asyncData(context) {
     const path = context.route.path === '/' ? '/home' : context.route.path
     const [pageDataRes, allTeamRes] = await Promise.all([
-
       context.app.$storyapi.get(`cdn/stories/${path}`, {
         version: 'published',
         resolve_relations: 'service_consulting_details_container.service_consulting_details,teams-container.teams'
       }),
-
       // Core:       24d738a4-ad30-45f7-9ec6-3584eb0ddbe0
       // Data:       87a4dfac-ca7d-4605-92d1-b95a7bee0a85
       // Consulting: 6e27734f-2f09-4108-9292-b27bd8a17870
@@ -154,13 +129,11 @@ export default {
         // Consulting Team Here...
         'filter_query[teams_categories][exists]': '6e27734f-2f09-4108-9292-b27bd8a17870'
       }),
-
     ])
     return {
       pageData: pageDataRes.data,
       ConsultingTeam: allTeamRes.data,
     }
-
   },
 
   data() {
@@ -168,9 +141,7 @@ export default {
       consulting_approach: {
         title: "Our Consulting Approach",
         description: "Combining commercial and technical expertise, we have a unique approach to technical consulting. We prioritize your budget, time, and tech needs, delivering proven tailored plans.",
-
         approaches: [
-
           {
             icon: "cog.svg",
             title: "Discovery",
@@ -304,11 +275,6 @@ export default {
     getTeamsData() {
       return this.ConsultingTeam
     },
-
-
   },
-
-
-
 }
 </script>

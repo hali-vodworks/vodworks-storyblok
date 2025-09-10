@@ -1,8 +1,6 @@
 <template>
   <div>
-
-    <!----------------------------------------------------------------------------------->
-
+    <!---------------------------- Hero Sec---------------------------------------------->
     <PageHeroWithAnimatedTitle :data="{
       title: 'Software Development',
       animated_word: 'for Startups',
@@ -10,42 +8,43 @@
     }" />
     <!----------------------------------------------------------------------------------->
 
-
-    <!-------Startup Software Development Services & Solutions--------->
+    <!-------Startup Software Development Services & Solutions--------------------------->
     <section class="lg:py-32 py-14 bgColor-normal-grey">
       <div class="mx-auto container">
         <div class="mx-auto w-full lg:w-4/5">
           <div class="text-center mx-auto w-full lg:w-4/5">
-            <h2 v-in-viewport>{{ Startup_SDev_Services_Solutions.title }} <span class="bgFill"><span class="textClip">{{
-              Startup_SDev_Services_Solutions.animated_word }}</span></span></h2>
+            <h2 v-in-viewport>{{ }} <span class="bgFill"><span class="textClip">{{
+                  }}</span></span></h2>
+            <AnimatedHeading :data="{
+              simpleWords: Startup_SDev_Services_Solutions.title,
+              animatedWords: Startup_SDev_Services_Solutions.animated_word,
+              isBgDark: false
+            }" />
           </div>
           <div class="center-two-ele-in-grid mx-auto mt-8 lg:mt-16 gap-4">
             <template v-for="(card, i) in Startup_SDev_Services_Solutions.list">
               <div :key="i" class="default-card card-utilities hvr-effect item">
-
                 <img class="hvr-top" :src="`${require('~/assets/img/icons/' + card.icon)}`" :alt="card.alt" />
-
                 <h4 class="mt-4 lg:mt-8 mb-4 lg:mb-4">{{ card.title }}</h4>
                 <p class="text-card flex-grow-1">{{ card.description }}</p>
               </div>
             </template>
           </div>
         </div>
-
       </div>
     </section>
-    <!----------------------------------------------------------------------------------->
+    <!---------------------------------------------------------------------------------->
 
-
-    <!-------------------------How Startup Development (Timeline) ----------------------------------->
+    <!-------------------------How Startup Development (Timeline) ---------------------->
     <section class="lg:py-32 py-14 overflow-hidden bgColor-tertiary-black color-white">
       <div class="mx-auto container">
-
         <div class="text-center mx-auto w-full lg:w-3/5">
-          <h2 v-in-viewport>{{ how_startup_Dev_works.title }} <span class="bgFill"><span class="textClip color-white">{{
-            how_startup_Dev_works.animated_word }}</span></span></h2>
+          <AnimatedHeading :data="{
+            simpleWords: how_startup_Dev_works.title,
+            animatedWords: how_startup_Dev_works.animated_word,
+            isBgDark: true
+          }" />
         </div>
-
         <div class="mt-4 lg:mt-12">
           <div class="teams_approach_timeline how_startup_Dev_works_timeline">
             <div class="approach_wrapper">
@@ -63,43 +62,39 @@
             </div>
           </div>
         </div>
-
       </div>
     </section>
-    <!----------------------------------------------------------------------------------->
+    <!---------------------------------------------------------------------------------->
 
-
-
-    <!--------------------------------Our Success Stories---------------------------------->
+    <!--------------------------------Our Success Stories------------------------------->
     <div class=" bgColor-normal-grey">
       <CaseStudiesSection :data="{
-        title: 'Software Development Case Studies',
-        animated_word: '',
+        title: 'Software Development',
+        animated_word: 'Case Studies',
         description: '',
         getCasesData,
         isDarkMode: false,
       }" />
     </div>
-    <!----------------------------------------------------------------------------------->
+    <!---------------------------------------------------------------------------------->
 
-
-
-    <!-----------------How Startups Can Benefit from Delegating Software Development-------------------->
+    <!------------ How Startups Can Benefit from Delegating Software Development-------->
     <ThreeCardsSections :data="{
       sectionData: Benefit_from_Delegating_SD,
       backgroundColor: 'bgColor-white',
     }" />
-    <!----------------------------------------------------------------------------------->
+    <!---------------------------------------------------------------------------------->
 
-
-
-    <!--------------------------------------FAQs-------------------------------------------------->
+    <!--------------------------------------FAQs---------------------------------------->
     <section class="lg:py-32 py-14 bgColor-normal-grey">
       <div class="mx-auto container">
         <div class="mx-auto w-full lg:w-3/5">
           <div class="text-center">
-            <h2 v-in-viewport>{{ FaqsData.title }} <span class="bgFill"><span class="textClip">{{
-              FaqsData.animated_word }}</span></span></h2>
+            <AnimatedHeading :data="{
+              simpleWords: FaqsData.title,
+              animatedWords: FaqsData.animated_word,
+              isBgDark: false
+            }" />
           </div>
           <div class="mt-8 lg:mt-16">
             <Accordion :payload="FaqsData" category="forStartup" />
@@ -107,20 +102,18 @@
         </div>
       </div>
     </section>
-    <!---------------------------------------------------------------------------------------------------->
+    <!---------------------------------------------------------------------------------->
 
-
-    <!----------------------------- What Our Clients Say ------------------------------------->
+    <!----------------------------- What Our Clients Say ------------------------------->
     <WhatOurClientsSay :data="{
       title: 'Clients About ',
       animated_word: 'Vodworks',
       getTestimonialsData,
       isDarkMode: true
     }" />
-    <!----------------------------------------------------------------------------------------->
+    <!--------------------------------------------------------------------------------->
 
-
-    <!------------------------------------Featured CTA Version-1 ----------------------------------------->
+    <!-----------------------Featured CTA Version-1 ----------------------------------->
     <FeaturedCTA :data="{
       title: `Looking for a Bespoke Software Solution for Your Start-up?`,
       btnText: 'Get in touch with us',
@@ -131,48 +124,38 @@
     }" />
     <!---------------------------------------------------------------------------------------------------->
 
-
     <!----------------------------- Get in Touch with us--------------------------------->
     <GetInTouchWithUs :data="{
-      title:'Get in Touch with us',
+      title: 'Get in Touch with us',
       isDarkSectionAtTop: true
     }" />
     <!----------------------------------------------------------------------------------->
 
   </div>
 </template>
-  
-  
+
 <script>
-
 import FAQs from '~/static/faqs'
-
 export default {
-
   async asyncData(context) {
     // const path = context.route.path === '/' ? '/home' : context.route.path
     const [allCasesRes, allTestimonialsRes] = await Promise.all([
-
       context.app.$storyapi.get('cdn/stories/', {
         version: 'published',
         starts_with: 'cases/',
         resolve_relations: 'case-studies-container.case_studies',
       }),
-
       context.app.$storyapi.get('cdn/stories/', {
         version: 'published',
         starts_with: 'testimonials/',
         resolve_relations: 'testimonial-container.testimonials_list',
       }),
-
     ])
     return {
       allCases: allCasesRes.data,
       allTestimonials: allTestimonialsRes.data,
     }
-
   },
-
 
   data() {
     return {
@@ -248,7 +231,6 @@ export default {
           }
         ]
       },
-
 
       FaqsData: {
         title: "Startup Software",
@@ -330,7 +312,6 @@ export default {
     getTestimonialsData() {
       return this.allTestimonials
     },
-
   },
 
   methods: {
@@ -352,4 +333,3 @@ export default {
 
 }
 </script>
-    

@@ -1,7 +1,5 @@
 <template>
   <div>
-
-
     <!--------------------------------------- HERO ----------------------------------------->
     <PageHeroWithAnimatedTitle :data="{
       title: 'Web3 Development Company',
@@ -13,46 +11,38 @@
     <!------------------ Web3 Development Services We Perform ------------------------------>
     <section class="lg:py-32 py-14 bgColor-normal-grey">
       <div class="mx-auto container">
-
         <div class="mx-auto w-full lg:w-4/5">
           <div class="text-center">
-            <h2 v-in-viewport>{{ Web3_Development_Services_We_Perform.title }} <span class="bgFill"><span
-                  class="textClip">{{
-                    Web3_Development_Services_We_Perform.animated_word }}</span></span></h2>
+            <AnimatedHeading :data="{
+              simpleWords: Web3_Development_Services_We_Perform.title,
+              animatedWords: Web3_Development_Services_We_Perform.animated_word,
+              isBgDark: false
+            }" />
           </div>
-
           <div class="center-two-ele-in-grid mx-auto mt-8 lg:mt-16 gap-4">
-
             <template v-for="(card, i) in Web3_Development_Services_We_Perform.list">
               <div :key="i" class="default-card card-utilities hvr-effect item">
                 <img class="hvr-top" :src="`${require('~/assets/img/icons/' + card.icon)}`" :alt="card.alt" />
                 <h4 class="mt-4 lg:mt-8 mb-4 lg:mb-4">{{ card.title }}</h4>
                 <p class="text-card flex-grow-1">{{ card.description }}</p>
-
               </div>
             </template>
-
           </div>
         </div>
-
       </div>
     </section>
     <!-------------------------------------------------------------------------------------->
 
-    <!--------------------------------- Explore Kumocore ---------------------------------->
+    <!--------------------------------- Explore Kumocore ----------------------------------->
     <section class="lg:py-32 py-14 bgColor-tertiary-black">
       <div class="mx-auto container color-white">
-
         <div
           class="grid md:grid-cols-12 lg:grid-cols-12 xl:grid-cols-12 gap-4 items-center mx-auto text-center md:text-left">
-
           <div class="md:col-span-7">
             <h2 class="heading-1 kumoCore_title"> {{ explore_kumocore.title }} <img
                 :src="`${require('~/assets/img/icons/forWeb3/' + explore_kumocore.kumo_logo)}`" alt="kumocore logo" />
             </h2>
             <p class="mt-2 lg:mt-4 text-big w-full lg:w-4/5">{{ explore_kumocore.description }}</p>
-
-
             <a :href="explore_kumocore.btnURL" :target="explore_kumocore.target"
               class="btn-primary btn-lg mt-16 hidden md:inline-block invisible md:visible">
               {{ explore_kumocore.btnText }}
@@ -69,7 +59,6 @@
               {{ explore_kumocore.btnText }}
             </a>
           </div>
-
         </div>
       </div>
     </section>
@@ -82,45 +71,45 @@
     }" />
     <!-------------------------------------------------------------------------------------->
 
-    <!--------------------------------Our Success Stories---------------------------------->
+    <!--------------------------------Our Success Stories----------------------------------->
     <div class="bgColor-normal-grey">
       <CaseStudiesSection :data="{
-        title: 'Vodworks Web3 Case Studies',
-        animated_word: '',
+        title: 'Vodworks Web3',
+        animated_word: 'Case Studies',
         description: '',
         getCasesData,
         isDarkMode: false,
       }" />
     </div>
-    <!------------------------------------------------------------------------------------->
+    <!-------------------------------------------------------------------------------------->
 
-    <!---------------- Why Choose Us as Your Web3 Development Company -------------------->
+    <!---------------- Why Choose Us as Your Web3 Development Company ---------------------->
     <ThreeCardsSections :data="{
       sectionData: Why_Choose_as_Web3_Development_Company,
       backgroundColor: 'bgColor-white',
     }" />
-    <!------------------------------------------------------------------------------------->
+    <!-------------------------------------------------------------------------------------->
 
-    <!--------------------------------------FAQs-------------------------------------------------->
+    <!--------------------------------------FAQs-------------------------------------------->
     <section class="lg:py-32 py-14 bgColor-normal-grey">
       <div class="mx-auto container">
-
         <div class="mx-auto w-full lg:w-3/5">
           <div class="text-center">
-            <h2 v-in-viewport>{{ FaqsData.title }} <span class="bgFill"><span class="textClip">{{
-              FaqsData.animated_word }}</span></span></h2>
+              <AnimatedHeading :data="{
+              simpleWords: FaqsData.title,
+              animatedWords: FaqsData.animated_word,
+              isBgDark: false
+            }" />
           </div>
-
           <div class="mt-8 lg:mt-16">
             <Accordion :payload="FaqsData" category="web3" />
           </div>
         </div>
-
       </div>
     </section>
-    <!---------------------------------------------------------------------------------------------------->
+    <!-------------------------------------------------------------------------------------->
 
-    <!----------------------------- What Our Clients Say ------------------------------------->
+    <!----------------------------- What Our Clients Say ----------------------------------->
     <WhatOurClientsSay :data="{
       title: 'Our Clients ',
       animated_word: 'Want to Say',
@@ -129,23 +118,19 @@
     }" />
     <!----------------------------------------------------------------------------------------->
 
-    <!----------------------------- Get in Touch with us--------------------------------->
+    <!----------------------------- Get in Touch with us--------------------------------------->
     <GetInTouchWithUs :data="{
-      title:'Get Started Your Web3 Development Project With Us!',
+      title: 'Get Started Your Web3 Development Project With Us!',
       isDarkSectionAtTop: true
     }" />
     <!----------------------------------------------------------------------------------------->
 
   </div>
 </template>
-  
-  
+
 <script>
-
 import FAQs from '~/static/faqs'
-
 export default {
-
   async asyncData(context) {
     // const path = context.route.path === '/' ? '/home' : context.route.path
     const [allCasesRes, allTestimonialsRes] = await Promise.all([
@@ -170,7 +155,6 @@ export default {
     }
 
   },
-
 
   data() {
     return {
@@ -240,7 +224,7 @@ export default {
             title: 'Super Admin Function',
             description: "White label for your clients or launch multiple use cases"
           },
-          
+
         ]
       },
 
@@ -296,19 +280,19 @@ export default {
         list: [
           {
             icon: "forWeb3/badge-dollar-sign.svg",
-            alt:"badge dollar sign icon",
+            alt: "badge dollar sign icon",
             title: "Cost efficiency",
             description: "We work closely with you through every stage of the development process, making sure we tackle risks and set your technology investments up for success",
           },
           {
             icon: "forWeb3/target.svg",
-            alt:"target icon",
+            alt: "target icon",
             title: "Business focus",
             description: "We support your business from ideation to launch, offering tailored solutions for your projects needs.",
           },
           {
             icon: "forWeb3/shield-check.svg",
-            alt:"security icon",
+            alt: "security icon",
             title: "Security",
             description: "We implement security measures during the software development process to ensure that the software can withstand attacks.",
           }
@@ -389,4 +373,3 @@ export default {
 
 }
 </script>
-    

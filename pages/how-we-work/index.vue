@@ -1,34 +1,30 @@
 <template>
   <div>
-
     <!---------------------------------------- Hero ------------------------------------->
     <PageHeroWithAnimatedTitle :data="{ title: 'How we', animated_word: 'work', description: '' }" />
     <!----------------------------------------------------------------------------------->
 
-
-    <!------------------------------------Overview with Image---------------------------------->
+    <!------------------------------------Overview with Image---------------------------->
     <div class="bgColor-normal-grey">
-
       <div class="hero">
         <div class="grid items-center md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 mx-auto gap-0 md:gap-8">
           <div class="py-8 lg:py-4 content">
-
             <p class="my-4 text-big">
               Vodworks provides end-to-end software and product engineering services, including consulting, outsourcing,
-              and augmented teams. We help companies who do not have the skills, resources or time to solve their deepest
-              technical challenges, to adopt and implement new technology or explore emerging developments in technology.
+              and augmented teams. We help companies who do not have the skills, resources or time to solve their
+              deepest
+              technical challenges, to adopt and implement new technology or explore emerging developments in
+              technology.
             </p>
-
             <p class="my-4 text-big">
               Our vision is to create a world where technology is designed around human needs and in harmony with the
               planet, rather than the other way around.
             </p>
-
             <p class="my-4 text-big">
-              We have more than 150 highly-skilled technical staff working for and with us globally. If we do not yet have
+              We have more than 150 highly-skilled technical staff working for and with us globally. If we do not yet
+              have
               the talent in house, we have a strong network to hire quickly and globally based on the client’s needs.
             </p>
-
             <div v-scroll-to="'#GetInTouchWithUs'" class="mt-4 lg:mt-8 btn-primary btn-lg inline-block cursor-pointer">
               Discuss your project
             </div>
@@ -41,13 +37,16 @@
     </div>
     <!----------------------------------------------------------------------------------->
 
-
-    <!---------------------------------- Vodworks Approach --------------------------------------->
+    <!---------------------------------- Vodworks Approach ------------------------------>
     <section class="lg:py-32 py-14">
       <div class="mx-auto container">
         <div class="md:max-w-4/5 mx-auto">
           <div class="text-center">
-            <h2 v-in-viewport>Vodworks <span class="bgFill"><span class="textClip">Approach</span></span></h2>
+            <AnimatedHeading :data="{
+              simpleWords: 'Vodworks',
+              animatedWords: 'Approach',
+              isBgDark: false
+            }" />
           </div>
           <p class="mt-4 lg:mt-8 mb-4 lg:mb-6 text-big">On the first stages of software development cycle we assist our
             valued clients
@@ -61,21 +60,18 @@
             requirements, we actively engage and contribute, being a partner rather than just a vendor, embracing this
             principle as an integral part of our team's ethos and DNA.
           </p>
-
         </div>
       </div>
     </section>
     <!----------------------------------------------------------------------------------->
 
-
-    <!--------------------------------Featured Image---------------------------------------->
+    <!--------------------------------Featured Image------------------------------------->
     <div>
       <img class="w-full" src="~/assets/img/Vodworks002.jpg" alt="Dedicated team Members" />
     </div>
     <!----------------------------------------------------------------------------------->
 
-
-    <!------------------------------ Statistics -------------------------------------->
+    <!------------------------------ Statistics ----------------------------------------->
     <section>
       <div class="mx-auto">
         <div class="grid lg:grid-cols-2 xl:grid-cols-2 items-center mx-auto">
@@ -102,7 +98,8 @@
               project at a time. We never switch teams, which ensures that resources are never shared across multiple
               projects.</p>
             <p class="my-4 text-big">To maintain a high standard of quality, we have our own quality assurance processes
-              and independent teams. They operate autonomously from our development team, ensuring that quality management
+              and independent teams. They operate autonomously from our development team, ensuring that quality
+              management
               involves not just a single group but every project member.</p>
           </div>
         </div>
@@ -110,13 +107,15 @@
     </section>
     <!----------------------------------------------------------------------------------->
 
-
-    <!--------------------------------- Agile Process ------------------------------------->
+    <!--------------------------------- Agile Process ----------------------------------->
     <section class="lg:py-32 py-14 overflow-hidden bgColor-tertiary-black color-white">
       <div class="mx-auto container">
         <div class="text-center">
-          <h2 v-in-viewport>{{ Agile_Processes.title }} <span class="bgFill"><span class="textClip color-white">{{
-            Agile_Processes.animated_word }}</span></span></h2>
+          <AnimatedHeading :data="{
+            simpleWords: Agile_Processes.title,
+            animatedWords: Agile_Processes.animated_word,
+            isBgDark: true
+          }" />
           <img class="mt-8 lg:mt-16 mx-auto" src="~/assets/img/Iteration.svg" alt="Agile Process" />
         </div>
         <div class="mt-4 lg:mt-12">
@@ -136,33 +135,28 @@
             </div>
           </div>
         </div>
-
         <div class="text-center">
           <NuxtLink to="/services/" class="btn-primary btn-lg mt-16 inline-block ">
             Explore our services
           </NuxtLink>
         </div>
-
       </div>
     </section>
     <!----------------------------------------------------------------------------------->
-
 
     <!--------------------------- Custom Software for Your Business---------------------->
     <CustomSoftwareForYourBusiness />
     <!----------------------------------------------------------------------------------->
 
-
-    <!--------------------------------Our Success Stories---------------------------------->
+    <!--------------------------------Our Success Stories-------------------------------->
     <CaseStudiesSection :data="{
-      title: 'Software Development Succes Stories',
-      animated_word: '',
+      title: 'Software Development ',
+      animated_word: 'Success Stories',
       description: '',
       getCasesData,
       isDarkMode: true,
     }" />
-    <!------------------------------------------------------------------------------------->
-
+    <!----------------------------------------------------------------------------------->
 
     <!----------------------------- What Our Clients Say -------------------------------->
     <WhatOurClientsSay :data="{
@@ -171,8 +165,7 @@
       getTestimonialsData,
       isDarkMode: false
     }" />
-    <!--------------------------------------------------------------------------------->
-
+    <!----------------------------------------------------------------------------------->
 
     <!----------------------------- Get in Touch with us--------------------------------->
     <GetInTouchWithUs :data="{
@@ -185,36 +178,27 @@
 </template>
 
 <script>
-
 import statistics from '~/static/our-statistics'
-
 export default {
-
   async asyncData(context) {
     // const path = context.route.path === '/' ? '/home' : context.route.path
     const [allCasesRes, allTestimonialsRes] = await Promise.all([
-
-
       context.app.$storyapi.get('cdn/stories/', {
         version: 'published',
         starts_with: 'cases/',
         resolve_relations: 'case-studies-container.case_studies',
       }),
-
       context.app.$storyapi.get('cdn/stories/', {
         version: 'published',
         starts_with: 'testimonials/',
         resolve_relations: 'testimonial-container.testimonials_list',
       }),
-
     ])
     return {
       allCases: allCasesRes.data,
       allTestimonials: allTestimonialsRes.data,
     }
-
   },
-
 
   data() {
     return {
@@ -267,7 +251,6 @@ export default {
 
         ]
       }
-
     }
   },
 
@@ -286,7 +269,6 @@ export default {
           property: 'og:title',
           content: 'How we work | Vodworks',
         },
-
         {
           hid: 'og:description',
           name: 'og:description',
@@ -307,6 +289,5 @@ export default {
     },
 
   },
-
 }
 </script>

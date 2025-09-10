@@ -1,12 +1,14 @@
 <!-- eslint-disable vue/no-multiple-template-root -->
 <template>
     <div>
-        <section class="lg:py-32 py-14" :class="data.isDarkMode? 'bgColor-tertiary-black': 'bgColor-normal-grey'">
-
+        <section class="lg:py-32 py-14" :class="data.isDarkMode ? 'bgColor-tertiary-black' : 'bgColor-normal-grey'">
             <div class="mx-auto container lg:max-w-3/5">
                 <div class="text-center">
-                    <h2 v-in-viewport.once :class="data.isDarkMode? 'color-white': ''">{{ data.title }} <span class="bgFill"><span class="textClip" :class="data.isDarkMode? 'color-white': ''">{{
-                        data.animated_word }}</span></span></h2>
+                    <AnimatedHeading :data="{
+                        simpleWords: data.title,
+                        animatedWords: data.animated_word,
+                        isBgDark: data.isDarkMode
+                    }" />
                 </div>
             </div>
             <div class="mt-8 lg:mt-16">
@@ -23,14 +25,11 @@
 </template>
 
 <script>
-
 import VueSlickCarousel from 'vue-slick-carousel'
 import 'vue-slick-carousel/dist/vue-slick-carousel.css'
 import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
 
-
 export default {
-
     name: 'WhatOurClientsSay',
     components: {
         VueSlickCarousel,
@@ -43,6 +42,3 @@ export default {
     }
 }
 </script>
-  
-  
-  

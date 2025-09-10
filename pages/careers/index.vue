@@ -1,9 +1,7 @@
 <template>
   <div>
-
-    <!------------------------------ Hero section ---------------------------->
+    <!------------------------------ Hero section ------------------------------------------->
     <section class="bgColor-tertiary-black color-white">
-
       <div class="hero">
         <div class="grid items-center md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 mx-auto gap-0 md:gap-8">
           <div class="py-8 lg:py-4 order-2 lg:order-1 content">
@@ -17,7 +15,6 @@
             <p class="mt-4 lg:mt-8 mb-8 lg:mb-12 text-big mr-4">We invite you to join us and be more than just an
               employee, but
               a partner in achieving our goals.</p>
-
             <div v-scroll-to="'#OurOpenings'" class="btn-primary btn-lg inline-block cursor-pointer">
               Browse Jobs
             </div>
@@ -28,30 +25,30 @@
         </div>
       </div>
     </section>
-    <!----------------------------------------------------------------------------->
+    <!-------------------------------------------------------------------------------------->
 
-
-    <!------------------------------------  Our Benefits ------------------------------>
+    <!------------------------------------  Our Benefits ----------------------------------->
     <ThreeCardsSections :data="{
       sectionData: our_benefits,
       backgroundColor: 'bgColor-normal-grey',
     }" />
     <!-------------------------------------------------------------------------------------->
 
-
-
-    <!-------------------------------------- About Vodworks ---------------------------------------->
+    <!-------------------------------------- About Vodworks -------------------------------->
     <AboutVodworks :data="{
       isDarkMode: true
     }" />
-    <!---------------------------------------------------------------------------------------------->
+    <!-------------------------------------------------------------------------------------->
 
-    <!------------------------------- Our Values -------------------------------------------------->
+    <!------------------------------- Our Values ------------------------------------------->
     <section class="lg:py-32 py-14">
       <div class="mx-auto container">
         <div class="text-center mx-auto w-full lg:w-3/5">
-          <h2 v-in-viewport>{{ our_values.title }} <span class="bgFill"><span class="textClip">{{
-            our_values.animated_word }}</span></span></h2>
+          <AnimatedHeading :data="{
+              simpleWords: our_values.title,
+              animatedWords: our_values.animated_word,
+              isBgDark: false
+            }" />
           <p class="mt-4 lg:mt-8 text-big">{{ our_values.description }}</p>
         </div>
         <div class="grid mx-auto gap-4 mt-8 lg:mt-16 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4">
@@ -59,19 +56,16 @@
             <div :key="i" class="default-card card-utilities hvr-effect">
               <img class="hvr-top" :src="`${require('~/assets/img/icons/' + card.icon)}`" :alt="card.alt" />
               <h4 class="mt-4 lg:mt-8 mb-4 lg:mb-4">{{ card.title }}</h4>
-
             </div>
           </template>
         </div>
       </div>
     </section>
-    <!---------------------------------------------------------------------------------------------->
+    <!-------------------------------------------------------------------------------------->
 
-
-    <!-----------------------------Join Our Team---------------------------------->
+    <!-----------------------------Join Our Team-------------------------------------------->
     <section class="lg:py-32 py-14 bgColor-normal-grey">
       <div class="mx-auto container">
-
         <div class="text-center mx-auto md:max-w-3/5 ">
           <h2>{{ join_our_team.title }}</h2>
         </div>
@@ -95,8 +89,7 @@
         </div>
       </div>
     </section>
-    <!----------------------------------------------------------------------------->
-
+    <!-------------------------------------------------------------------------------------->
 
     <!------------------------------- Our Openings----------------------------->
     <section id="OurOpenings" class="lg:py-32 py-14 ">
@@ -112,7 +105,6 @@
     </section>
     <!----------------------------------------------------------------------------->
 
-
     <!------------------------------- Get in Touch with us----------------------------->
     <GetInTouchWithUs :data="{
       title:'Get in Touch with us',
@@ -123,13 +115,8 @@
   </div>
 </template>
 
-
-
-
 <script>
-
 import ogImage from '~/static/preview-careers.jpg';
-
 export default {
   data() {
     return {
@@ -223,7 +210,6 @@ export default {
 
     }
   },
-
 
   head() {
     return {

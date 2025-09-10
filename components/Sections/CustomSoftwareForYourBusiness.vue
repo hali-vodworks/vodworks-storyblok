@@ -3,18 +3,20 @@
     <section class="lg:py-32 py-14 bgColor-normal-grey">
         <div class="mx-auto container">
             <div class="text-center">
-                <h2 v-in-viewport.once>Custom Software for Your <span class="bgFill"><span
-                            class="textClip">Business</span></span>
-                </h2>
+                <AnimatedHeading :data="{
+                    simpleWords: 'Custom Software for Your',
+                    animatedWords: 'Business',
+                    isBgDark: false
+                }" />
                 <p class="mt-4 lg:mt-8 text-big mx-auto md:max-w-3/5">
                     {{ custom_software_for_your_business.description }}
                 </p>
             </div>
-
             <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 mx-auto gap-4 mt-8 lg:mt-16">
                 <template v-for="(card, i) in custom_software_for_your_business.list">
                     <div :key="i" class="default-card card-utilities hvr-effect business-card">
-                        <img class="card-icon hvr-top lazyload" :src="`${require('~/assets/img/icons/' + card.icon)}`" :alt="card.alt" />
+                        <img class="card-icon hvr-top lazyload" :src="`${require('~/assets/img/icons/' + card.icon)}`"
+                            :alt="card.alt" />
                         <h3 class="mt-4 lg:mt-8 mb-4 lg:mb-4">{{ card.title }}</h3>
                         <p class="text-card">{{ card.description }}</p>
                         <ul class="mt-4 md:mt-8 flex-grow-1 text-card">
@@ -28,16 +30,12 @@
                     </div>
                 </template>
             </div>
-            
         </div>
     </section>
 </template>
 
 <script>
-
-
 export default {
-
     name: 'CustomSoftwareForYourBusiness',
     data() {
         return {
@@ -48,7 +46,6 @@ export default {
                     {
                         icon: "Rocket.svg",
                         alt: "Rocket-Icon",
-
                         title: "For Startups",
                         description: "We take your idea from prototype to full-scale launch, offering technical expertise along the way to minimize risk and boost success. When we recognise exceptional potential, we also offer investment and incubation for new market prospects.",
 
@@ -67,7 +64,7 @@ export default {
                             }
                         ],
 
-                        btnURL:"/for-startups/",
+                        btnURL: "/for-startups/",
 
                     },
                     {
@@ -92,7 +89,7 @@ export default {
                             }
                         ],
 
-                        btnURL:"for-enterprise/",
+                        btnURL: "for-enterprise/",
 
                     },
                     {
@@ -117,17 +114,12 @@ export default {
                             }
                         ],
 
-                        btnURL:"/for-web3/",
+                        btnURL: "/for-web3/",
 
                     }
                 ]
             },
         }
     },
-
-
 }
 </script>
-  
-  
-  

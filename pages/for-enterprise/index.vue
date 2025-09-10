@@ -1,29 +1,30 @@
 <template>
   <div>
-
-    <!------------------------------HERO------------------------------------------>
+    <!------------------------------HERO----------------------------------------------------->
     <PageHeroWithAnimatedTitle :data="{
       title: 'Enterprise Software',
       animated_word: 'Development',
       description: 'We cater to the unique needs of large organizations by designing, creating and maintaining custom software solutions. We aim to enhance the efficiency of complex business operations with innovative technologies.',
     }" />
-    <!----------------------------------------------------------------------------------->
+    <!--------------------------------------------------------------------------------------->
 
     <!-------------------Our Enterprise Software Development Solutions----------------------->
     <ThreeCardsSections :data="{
       sectionData: enterpriseSoftwareDevSolutions,
       backgroundColor: 'bgColor-normal-grey',
     }" />
-    <!----------------------------------------------------------------------------------->
+    <!-------------------------------------------------------------------------------------->
 
-    <!------------------------Enterprise Software Development Lifecycle----------------------------->
+    <!------------------------Enterprise Software Development Lifecycle--------------------->
     <section class="lg:py-32 py-14 overflow-hidden bgColor-tertiary-black color-white">
       <div class="mx-auto container">
         <div class="text-center">
-          <h2 v-in-viewport>{{ ESD_lifecyle_timeline.title }} <span class="bgFill"><span class="textClip color-white">{{
-            ESD_lifecyle_timeline.animated_word }}</span></span></h2>
+             <AnimatedHeading :data="{
+              simpleWords: ESD_lifecyle_timeline.title,
+              animatedWords: ESD_lifecyle_timeline.animated_word,
+              isBgDark: true
+            }" />
         </div>
-
         <div class="mt-4 lg:mt-12">
           <div class="teams_approach_timeline ESD_lifecyle_timeline">
             <div class="approach_wrapper">
@@ -41,16 +42,15 @@
             </div>
           </div>
         </div>
-
       </div>
     </section>
-    <!----------------------------------------------------------------------------------->
+    <!-------------------------------------------------------------------------------------->
 
-    <!--------------------------------Our Success Stories---------------------------------->
+    <!--------------------------------Our Success Stories----------------------------------->
     <div class=" bgColor-normal-grey">
       <CaseStudiesSection :data="{
-        title: 'Software Development Succes Stories',
-        animated_word: '',
+        title: 'Software Development',
+        animated_word: 'Success Stories',
         description: '',
         getCasesData,
         isDarkMode: false,
@@ -58,33 +58,33 @@
     </div>
     <!------------------------------------------------------------------------------------->
 
-    <!------------------- Benefits of Enterprise Software Development -------------------->
+    <!------------------- Benefits of Enterprise Software Development --------------------->
     <ThreeCardsSections :data="{
       sectionData: Benefits_of_EnterpriseSoftwareDevelopment,
       backgroundColor: 'bgColor-white',
     }" />
-    <!----------------------------------------------------------------------------------->
+    <!------------------------------------------------------------------------------------->
 
-    <!--------------------------------------FAQs-------------------------------------------------->
+    <!--------------------------------------FAQs------------------------------------------->
     <section class="lg:py-32 py-14 bgColor-normal-grey">
       <div class="mx-auto container">
-
         <div class="mx-auto w-full lg:w-3/5">
           <div class="text-center">
-            <h2 v-in-viewport>{{ FaqsData.title }} <span class="bgFill"><span class="textClip">{{
-              FaqsData.animated_word }}</span></span></h2>
+            <AnimatedHeading :data="{
+              simpleWords: FaqsData.title,
+              animatedWords: FaqsData.animated_word,
+              isBgDark: false
+            }" />
           </div>
-
           <div class="mt-8 lg:mt-16">
             <Accordion :payload="FaqsData" category="forEnterprise" />
           </div>
         </div>
-
       </div>
     </section>
-    <!---------------------------------------------------------------------------------------------------->
+    <!------------------------------------------------------------------------------------->
 
-    <!----------------------------- What Our Clients Say ------------------------------------->
+    <!----------------------------- What Our Clients Say ---------------------------------->
     <WhatOurClientsSay :data="{
       title: 'What Makes Our Cooperation so Special: In the Eyes',
       animated_word: 'of Customers',
@@ -95,41 +95,35 @@
 
     <!----------------------------- Get in Touch with us--------------------------------->
     <GetInTouchWithUs :data="{
-      title:'Discuss Your Enterprise Development Software Project With Us!',
+      title: 'Discuss Your Enterprise Development Software Project With Us!',
       isDarkSectionAtTop: true
     }" />
     <!----------------------------------------------------------------------------------->
 
   </div>
 </template>
-  
+
 <script>
 import FAQs from '~/static/faqs'
 export default {
-
   async asyncData(context) {
     // const path = context.route.path === '/' ? '/home' : context.route.path
     const [allCasesRes, allTestimonialsRes] = await Promise.all([
-
-
       context.app.$storyapi.get('cdn/stories/', {
         version: 'published',
         starts_with: 'cases/',
         resolve_relations: 'case-studies-container.case_studies',
       }),
-
       context.app.$storyapi.get('cdn/stories/', {
         version: 'published',
         starts_with: 'testimonials/',
         resolve_relations: 'testimonial-container.testimonials_list',
       }),
-
     ])
     return {
       allCases: allCasesRes.data,
       allTestimonials: allTestimonialsRes.data,
     }
-
   },
 
   data() {
@@ -352,4 +346,3 @@ export default {
 
 }
 </script>
-    

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!------------------------------------- Services/Teams Hero -------------------------------------->
+    <!------------------------------------- Services/Teams Hero ------------------------------------->
     <section class="lg:py-32 py-14 bgColor-tertiary-black">
       <div class="mx-auto container">
         <div class="text-center mx-auto md:max-w-3/5">
@@ -13,7 +13,6 @@
             Explore our services
           </NuxtLink>
         </div>
-
         <div class="text-center mx-auto md:max-w-4/5 mt-8 lg:mt-16">
           <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 mx-auto gap-2 md:gap-4 lg:gap-6">
             <template v-for="(card, i) in getTeamsServiceData.service_teams_details">
@@ -21,39 +20,35 @@
             </template>
           </div>
         </div>
-
       </div>
     </section>
-    <!------------------------------------------------------------------------------------------>
-
+    <!----------------------------------------------------------------------------------------------->
 
     <!---------------------------- Services/Teams details Cards (larg Cards) ------------------------>
     <section class="lg:py-32 py-14 bgColor-normal-grey">
       <div class="mx-auto container">
         <div class="text-center">
-
-          <h2 v-in-viewport>{{ getTeamsServiceData.title }} <span class="bgFill"><span class="textClip">{{
-            getTeamsServiceData.animated_word }}</span></span></h2>
-
+          <AnimatedHeading :data="{
+            simpleWords: getTeamsServiceData.title,
+            animatedWords: getTeamsServiceData.animated_word,
+            isBgDark: false
+          }" />
           <div class="mx-auto md:max-w-4/5  mt-4 lg:mt-12">
             <template v-for="(card, i) in getTeamsServiceData.service_teams_details">
               <ServiceLargeCard :key="i" :data="card" :button="{ text: `Let's discuss`, btnURL: 'isStatic' }" />
             </template>
           </div>
-
         </div>
       </div>
     </section>
-    <!------------------------------------------------------------------------------------------>
+    <!----------------------------------------------------------------------------------------------->
 
-
-    <!----------------------------------------------------------------------------------->
+    <!---------------- -Our Unique Approach to Building Teams --------------------------------------->
     <section class="lg:py-32 py-14 overflow-hidden bgColor-tertiary-black color-white">
       <div class="mx-auto container">
         <div class="text-center">
           <h2>{{ teams_building_approach.title }}</h2>
         </div>
-
         <div class="mt-4 lg:mt-12">
           <div class="teams_approach_timeline">
             <div class="approach_wrapper">
@@ -73,9 +68,9 @@
         </div>
       </div>
     </section>
-    <!----------------------------------------------------------------------------------->
+    <!----------------------------------------------------------------------------------------------->
 
-    <!------------------------------------Featured CTA Version-1 ----------------------------------------->
+    <!------------------------------------Featured CTA Version-1 ------------------------------------>
     <FeaturedCTA :data="{
       title: `Build your development team!`,
       btnText: 'Get in touch with us',
@@ -83,22 +78,17 @@
       imgSrc: 'our-experts.png',
       col_1: 'md:col-span-6',
       col_2: 'md:col-span-6',
-
     }" />
-    <!---------------------------------------------------------------------------------------------------->
+    <!----------------------------------------------------------------------------------------------->
 
-
-
-    <!------------------------------ Why Choose Vodworks?-------------------------------->
+    <!------------------------------ Why Choose Vodworks?-------------------------------------------->
     <FeaturedCards3sInRow :data="{
       content: why_choose_vodworks,
       isDarkMode: true
     }" />
-    <!----------------------------------------------------------------------------------->
+    <!----------------------------------------------------------------------------------------------->
 
-
-
-    <!--------------------------------Our Success Stories---------------------------------->
+    <!--------------------------------Our Success Stories-------------------------------------------->
     <CaseStudiesSection :data="{
       title: 'Our Teams',
       animated_word: 'Success Stories',
@@ -106,31 +96,26 @@
       getCasesData,
       isDarkMode: false,
     }" />
-    <!------------------------------------------------------------------------------------->
+    <!---------------------------------------------------------------------------------------------->
 
-
-    <!------------------------------------ About Vodworks ---------------------------------------->
+    <!------------------------------------ About Vodworks ------------------------------------------>
     <AboutVodworks :data="{
       isDarkMode: true
     }" />
     <!---------------------------------------------------------------------------------------------->
 
-
-    <!------------------------------- Get in Touch with us-------------------------------------->
+    <!------------------------------- Get in Touch with us ----------------------------------------->
     <GetInTouchWithUs :data="{
       title: 'Get in Touch with us',
       isDarkSectionAtTop: true
     }" />
-    <!------------------------------------------------------------------------------------------>
-
+    <!---------------------------------------------------------------------------------------------->
+  
   </div>
 </template>
-
-
 <script>
 
 export default {
-
   async asyncData(context) {
     const path = context.route.path === '/' ? '/home' : context.route.path
     const [pageDataRes, allCasesRes] = await Promise.all([
@@ -152,7 +137,6 @@ export default {
     }
 
   },
-
 
   data() {
     return {
@@ -285,8 +269,7 @@ export default {
       ],
     }
   },
-
-
+  
   computed: {
     getTeamsServiceData() {
       return this.pageData.story.content.Services_Detailed_Content.find(function (obj) {

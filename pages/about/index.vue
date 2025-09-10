@@ -1,16 +1,15 @@
 <template>
   <div>
-
+    <!----------------------------Hero Section --------------------------------------->
     <PageHeroWithAnimatedTitle :data="{ title: 'Welcome to', animated_word: 'Vodworks' }" />
+    <!-------------------------------------------------------------------------------->
 
     <!-------------------------------- About Us -------------------------------------->
     <section class="lg:py-32 py-14">
       <div class="mx-auto container">
-
         <div class="text-center mx-auto md:max-w-3/5 ">
           <h2>{{ about_us.title }}</h2>
         </div>
-
         <div class="grid lg:grid-cols-2 xl:grid-cols-2 items-center mx-auto gap-8 lg:gap-16 mt-8 lg:mt-16">
           <div>
             <p class="text-big">{{ about_us.description }}</p>
@@ -28,21 +27,22 @@
     <!---------------------------------- Meet Our Team ------------------------------->
     <section v-if="getTeamsData" class="lg:py-32 py-14 bgColor-normal-grey">
       <div class="mx-auto container">
+        
         <div class="text-center">
-          <h2 v-in-viewport>Meet Our <span class="bgFill"><span class="textClip">Core Team</span></span></h2>
+          <AnimatedHeading :data="{
+            simpleWords: 'Meet Our',
+            animatedWords: 'Core Team',
+            isBgDark: false
+          }" />
         </div>
 
         <div class="grid lg:grid-cols-2 xl:grid-cols-2 items-center mx-auto gap-4 mt-8 lg:mt-16">
-
           <template v-for="(card, i) in getTeamsData.stories">
             <div :key="i" class="bgColor-white card-utilities hvr-effect h-full">
-
               <div class="grid md:grid-cols-12 lg:grid-cols-12 xl:grid-cols-12 gap-0 h-full">
-
                 <div class="md:col-span-4 expert-avatar-wrapper">
                   <img :src="card.content.Avatar.filename" :alt="card.content.Avatar.alt" />
                 </div>
-
                 <div class="md:col-span-8 expert-content p-4 lg:px-8 lg:py-8">
                   <div class="flex items-center gap-4 justify-between">
                     <div>
@@ -55,12 +55,10 @@
                   </div>
                   <p class="mt-4 color-primary-black text-small team-descr">{{ card.content.Description }}</p>
                 </div>
-
               </div>
             </div>
           </template>
         </div>
-
       </div>
     </section>
     <!-------------------------------------------------------------------------------->
@@ -74,11 +72,11 @@
             {{ our_story.description }}
           </p>
         </div>
-
         <div class=" mt-8 lg:mt-16">
           <img class="w-full hidden md:inline-block" :src="`${require('~/assets/img/' + our_story.image_web)}`"
             :alt="our_story.alt" />
-          <img class="w-full md:hidden" :src="`${require('~/assets/img/' + our_story.image_mob)}`" :alt="our_story.alt" />
+          <img class="w-full md:hidden" :src="`${require('~/assets/img/' + our_story.image_mob)}`"
+            :alt="our_story.alt" />
         </div>
       </div>
     </section>
@@ -94,19 +92,17 @@
     <!--------------------------- Our Partners ---------------------------------------->
     <section class="lg:py-32 py-14">
       <div class="mx-auto container">
-
         <div class="text-center mx-auto md:max-w-3/5">
           <h2>{{ our_partners.title }}</h2>
           <p class="mt-4 lg:mt-8 text-big">{{ our_partners.description }}
           </p>
         </div>
-
         <div class="flex flex-col md:flex-row justify-between mx-auto md:max-w-3/5  mt-8 lg:mt-16">
           <template v-for="(partner, i) in our_partners.partners">
             <div :key="i" class="tools_and_techs text-center mb-8 md:mb-0">
               <h3 v-in-viewport> <span class="bgFill"><span class="textClip font-semibold">{{
                 partner.title
-              }}</span></span></h3>
+                    }}</span></span></h3>
               <div class="techs-stacks mt-8 md:mt-0">
                 <template v-for="(logo, index) in partner.list">
                   <img :key="index" class="mx-auto md:my-10 hvr-top"
@@ -124,24 +120,19 @@
     <!-- Note: This same section is also on Industries (telecom.) -->
     <section class="lg:py-32 py-14 overflow-hidden	vw-map  bgColor-normal-grey">
       <div class="mx-auto container">
-
         <div class="text-center mx-auto md:max-w-3/5 ">
           <h2>{{ our_offices.title }}</h2>
         </div>
-
         <div class="grid lg:grid-cols-2 xl:grid-cols-2 items-center mx-auto gap-8 lg:gap-16 mt-8 lg:mt-16 relative">
-
           <div class="text-center lg:text-left position-relative z-10	gap-y">
             <p class="mb-4 lg:mb-6 text-big">{{ our_offices.description1 }}</p>
             <p class="mb-4 lg:mb-6 text-big">{{ our_offices.description2 }}</p>
           </div>
-
           <div>
-            <img class="locations-map" :src="`${require('~/assets/img/' + our_offices.image)}`" :alt="our_offices.alt" />
+            <img class="locations-map" :src="`${require('~/assets/img/' + our_offices.image)}`"
+              :alt="our_offices.alt" />
           </div>
-
         </div>
-
       </div>
     </section>
     <!-------------------------------------------------------------------------------->
@@ -152,7 +143,6 @@
         <div class="grid items-center md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 mx-auto gap-0 md:gap-8">
           <div class="py-8 order-2 lg:order-1 content">
             <h2 class="heading-1 capitalize">Join Our Team</h2>
-
             <NuxtLink to="/contact/" class="btn-primary btn-lg mt-16 inline-block cursor-pointer">
               Get in touch with us
             </NuxtLink>
@@ -183,21 +173,12 @@
 
   </div>
 </template>
-  
-  
+
 <script>
-
 import ogImage from '~/static/preview-about.jpg';
-
 export default {
-  
-
   async asyncData(context) {
-
     const [allTeamRes, allTestimonialsRes] = await Promise.all([
-
-
-
       // Core:       24d738a4-ad30-45f7-9ec6-3584eb0ddbe0
       // Data:       87a4dfac-ca7d-4605-92d1-b95a7bee0a85
       // Consulting: 6e27734f-2f09-4108-9292-b27bd8a17870
@@ -213,16 +194,12 @@ export default {
         starts_with: 'testimonials/',
         resolve_relations: 'testimonial-container.testimonials_list',
       }),
-
-
     ])
     return {
       allTeam: allTeamRes.data,
       allTestimonials: allTestimonialsRes.data,
     }
-
   },
-
 
   data() {
     return {
@@ -392,7 +369,6 @@ export default {
           property: 'og:title',
           content: 'About us | Vodworks',
         },
-
         {
           hid: 'og:description',
           name: 'og:description',
@@ -423,11 +399,5 @@ export default {
     },
 
   },
-
 }
 </script>
-    
-
-
-    
-

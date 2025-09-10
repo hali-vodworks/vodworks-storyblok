@@ -2,7 +2,6 @@
   <div>
     <!------------------------------Hero section start---------------------------->
     <section class="bgColor-normal-grey">
-
       <div class="hero fw-image-and-fw-content">
         <div class="grid items-center md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 mx-auto gap-0 md:gap-8">
           <div class="py-8 lg:py-4 order-2 lg:order-1 content">
@@ -28,11 +27,9 @@
       <div class="stats-wrapper mx-auto container color-white">
         <div class="stats">
           <template v-for="(card, i) in statistics.list">
-
             <div :key="card.id" class="stats-card relative" :class="i == 3 ? 'last-item' : ''">
               <!-- <img :src="resolveImage('/img/icons/'+card.icon)" :alt="card.alt" /> -->
               <img class="hvr-top" :src="`${require('~/assets/img/icons/' + card.icon)}`" :alt="card.alt" />
-
               <div>
                 <h3>{{ card.count }}</h3>
                 <p class="color-white text-regular">{{ card.title }}</p>
@@ -50,21 +47,21 @@
     <section v-if="getServicesData" class="lg:py-32 py-14 bgColor-normal-grey">
       <div class="mx-auto container">
         <div class="text-center">
-          <h2 v-in-viewport.once>{{ getServicesData.title }} <span class="bgFill"><span class="textClip">{{
-            getServicesData.animated_word }}</span></span></h2>
+          <AnimatedHeading :data="{
+            simpleWords: getServicesData.title,
+            animatedWords: getServicesData.animated_word,
+            isBgDark: false
+          }" />
           <p class="mt-4 lg:mt-8 text-big mx-auto md:max-w-1/2">
             {{ getServicesData.description }}
           </p>
         </div>
-
         <div class="grid md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 mx-auto gap-4 mt-8 lg:mt-16">
           <template v-for="(card, i) in getServicesData.services">
             <ServiceCard :key="i" :data="card" />
           </template>
         </div>
-
       </div>
-
     </section>
     <!----------------------------------------------------------------------------------->
 
