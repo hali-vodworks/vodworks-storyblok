@@ -808,7 +808,8 @@
                 position: static;
             }
             .featured-img{
-                height: auto;
+                height: 400px;
+                object-position: top;
             }
         }
         .hero-content {
