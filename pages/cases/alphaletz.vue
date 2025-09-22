@@ -26,12 +26,13 @@
             <div class="mx-auto container">
                 <div class="md:max-w-4/5 mx-auto">
                     <div class="text-center md:max-w-4/5 mx-auto">
-                        <h2 v-in-viewport.once><span class="bgFill"><span class="textClip">{{ Approach.title
-                                    }}</span></span>
-                        </h2>
+                        <AnimatedHeading :data="{
+                            simpleWords: null,
+                            animatedWords: Approach.title,
+                            isBgDark: false
+                        }" />
                     </div>
                     <div class="mt-8 lg:mt-16 text-center" v-html="$md.render(Approach.description)"> </div>
-
                     <div class="video-container">
                         <iframe class="mt-8 lg:mt-16" src="https://player.vimeo.com/video/702593566?h=584daa3463"
                             frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>

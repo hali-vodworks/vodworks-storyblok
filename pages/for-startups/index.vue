@@ -13,8 +13,6 @@
       <div class="mx-auto container">
         <div class="mx-auto w-full lg:w-4/5">
           <div class="text-center mx-auto w-full lg:w-4/5">
-            <h2 v-in-viewport>{{ }} <span class="bgFill"><span class="textClip">{{
-                  }}</span></span></h2>
             <AnimatedHeading :data="{
               simpleWords: Startup_SDev_Services_Solutions.title,
               animatedWords: Startup_SDev_Services_Solutions.animated_word,

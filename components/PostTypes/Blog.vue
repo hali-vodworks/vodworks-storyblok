@@ -39,22 +39,14 @@
           </div>
         </div>
 
-         <!--  AI Chatbot Buttons --> 
+        <!--  AI Chatbot Buttons -->
         <div class="chatbot-buttons mt-8">
           <p class="mb-2">Summarize this article with:</p>
-          <a
-            v-if="chatgptUrl"
-            target="_blank"
-            :href="chatgptUrl"
-          >
+          <a v-if="chatgptUrl" target="_blank" :href="chatgptUrl">
             <img src="~/assets/img/icon/chatGPT-icon.svg" alt="chatGPT-icon" />
             ChatGPT
           </a>
-          <a
-            v-if="perplexityUrl"
-            target="_blank"
-            :href="perplexityUrl"
-          >
+          <a v-if="perplexityUrl" target="_blank" :href="perplexityUrl">
             <img src="~/assets/img/icon/perplexity-ai-icon.svg" alt="perplexity-ai-icon" />
             Perplexity
           </a>
@@ -118,7 +110,8 @@
           <div class="cs-cta">
             <img src="~/assets/img/case-bg.png" alt="img" />
             <div class="content">
-              <a href="/cases/" target="_blank" rel="noopener noreferrer" class="btn-primary btn-md block mt-4">More Case
+              <a href="/cases/" target="_blank" rel="noopener noreferrer" class="btn-primary btn-md block mt-4">More
+                Case
                 Studies</a>
             </div>
           </div>
@@ -127,7 +120,8 @@
               <img src="~/assets/img/dev-partner.jpg" alt="img" />
               <div class="content">
                 <h4 class="color-white">Accelerate Your Projects With Our On-Demand Developers</h4>
-                <a href="/contact/" target="_blank" rel="noopener noreferrer" class="btn-primary btn-md block mt-4">Let's
+                <a href="/contact/" target="_blank" rel="noopener noreferrer"
+                  class="btn-primary btn-md block mt-4">Let's
                   Talk</a>
               </div>
             </div>
@@ -162,7 +156,11 @@
       <div class="mx-auto container">
         <div class="mx-auto w-full lg:w-3/5">
           <div class="text-center">
-            <h2 v-in-viewport>Frequently Asked <span class="bgFill"><span class="textClip">Questions</span></span></h2>
+            <AnimatedHeading :data="{
+              simpleWords: 'Frequently Asked',
+              animatedWords: 'Questions',
+              isBgDark: false
+            }" />
           </div>
           <div class="mt-8 lg:mt-16">
             <AccordionNew :payload="filteredFAQs" />

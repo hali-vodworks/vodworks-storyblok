@@ -27,7 +27,7 @@
     <!---------------------------------- Meet Our Team ------------------------------->
     <section v-if="getTeamsData" class="lg:py-32 py-14 bgColor-normal-grey">
       <div class="mx-auto container">
-        
+
         <div class="text-center">
           <AnimatedHeading :data="{
             simpleWords: 'Meet Our',
@@ -100,9 +100,10 @@
         <div class="flex flex-col md:flex-row justify-between mx-auto md:max-w-3/5  mt-8 lg:mt-16">
           <template v-for="(partner, i) in our_partners.partners">
             <div :key="i" class="tools_and_techs text-center mb-8 md:mb-0">
-              <h3 v-in-viewport> <span class="bgFill"><span class="textClip font-semibold">{{
-                partner.title
-                    }}</span></span></h3>
+              <AnimatedHeading3 :data="{
+                title: partner.title,
+                isBgDark: false
+              }" />
               <div class="techs-stacks mt-8 md:mt-0">
                 <template v-for="(logo, index) in partner.list">
                   <img :key="index" class="mx-auto md:my-10 hvr-top"

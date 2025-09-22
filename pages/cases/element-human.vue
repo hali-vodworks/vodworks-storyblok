@@ -27,9 +27,11 @@
         <div class="row ">
           <div class="md:max-w-4/5 mx-auto">
             <div class="text-center">
-              <h2 v-in-viewport.once><span class="bgFill"><span class="textClip">{{ FullWidthWhiteBgSection.title
-                    }}</span></span>
-              </h2>
+              <AnimatedHeading :data="{
+              simpleWords: null,
+              animatedWords: FullWidthWhiteBgSection.title,
+              isBgDark: false
+            }" />
             </div>
             <div class="mt-8" v-html="$md.render(FullWidthWhiteBgSection.description)"></div>
           </div>

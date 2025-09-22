@@ -21,15 +21,17 @@
     <CsFeaturedImage :data="getSingleCsFeaturedImage1" />
     <!----------------------------------------------------------------------------------->
 
-    <!--------------- The clients VidScape Helped  -------------------------------------->
+    <!--------------- How Vodworks Helped ----------------------------------------------->
     <section v-if="Approach" class="single-cs lg:py-32 py-14 bgColor-normal-grey">
       <div class="mx-auto container">
         <div class="">
           <div class="text-center md:max-w-4/5 mx-auto">
-            <h2 v-in-viewport.once><span class="bgFill"><span class="textClip">{{ Approach.title }}</span></span>
-            </h2>
+            <AnimatedHeading :data="{
+              simpleWords: null,
+              animatedWords: Approach.title,
+              isBgDark: false
+            }" />
             <div class="mt-8 lg:mt-16 text-left" v-html="$md.render(Approach.description)"> </div>
-
           </div>
 
           <!-- CARDs -->

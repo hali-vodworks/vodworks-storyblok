@@ -2,7 +2,6 @@
 <template>
     <section class="lg:py-32 py-14" :class="data.isDarkMode? 'bgColor-tertiary-black color-white':'bgColor-normal-grey'">
         <div class="mx-auto container">
-
             <div class="text-center mx-auto md:max-w-3/5">
                 <h2 class="">Tools and Technologies we use</h2>
                 <p class="mt-4 lg:mt-8 text-big">Our team at Vodworks has knowledge and experience
@@ -11,13 +10,13 @@
                     select the appropriate tools and tech stack to ensure we deliver on time and within budget.
                 </p>
             </div>
-
             <div class="flex flex-col md:flex-row justify-between mx-auto md:max-w-4/5  mt-8 lg:mt-16">
                 <template v-for="(tech, i) in tools_and_techs.techs">
                     <div :key="i" class="tools_and_techs text-center mb-8 md:mb-0">
-                        <p v-in-viewport> <span class="bgFill"><span :class="data.isDarkMode?'textClip color-white font-semibold':'textClip font-semibold' ">{{
-                            tech.title
-                        }}</span></span></p>
+                        <AnimatedParagraph :data="{
+                            simpleWords: tech.title,
+                            animatedWords: null
+                        }" />
                         <div class="techs-stacks mt-8 md:mt-0">
                             <template v-for="(logo, index) in tech.list">
                                 <img :key="index" class="mx-auto md:my-10 hvr-top"
@@ -34,14 +33,12 @@
 <script>
 export default {
     name: 'ToolsAndTechs',
-
     props: {
         data: {
             type: Object,
             default: null
         },
     },
-
     data() {
         return {
             tools_and_techs: {

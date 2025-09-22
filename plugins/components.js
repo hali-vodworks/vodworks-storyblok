@@ -53,7 +53,10 @@ import CsServicesWeProvide from '~/components/Sections/CsServicesWeProvide.vue'
 import CsTeam from '~/components/Sections/CsTeam.vue'
 import CsResult from '~/components/Sections/CsResult.vue'
 import CsScope from '~/components/Sections/CsScope.vue'
+import AnimatedHeading1 from '~/components/headings/AnimatedHeading1'
 import AnimatedHeading from '~/components/headings/AnimatedHeading'
+import AnimatedHeading3 from '~/components/headings/AnimatedHeading3'
+import AnimatedParagraph from '~/components/headings/AnimatedParagraph'
 
 Vue.component('CsBrief', CsBrief)
 Vue.component('CsHero', CsHero)
@@ -66,7 +69,10 @@ Vue.component('CsTeam', CsTeam)
 Vue.component('CsResult', CsResult)
 Vue.component('CsScope', CsScope)
 Vue.component('WhatOurClientsSay', WhatOurClientsSay)
+Vue.component('AnimatedHeading1', AnimatedHeading1)
 Vue.component('AnimatedHeading', AnimatedHeading)
+Vue.component('AnimatedHeading3', AnimatedHeading3)
+Vue.component('AnimatedParagraph', AnimatedParagraph)
 
 // General Cards
 Vue.component('ServiceCtaCard', ServiceCtaCard)

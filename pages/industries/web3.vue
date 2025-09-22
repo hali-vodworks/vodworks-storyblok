@@ -1,9 +1,10 @@
 <template>
   <div>
-
+    <!---------------------------------------------------------------------------------------------------->
     <IndustriesHeroSection :industries="getIndustriesData" :page="getPageDetails" :button="{
       btnURL: false
     }" />
+    <!---------------------------------------------------------------------------------------------------->
 
     <!---------------------------------------------------------------------------------------------------->
     <IndustriesSolutionCardsSection :data="{
@@ -12,22 +13,19 @@
     }" />
     <!---------------------------------------------------------------------------------------------------->
 
-
-
     <!---------------------------------Our Journey in Web3------------------------------------------------->
     <section class="lg:py-32 py-14">
       <div class="mx-auto container">
-
         <div class="text-center mx-auto w-full lg:w-3/5">
-          <h2 v-in-viewport>{{ Our_Journey_in_Web3.title }} <span class="bgFill"> <span class="textClip">{{
-            Our_Journey_in_Web3.animated_word }}</span></span></h2>
+          <AnimatedHeading :data="{
+            simpleWords: Our_Journey_in_Web3.title,
+            animatedWords: Our_Journey_in_Web3.animated_word,
+            isBgDark: false
+          }" />
           <p class="mt-4 lg:mt-8">{{ Our_Journey_in_Web3.description }}</p>
         </div>
-
         <div class="mt-8 lg:mt-16">
-
           <div class="web3-journey-wrapper">
-
             <template v-for="(journey, i) in Our_Journey_in_Web3.list">
               <div :key="i" class="journey hvr-top">
                 <div class="year">
@@ -37,42 +35,33 @@
                 <p class="text-small mt-2 color-primary-black">{{ journey.description }}</p>
               </div>
             </template>
-
           </div>
-
         </div>
       </div>
     </section>
     <!---------------------------------------------------------------------------------------------------->
 
-
-
-    <!--------------------------------Our Success Stories---------------------------------->
+    <!--------------------------------Our Success Stories------------------------------------------------->
     <CaseStudiesSection :data="{
       // title: 'Web3 Development Case Studies',
-      title:'Our Case Studies',
+      title: 'Our Case Studies',
       animated_word: '',
       description: '',
       getCasesData,
       isDarkMode: true,
     }" />
-    <!------------------------------------------------------------------------------------->
+    <!--------------------------------------------------------------------------------------------------->
 
-
-    <!----------------------------------------- Blog ----------------------------------------------------->
+    <!----------------------------------------- Blog ---------------------------------------------------->
     <ArticlesSections :data="{
       title: 'Related Web3 Development Blog Posts ',
       animated_word: '',
       getBlogData,
       isDarkMode: false
     }" />
-    <!---------------------------------------------------------------------------------------------------->
+    <!-------------------------------------------------------------------------------------------------->
 
-
-
-
-
-    <!---------------------------------------Meet our Web3 Experts------------------------------------------>
+    <!---------------------------------------Meet our Web3 Experts-------------------------------------->
     <Web3ExpertsSection :data="{
       title: 'Meet Our',
       animated_word: 'Web3 Experts',
@@ -80,69 +69,58 @@
       getDataExpertsData,
       isDarkMode: true
     }" />
+    <!------------------------------------------------------------------------------------------------->
 
-    <!------------------------------------------------------------------------------------------>
-
-    <!-------------------------------------------FAQs----------------------------------------------------->
+    <!-------------------------------------------FAQs-------------------------------------------------->
     <section class="lg:py-32 py-14">
       <div class="mx-auto container">
-
         <div class="mx-auto w-full lg:w-3/5">
           <div class="text-center">
-            <h2 v-in-viewport>{{ FaqsData.title }} <span class="bgFill"><span class="textClip">{{
-              FaqsData.animated_word }}</span></span></h2>
+            <AnimatedHeading :data="{
+              simpleWords: FaqsData.title,
+              animatedWords: FaqsData.animated_word,
+              isBgDark: false
+            }" />
           </div>
           <div class="mt-8 lg:mt-16">
             <Accordion :payload="FaqsData" category="web3" />
           </div>
         </div>
-
       </div>
     </section>
-    <!---------------------------------------------------------------------------------------------------->
+    <!------------------------------------------------------------------------------------------------>
 
-
-
-    <!----------------------------- What Our Clients Say ------------------------------------->
+    <!----------------------------- What Our Clients Say --------------------------------------------->
     <WhatOurClientsSay :data="{
       title: 'What Our Clients',
       animated_word: 'Say',
       getTestimonialsData,
       isDarkMode: false
     }" />
-    <!----------------------------------------------------------------------------------------->
+    <!----------------------------------------------------------------------------------------------->
 
-
-
-
-    <!-------------------------------------- About Vodworks ---------------------------------------->
+    <!-------------------------------------- About Vodworks ----------------------------------------->
     <AboutVodworks :data="{
       isDarkMode: false
     }" />
-    <!---------------------------------------------------------------------------------------------->
+    <!----------------------------------------------------------------------------------------------->
 
-
-    <!----------------------------- Get in Touch with us--------------------------------->
+    <!----------------------------- Get in Touch with us-------------------------------------------->
     <GetInTouchWithUs :data="{
-      title:'Get in Touch with us',
+      title: 'Get in Touch with us',
       isDarkSectionAtTop: false
     }" />
-    <!----------------------------------------------------------------------------------->
-
+    <!-------------------------------------------------------------------------------------------->
   </div>
 </template>
-  
 
 <script>
 
 import FAQs from '~/static/faqs'
-
 export default {
-
   async asyncData(context) {
     const path = context.route.path === '/' ? '/home' : context.route.path
     const [pageDataRes, allCasesRes, allArticlesRes, dataTeamRes, allTestimonialsRes] = await Promise.all([
-
       context.app.$storyapi.get(`cdn/stories/${path}`, {
         version: 'published',
         resolve_relations: 'industries-container.industries'
@@ -173,8 +151,6 @@ export default {
         starts_with: 'testimonials/',
         resolve_relations: 'testimonial-container.testimonials_list',
       }),
-
-
     ])
     return {
       pageData: pageDataRes.data,
@@ -183,9 +159,7 @@ export default {
       dataTeam: dataTeamRes.data,
       allTestimonials: allTestimonialsRes.data,
     }
-
   },
-
 
   data() {
     return {
@@ -385,7 +359,6 @@ export default {
     getTestimonialsData() {
       return this.allTestimonials
     },
-
   },
 
   methods: {
@@ -404,7 +377,5 @@ export default {
       };
     }
   }
-
 }
 </script>
-  

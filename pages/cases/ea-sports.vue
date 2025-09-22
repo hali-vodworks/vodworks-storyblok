@@ -1,15 +1,15 @@
 te<!-- eslint-disable vue/no-v-html -->
 <template>
   <div>
-    <!-----------  Hero section --------------------------------------------------->
+    <!-----------  Hero section -------------------------------------------------------->
     <CsHero :data="{
       content: getSingleCsHero,
       hasMorePadding: true,
       imageHeightFull: false,
     }" />
-    <!----------------------------------------------------------------------------->
+    <!----------------------------------------------------------------------------------->
 
-    <!-------------- Brief ----------------------------------------------------->
+    <!-------------- Brief -------------------------------------------------------------->
     <CsBrief :data="Brief" />
     <!----------------------------------------------------------------------------------->
 
@@ -22,8 +22,11 @@ te<!-- eslint-disable vue/no-v-html -->
       <div class="mx-auto container">
         <div class="md:max-w-4/5 mx-auto">
           <div class="text-center">
-            <h2 v-in-viewport.once><span class="bgFill"><span class="textClip">{{ Approach.title }}</span></span>
-            </h2>
+            <AnimatedHeading :data="{
+              simpleWords: null,
+              animatedWords: Approach.title,
+              isBgDark: false
+            }" />
           </div>
           <div class="mt-8 lg:mt-16" v-html="$md.render(Approach.description)"> </div>
           <div :style="resolveBackground('/img/border-design.svg')"
@@ -39,7 +42,6 @@ te<!-- eslint-disable vue/no-v-html -->
         </div>
       </div>
     </section>
-      
     <!----------------------------------------------------------------------------------->
 
     <!---------------  Technical Stack -------------------------------------------------->
@@ -53,28 +55,30 @@ te<!-- eslint-disable vue/no-v-html -->
     <CsServicesWeProvide :data="{
       content: ServicesWeProvided,
       layout: 'md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4'
-    }"/>
+    }" />
     <!----------------------------------------------------------------------------------->
 
-    <!---------------  Review -------------------------------------->
+    <!---------------  Review ----------------------------------------------------------->
     <CsReview :data="Review" />
     <!----------------------------------------------------------------------------------->
 
-    <!--------------- Features  --------------------------------------->
+    <!--------------- Features  --------------------------------------------------------->
     <CsFeatures :data="{
       Features,
       layout: 'center-two-ele-in-grid'
     }" />
-    <!----------------------------------------------------------------->
+    <!----------------------------------------------------------------------------------->
 
-    <!---------------  Outcome -------------------------------------->
+    <!---------------  Outcome ---------------------------------------------------------->
     <section v-if="Outcome" class="lg:py-32 py-14 single-cs bgColor-tertiary-black">
       <div class="outcome mx-auto container">
         <div class="md:max-w-4/5 mx-auto">
           <div class="text-center">
-            <h2 v-in-viewport.once><span class="bgFill"><span class="textClip color-white">{{ Outcome.title
-                  }}</span></span>
-            </h2>
+            <AnimatedHeading :data="{
+              simpleWords: null,
+              animatedWords: Outcome.title,
+              isBgDark: true
+            }" />
           </div>
           <ul class=" lg:pt-16 grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 mx-auto gap-4">
             <template v-for="card, i in Outcome.cards">
@@ -89,12 +93,12 @@ te<!-- eslint-disable vue/no-v-html -->
     </section>
     <!----------------------------------------------------------------------------------->
 
-    <!------------------------------- Get in Touch with us-------------------------------------->
+    <!------------------------------- Get in Touch with us------------------------------->
     <GetInTouchWithUs :data="{
       title: 'Get in Touch with us',
       isDarkSectionAtTop: true
     }" />
-    <!------------------------------------------------------------------------------------------>
+    <!----------------------------------------------------------------------------------->
 
   </div>
 </template>

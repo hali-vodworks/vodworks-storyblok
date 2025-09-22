@@ -39,11 +39,13 @@
       <div class="mx-auto container">
         <div class="">
           <div class="text-center md:max-w-4/5 mx-auto">
-            <h2 v-in-viewport.once><span class="bgFill"><span class="textClip">{{ Approach.title }}</span></span>
-            </h2>
+            <AnimatedHeading :data="{
+              simpleWords: null,
+              animatedWords: Approach.title,
+              isBgDark: false
+            }" />
             <div class="mt-8 lg:mt-16 text-center" v-html="$md.render(Approach.description)"> </div>
           </div>
-
           <!-- Development Lifecycle -->
           <div class="bg-no-repeat dev_life_cycle grid lg:grid-cols-4 xl:grid-cols-4 gap-4 mx-auto mt-8 lg:mt-16">
             <template v-for="card, i in Approach.cards">
@@ -55,7 +57,6 @@
             </template>
           </div>
         </div>
-
       </div>
     </section>
     <!----------------------------------------------------------------------------------->

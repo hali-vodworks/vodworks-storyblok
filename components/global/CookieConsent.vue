@@ -68,7 +68,6 @@
     align-items: center;
     z-index: 1000;
   }
-  
   .cookie-bar-content {
     display: flex;
     flex-wrap: wrap;
@@ -76,7 +75,6 @@
     align-items: center;
     width: 92%;
     margin: 0 auto;
-  
     p {
       a {
         color: var(--color_prim_red);
@@ -85,7 +83,6 @@
       }
     }
   }
-  
   .cookie-bar-buttons button {
     margin-right: 10px;
     margin-top: 20px;
@@ -95,15 +92,12 @@
     cursor: pointer;
     border-radius: .375rem;
   }
-  
   .btn-accept {
     background-color: #28a745;
     color: #fff;
   }
-  
   .btn-reject {
     background-color: #dc3545;
     color: #fff;
   }
   </style>
-  

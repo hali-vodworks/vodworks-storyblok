@@ -30,8 +30,11 @@
       <div class="mx-auto container">
         <div class="row">
           <div class="text-center">
-            <h2 v-in-viewport.once><span class="bgFill"><span class="textClip">{{ FullWidthWhiteBgSection.title }}</span></span>
-            </h2>
+            <AnimatedHeading :data="{
+              simpleWords: null,
+              animatedWords: FullWidthWhiteBgSection.title,
+              isBgDark: false
+            }" />
             <div class="mt-8" v-html="$md.render(FullWidthWhiteBgSection.description)"></div>
           </div>
         </div>
@@ -234,7 +237,7 @@ export default {
       return this.story.content.cs_full_details.find(function (obj) {
         return obj.component === 'single-cs-featured-image-2';
       })
-    },    
+    },
     Features() {
       return this.story.content.cs_full_details.find(function (obj) {
         return obj.component === 'cs_features';

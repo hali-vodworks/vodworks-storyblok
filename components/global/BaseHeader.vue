@@ -1,17 +1,12 @@
 <template>
   <div class="header bgColor-light-grey py-4 md:py-2">
-
-
     <header class="flex flex-row items-center justify-between mx-auto container">
-
       <!-- logo -->
       <NuxtLink to="/" class="lg:justify-self-end mr-5 cursor-pointer" active-class="bg-transparent">
         <img class="logo-img" src="~/assets/img/vw-logo.svg" alt="Vodworks Logo" />
       </NuxtLink>
-
       <!-- Main Navigation bar -->
       <ul class="hidden md:inline-block">
-
         <li v-for="(item, index) in Navigations.navigationItems" :key="index" class="relative color-primary-black"
           :class="item.list ? 'dropdown-parent hasDropdown' : ' '">
           <NuxtLink :to="item.path" class="flex gap-2 items-center">
@@ -19,7 +14,6 @@
               <TiltedArrow />
             </div>
           </NuxtLink>
-
           <ul v-if="item.list" class="dropdown bgColor-light-grey">
             <li v-for="(childItem, childIndex) in item.list" :key="childIndex">
               <NuxtLink :to="childItem.path" class="inline-block">
@@ -28,33 +22,24 @@
             </li>
           </ul>
         </li>
-
       </ul>
-
       <!-- button -->
       <NuxtLink to="/contact/" class="btn-primary btn-md hidden lg:inline-block invisible md:visible">
         Get in touch
       </NuxtLink>
-
       <!-- icon menu -->
       <img v-show="!showMenu" src="~/assets/img/icons/Burger.svg"
         class="self-center justify-self-end md:hidden cursor-pointer hamburger" alt="hamburger icon"
         @click="showMenu = true" />
-
       <div v-show="showMenu" class="self-center justify-self-end md:hidden cursor-pointer" @click="showMenu = false">
         <img class="cross-icon" src="~/assets/img/icons/x.svg" alt="cross icon" />
       </div>
-
     </header>
 
     <!--Mobile Menus-->
     <div class="mobileNavigation">
-
-
-
       <ul v-show="showMenu" class="text-h-font md:hidden flex flex-col items-start px-8 py-8 gap-2">
-
-        <!------------------------------------------Services----------------------------------->
+        <!--- Services -------->
         <li class="relative dropdown-parent hasDropdown w-full">
           <div class="flex items-center justify-between" :class="isServicesActive ? 'isActive' : ''">
             <NuxtLink to="/services/" @click.native="showMenu = false">
@@ -62,7 +47,6 @@
             </NuxtLink>
             <TiltedArrow @click.native="isServicesActive = !isServicesActive" />
           </div>
-
           <ul v-show="isServicesActive" class="px-4">
             <li>
               <NuxtLink to="/services/consulting/" class="rounded-md inline-block" @click.native="showMenu = false">
@@ -86,17 +70,14 @@
             </li>
           </ul>
         </li>
-
-        <!------------------------------------------Industries----------------------------------->
+        <!--------Industries------->
         <li class="relative dropdown-parent hasDropdown w-full">
-
           <div class="flex items-center justify-between" :class="isIndustriesActive ? 'isActive' : ''">
             <NuxtLink to="/industries/" class="py-2 flex gap-2 items-center" @click.native="showMenu = false">
               Industries
             </NuxtLink>
             <TiltedArrow @click.native="isIndustriesActive = !isIndustriesActive" />
           </div>
-
           <ul v-show="isIndustriesActive" class="px-4">
             <li>
               <NuxtLink to="/industries/media-and-entertainment/" class="rounded-md inline-block"
@@ -146,24 +127,20 @@
             </li>
 
           </ul>
-
         </li>
-
-
+        <!------- Case Studies----->
         <li>
           <NuxtLink to="/cases/" class="py-2 flex gap-2 items-center" @click.native="showMenu = false">
             Case Studies
           </NuxtLink>
         </li>
-
-
+        <!------- Blog ------------->
         <li>
           <NuxtLink to="/blogs/" class="py-2 flex gap-2 items-center" @click.native="showMenu = false">
             Blog
           </NuxtLink>
         </li>
-
-
+        <!------- Company----------->
         <li class="relative dropdown-parent hasDropdown w-full">
           <div class="flex items-center justify-between" :class="isCompanyActive ? 'isActive' : ''">
             <NuxtLink to="/about/" class="py-2 flex gap-2 items-center" @click.native="showMenu = false">
@@ -171,7 +148,6 @@
             </NuxtLink>
             <TiltedArrow @click.native="isCompanyActive = !isCompanyActive" />
           </div>
-
           <ul v-show="isCompanyActive" class="px-4">
             <li>
               <NuxtLink to="/about/" class="rounded-md inline-block" @click.native="showMenu = false">
@@ -198,13 +174,11 @@
                 For Web3
               </NuxtLink>
             </li>
-
             <li>
               <NuxtLink to="/social-projects/" class="rounded-md inline-block" @click.native="showMenu = false">
                 Social Projects
               </NuxtLink>
             </li>
-
             <li>
               <NuxtLink to="/careers/" class="rounded-md inline-block" @click.native="showMenu = false">
                 Careers
@@ -235,8 +209,5 @@ export default {
       Navigations: AllRoutes,
     }
   },
-
 }
-
 </script>
-

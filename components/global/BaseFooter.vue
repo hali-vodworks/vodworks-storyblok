@@ -1,7 +1,5 @@
 <template>
   <footer :style="resolveBackground('/img/footer-bg-logo.svg')" class="bg-no-repeat">
-
-
     <div class="grid md:grid-cols-1 lg:grid-cols-3 xl:grid-cols-3 gap-4 mx-auto container color-white">
       <!-- logo -->
       <div class="logo">
@@ -9,12 +7,10 @@
           <img class="lazyload logo-img" src="~/assets/img/footer-logo.svg" alt="Vodworks Logo" />
         </NuxtLink>
       </div>
-
       <div class="flex flex-col gap-12 lg:flex-row">
         <!-- Services -->
         <div class="flex flex-col leading-8 mt-4 lg:mt-0">
           <h4 class="uppercase font-medium mb-4 lg:mb-8">Services</h4>
-
           <ul>
             <li v-for="(item, index) in Navigations.navigationItems[0].list" :key="index" class="block color-white">
               <NuxtLink :to="item.path" active-class="bg-transparent">
@@ -22,9 +18,7 @@
               </NuxtLink>
             </li>
           </ul>
-
         </div>
-
         <!-- Quick Links -->
         <div class="flex flex-col leading-8 mt-4 lg:mt-0">
           <h4 class="uppercase font-medium mb-4 lg:mb-8">Quick Links</h4>
@@ -34,10 +28,8 @@
                 {{ item.name }}
               </NuxtLink>
             </li>
-
           </ul>
         </div>
-
         <!-- Company -->
         <div class="flex flex-col leading-8 mt-4 lg:mt-0">
           <h4 class="uppercase font-medium mb-4 lg:mb-8">Company</h4>
@@ -49,9 +41,7 @@
             </li>
           </ul>
         </div>
-
       </div>
-
       <div class="mt-4 lg:mt-0 ">
         <h4 class="uppercase font-medium mb-4 lg:mb-8">Follow Us</h4>
         <div class="social-icon flex flex-nowrap gap-6">
@@ -63,23 +53,17 @@
             target="_blank"><img class="lazyload" src="~/assets/img/icons/facebook-light.svg" alt="Facebook icon" /></a>
         </div>
       </div>
-
     </div>
-
      <!-- Cookies consent -->
      <div>
       <CookieConsent/> 
     </div>
-
   </footer>
 </template>
 
 <script>
-
-
 import AllRoutes from '~/static/routes'
 import CookieConsent from '~/components/global/CookieConsent.vue';
-
 export default {
   components: {
     CookieConsent,
@@ -88,7 +72,6 @@ export default {
     return {
       Navigations: AllRoutes,
       cookies: this.$cookies,
-
     }
   },
   methods: {

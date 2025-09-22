@@ -2,7 +2,6 @@
 <template>
     <section class="lg:py-32 py-14 bgColor-tertiary-black color-white">
         <div class="mx-auto container">
-
             <div class="text-center mx-auto md:max-w-3/5">
                 <h2 class="heading-1">Subscribe to our blog</h2>
                 <div class=" mx-auto md:max-w-4/5">
@@ -15,15 +14,12 @@
 </template>
   
 <script>
-
 export default {
     name: 'SubscribeToOurBlog',
-
     mounted() {
         const script = document.createElement("script");
         script.src = "https://js.hsforms.net/forms/v2.js";
         document.body.appendChild(script);
-
         script.addEventListener("load", () => {
             if (window.hbspt) {
                 window.hbspt.forms.create({
@@ -34,7 +30,6 @@ export default {
                 })
             }
         });
-
     },
 }
 </script>

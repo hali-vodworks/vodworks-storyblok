@@ -26,10 +26,12 @@
       <div class="mx-auto container">
         <div class="">
           <div class="text-center md:max-w-4/5 mx-auto">
-            <h2 v-in-viewport.once><span class="bgFill"><span class="textClip">{{ Approach.title }}</span></span>
-            </h2>
+            <AnimatedHeading :data="{
+              simpleWords: null,
+              animatedWords: Approach.title,
+              isBgDark: false
+            }" />
             <div class="mt-8 lg:mt-16 text-left" v-html="$md.render(Approach.description)"> </div>
-
           </div>
 
           <!-- CARDs -->

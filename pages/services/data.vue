@@ -6,7 +6,8 @@
         <div class="text-center mx-auto md:max-w-4/5">
           <h1 class="color-white">Data Management Services</h1>
           <p class="mt-4 lg:mt-8 mb-8 lg:mb-12 text-big color-white">While most companies collect data, very few take
-            action on that data. Our team of dedicated data specialists is here to ensure your data becomes an asset that
+            action on that data. Our team of dedicated data specialists is here to ensure your data becomes an asset
+            that
             actively benefits your operations. We collaborate within your current analytics framework or provide
             recommendations for tailored tools, guaranteeing consistent and dependable data delivery for seamless
             consumption every time.
@@ -64,8 +65,10 @@
         <div class="mt-4 lg:mt-12 center-two-ele-in-grid">
           <template v-for="(card, i) in why_use_our_data_services.list">
             <div :key="i" class="my-4 lg:my-4 text-center md:text-left item">
-              <h3 v-in-viewport class="mb-4 inline-block capitalize"> <span class="bgFill"><span class="textClip">{{
-                card.title }}</span></span> </h3>
+              <AnimatedHeading3 :data="{
+                title: card.title,
+                isBgDark: false
+              }" />
               <p class=" text-regular">{{ card.description }}</p>
             </div>
           </template>
@@ -92,7 +95,7 @@
 
     <!------------------------------- Get in Touch with us--------------------------------->
     <GetInTouchWithUs :data="{
-      title:'Get in Touch with us',
+      title: 'Get in Touch with us',
       isDarkSectionAtTop: false
     }" />
     <!------------------------------------------------------------------------------------------>
