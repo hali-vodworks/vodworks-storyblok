@@ -66,22 +66,9 @@
     <!------------------------------------------------------------------------------------->
 
     <!--------------------------------------FAQs------------------------------------------->
-    <section class="lg:py-32 py-14 bgColor-normal-grey">
-      <div class="mx-auto container">
-        <div class="mx-auto w-full lg:w-3/5">
-          <div class="text-center">
-            <AnimatedHeading :data="{
-              simpleWords: FaqsData.title,
-              animatedWords: FaqsData.animated_word,
-              isBgDark: false
-            }" />
-          </div>
-          <div class="mt-8 lg:mt-16">
-            <Accordion :payload="FaqsData" category="forEnterprise" />
-          </div>
-        </div>
-      </div>
-    </section>
+    <div class="bgColor-normal-grey">
+      <FAQs :payload="FAQs" />
+    </div>
     <!------------------------------------------------------------------------------------->
 
     <!----------------------------- What Our Clients Say ---------------------------------->
@@ -91,24 +78,27 @@
       getTestimonialsData,
       isDarkMode: true
     }" />
-    <!----------------------------------------------------------------------------------------->
+    <!------------------------------------------------------------------------------------>
 
-    <!----------------------------- Get in Touch with us--------------------------------->
+    <!----------------------------- Get in Touch with us---------------------------------->
     <GetInTouchWithUs :data="{
       title: 'Discuss Your Enterprise Development Software Project With Us!',
       isDarkSectionAtTop: true
     }" />
-    <!----------------------------------------------------------------------------------->
+    <!------------------------------------------------------------------------------------>
 
   </div>
 </template>
 
 <script>
-import FAQs from '~/static/faqs'
 export default {
   async asyncData(context) {
-    // const path = context.route.path === '/' ? '/home' : context.route.path
-    const [allCasesRes, allTestimonialsRes] = await Promise.all([
+    const path = context.route.path === '/' ? '/home' : context.route.path
+    const [pageDataRes, allCasesRes, allTestimonialsRes] = await Promise.all([
+      context.app.$storyapi.get(`cdn/stories/${path}`, {
+        version: 'published',
+        resolve_relations: 'faqs-container.list_of_faqs',
+      }),
       context.app.$storyapi.get('cdn/stories/', {
         version: 'published',
         starts_with: 'cases/',
@@ -121,6 +111,7 @@ export default {
       }),
     ])
     return {
+      pageData: pageDataRes.data,
       allCases: allCasesRes.data,
       allTestimonials: allTestimonialsRes.data,
     }
@@ -272,13 +263,6 @@ export default {
         ]
       },
 
-      FaqsData: {
-        title: "Enterprise Development Software",
-        animated_word: "FAQ",
-
-        faqs: FAQs.list
-      },
-
     }
   },
 
@@ -325,6 +309,9 @@ export default {
     getTestimonialsData() {
       return this.allTestimonials
     },
+    FAQs() {
+      return this.pageData.story.content.body.find(obj => obj.component === 'faqs-container');
+    }
   },
 
   methods: {
@@ -332,12 +319,12 @@ export default {
       return {
         "@context": "https://schema.org",
         "@type": "FAQPage",
-        "mainEntity": this.FaqsData.faqs.filter(faq => faq.categories.includes("forEnterprise")).map(faq => ({
+        "mainEntity": this.FAQs.list_of_faqs.map(faq => ({
           "@type": "Question",
-          "name": faq.question,
+          "name": faq.content.question,
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": faq.answer
+            "text": faq.content.answer
           }
         }))
       };
