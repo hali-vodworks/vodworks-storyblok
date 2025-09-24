@@ -1,30 +1,26 @@
 <template>
   <div id="contact_page">
-
-
+    <!----------------------- Hero Section --------------------------------------->
     <PageHeroWithAnimatedTitle
       :data="{ title: 'Get in Touch', animated_word: 'with Us', description: 'Just tell us a little bit about your project via the contact form, and we’ll make sure the right person reaches out.' }" />
+    <!--------------------------------------------------------------------------->
 
-
-    <!------------------------------- Form -------------------------------------->
+    <!----------------------- Contact Form -------------------------------------->
     <section class="lg:py-32 py-14 bgColor-grey ">
       <div class="mx-auto container">
-
         <div class="mx-auto w-full lg:w-3/5">
           <GetInTouchForm />
         </div>
-
       </div>
     </section>
-    <!------------------------------------------------------------------------------------------>
+    <!--------------------------------------------------------------------------->
 
-    <!----------------------------------- Our Next Steps --------------------------------------->
+    <!---------------------Our Next Steps --------------------------------------->
     <section v-if="NextStepContent" class="lg:py-32 py-14 bgColor-tertiary-black color-white">
       <div class="mx-auto container">
         <div class="text-center">
           <h2>{{ NextStepContent.title }}</h2>
         </div>
-
         <div class="next_step_timeline grid md:grid-cols-1 lg:grid-cols-4 xl:grid-cols-4 mx-auto gap-4 mt-8 lg:mt-16">
           <template v-for="(step, i) in NextStepContent.list">
             <div :key="i" class="next_step">
@@ -35,11 +31,9 @@
         </div>
       </div>
     </section>
-    <!------------------------------------------------------------------------------------------>
+    <!--------------------------------------------------------------------------->
 
-
-    <!---------------------------------- Customer Support ------------------------------------->
-
+    <!-------------- Customer Support (CTA) ------------------------------------->
     <section class="lg:py-32 py-14">
       <div class="mx-auto container">
         <div class="grid md:grid-cols-12 lg:grid-cols-12 xl:grid-cols-12 gap-4 lg:gap-8 items-center">
@@ -47,7 +41,6 @@
             <h2 class="heading-1">{{ customer_supprt.title }}</h2>
             <p class="mt-4 lg:mt-8 text-big lg:max-w-4/5">{{ customer_supprt.description }}</p>
           </div>
-
           <div class="md:col-span-3">
             <template v-for="(detail, i) in customer_supprt.company_detail">
               <div :key="i" class="p-4 py-4 lg:px-8 lg:py-8 card-utilities hvr-effect my-4">
@@ -59,24 +52,17 @@
               </div>
             </template>
           </div>
-
         </div>
       </div>
     </section>
-    <!------------------------------------------------------------------------------------------>
-
+    <!--------------------------------------------------------------------------->
   </div>
 </template>
 
-
-
 <script>
-
 import NextStepContent from '~/static/our-next-steps-content'
 import ogImage from '~/static/preview-contact.jpg';
-
 export default {
-
   data() {
     return {
       story: { content: {} },
@@ -101,13 +87,9 @@ export default {
             url: "tel:+4408432897925",
           },
         ]
-
       }
     }
   },
-
-
-
   head() {
     return {
       title: 'Contact us | Vodworks',
@@ -142,8 +124,6 @@ export default {
       ],
     }
   },
-
-
 }
 </script>
     
