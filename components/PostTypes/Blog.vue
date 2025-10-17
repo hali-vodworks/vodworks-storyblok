@@ -3,45 +3,65 @@
   <!------------------------------- Blog Detailed Hero -------------------------------->
   <div class="single-post">
     <!--    :style="{ backgroundImage: `url(${getFeaturedImage})` }"-->
-    <section class="lg:py-32 py-14 bgColor-tertiary-black color-white">
+    <section class="lg:py-32 py-14 bgColor-tertiary-black">
       <div class="mx-auto container">
-        <h1 class="heading-2 font-bold">
+
+        <h1 class="heading-2 font-bold color-white">
           {{ blok.title }}
         </h1>
-
-        <!-- If We have author -->
-        <div v-if="blok.author !== ''" class="flex mt-8 author-summary">
-          <div class="w-12 h-12 rounded-full mr-4 overflow-hidden">
-            <img :src="blok.author.content.short_img.filename" alt="Author Avatar" />
-          </div>
-          <div>
-            <p class="font-bold">
-              <NuxtLink to="/about/"><span>{{ blok.author.content.Name }}</span></NuxtLink>
-            </p>
-            <p class="mt-1 text-small opacity-80">
-              {{ getPublishDate }} - {{ blok.read_time }} min read
-            </p>
-          </div>
+        <div class="flex items-center gap-2 mt-2">
+          <img class="clock-icon" src="~/assets/img/icons/calendar.svg" alt="clock-icon" />
+          <p class="text-sm color-main-grey"> {{ getPublishDate }} - {{ blok.read_time }} min read</p>
         </div>
 
-        <!--  Defautl Author -->
-        <div v-else class="flex mt-8 author-summary">
-          <div class="w-12 h-12 rounded-full mr-4 overflow-hidden">
-            <img src="~/assets/img/vw-icon.png" alt="Author Avatar" />
+
+        <div class="authors py-10">
+          <!-- If We have Author -->
+          <div v-if="blok.author !== '' && blok.author" class="flex author-summary items-center">
+            <div class="w-12 h-12 rounded-full mr-4 overflow-hidden">
+              <img :src="blok.author.content.short_img.filename" alt="Author Avatar" />
+            </div>
+            <div>
+              <p class="font-bold color-white">
+                <NuxtLink :to="`/authors/${blok.author.slug}` + '/'"><span>{{ blok.author.content.Name }}</span>
+                </NuxtLink>
+              </p>
+              <p class="mt-0 text-small color-main-grey">Author</p>
+            </div>
           </div>
-          <div>
-            <p class="font-bold">
-              <NuxtLink to="/about/"><span>Vodworks</span></NuxtLink>
-            </p>
-            <p class="mt-1 text-small opacity-80">
-              {{ getPublishDate }} - {{ blok.read_time }} min read
-            </p>
+
+          <!-- Default Author -->
+          <div v-else class="flex author-summary items-center">
+            <div class="w-12 h-12 rounded-full mr-4 overflow-hidden">
+              <img src="~/assets/img/vw-icon.png" alt="Author Avatar" />
+            </div>
+            <div>
+              <p class="font-bold color-white">
+                <NuxtLink to="/about/"><span>Vodworks</span></NuxtLink>
+              </p>
+            </div>
           </div>
+
+          <!-- If We have Co-author -->
+          <div v-if="blok.co_author !== '' && blok.co_author" class="flex author-summary items-center co-author">
+            <div class="w-12 h-12 rounded-full mr-4 overflow-hidden">
+              <img :src="blok.co_author.content.short_img.filename" alt="Author Avatar" />
+            </div>
+            <div>
+              <p class="font-bold color-white">
+                <NuxtLink :to="`/co-authors/${blok.co_author.slug}` + '/'"><span>{{ blok.co_author.content.Name
+                }}</span>
+                </NuxtLink>
+              </p>
+              <p class="mt-0 text-small color-main-grey">{{ blok.co_author.content.Role }}</p>
+            </div>
+          </div>
+          
         </div>
 
         <!--  AI Chatbot Buttons -->
-        <div class="chatbot-buttons mt-8">
-          <p class="mb-2">Summarize this article with:</p>
+        <div class="chatbot-buttons">
+          <p class="mb-2" style="color: #ADB2C9;">Summarize this article with:</p>
           <a v-if="chatgptUrl" target="_blank" :href="chatgptUrl">
             <img src="~/assets/img/icon/chatGPT-icon.svg" alt="chatGPT-icon" />
             ChatGPT
@@ -194,8 +214,6 @@
 </template>
 
 <script>
-
-
 export default {
   name: 'Blog',
   props: {

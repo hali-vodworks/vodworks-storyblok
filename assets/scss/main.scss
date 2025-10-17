@@ -234,10 +234,25 @@ input[type='number']::-webkit-outer-spin-button {
       height: 80px;
       width: 80px;
       object-fit: contain;
-      background: #cccc;
+      background: #cccccc;
     }
   }
-
+}
+.blog-post-date{
+  background: #485655;
+  display: inline-block;
+  color: var(--color_white);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 13px;
+}
+.authors{
+  display: flex;
+  .co-author{
+    margin-left: 24px;
+    padding-left: 24px;
+    border-left: 1px solid #898989;
+  }
 }
 
 // ==============================================

@@ -388,7 +388,7 @@
 
     h1,
     .heading-1 {
-        font-size: 32px;
+        font-size: 32px !important;
     }
 
     h2 {
@@ -903,6 +903,15 @@
         .operator{
             width: 12px;
             height: 12px;
+        }
+    }
+    .authors{
+        flex-direction: column;
+        .co-author{
+            margin: 16px 0 0 0;
+            padding: 16px 0 0 0;
+            border-left: 0;
+            border-top: 1px solid #898989;
         }
     }
 }

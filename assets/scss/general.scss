@@ -240,7 +240,7 @@ li {
 }
 
 .image404{
-  max-width: 80%;
+  max-width: 70%;
   margin: 40px auto;
 }
 
@@ -765,7 +765,22 @@ li {
   overflow: hidden;
   border: 1px solid var(--bgColor_light_grey);
 }
+.article-content{
+  .card-summary{
+    border-bottom: 1px solid #dcdfec;
+    margin: 0;
+    padding: 12px 0;
+    margin-bottom: 12px;
+     img{
+      transform:scale(1) !important;
+    }
+  }
+  .author{
+    width: 24px;
+    height: 24px;
+  }
 
+}
 .popular-blog-wrapper {
   height: 96px;
 }
@@ -1423,5 +1438,25 @@ li {
   .operator{
     width: 19px;
     height: 19px;
+  }
+}
+
+.single-author{
+  .avatar{
+    width: 140px;
+    height: 140px;
+    overflow: hidden;
+    img{
+      width: 100%;
+    }
+  }
+
+  .empty-state{
+    max-width: 400px;
+    margin: 96px auto 0;
+    img{
+      max-width: 64%;
+      margin: 0 auto;
+    }
   }
 }

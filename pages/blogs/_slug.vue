@@ -1,22 +1,19 @@
+<!-- eslint-disable vue/attribute-hyphenation -->
 <template>
   <div>
     <component :is="pageData.story.content.component" v-if="pageData.story.content.component"
       :key="pageData.story.content._uid" :blok="pageData.story.content" :faqsdata="faqs" :getBlogData="relatedPosts" />
   </div>
 </template>
-
 <script>
 
-
-
 export default {
-
-  async asyncData(context) {
+  async asyncData(context ) {
     const path = context.route.path === '/' ? '/home' : context.route.path
     const [pageDataRes, faqsRes, relatedPostsRes] = await Promise.all([
       context.app.$storyapi.get(`cdn/stories/${path}`, {
         version: 'published',
-        resolve_relations: 'blog-container.blog,blog.author',
+        resolve_relations: 'blog-container.blog,blog.author,blog.co_author',
       }),
       context.app.$storyapi.get('cdn/stories/', {
         version: 'published',
@@ -25,7 +22,7 @@ export default {
       context.app.$storyapi.get('cdn/stories/', {
         version: 'published',
         starts_with: 'blogs/',
-        per_page: 4,
+        per_page: 6,
       }),
     ])
     return {
@@ -33,16 +30,12 @@ export default {
       faqs: faqsRes.data,
       relatedPosts: relatedPostsRes.data
     }
-
   },
-
-
   data() {
     return {
       story: { content: {} },
     }
   },
-
   head() {
     return {
       title: `${this.pageData.story.content.meta_title}`,
@@ -86,54 +79,21 @@ export default {
         },
 
       ],
-
+      // Hubspot CTA Tracking Code
       script: [
-        {
-          json: {
-            "@context": "https://schema.org/",
-            "@type": "Article",
-            "author": [
-              {
-                "@type": "Organization",
-                "name": "Vodworks",
-                "url": "https://vodworks.com/about/"
-              }
-            ],
-
-            "headline": `${this.pageData.story.content.title}`,
-            "datePublished": `${this.pageData.story.published_at}`,
-
-            "publisher": {
-              "@type": "Organization",
-              "name": "Vodworks",
-              "logo": {
-                "@type": "ImageObject",
-                "url": "https://vodworks.com/_nuxt/img/vw-logo.bda932c.svg"
-              }
-            },
-            "mainEntityOfPage": `https://vodworks.com/${this.story.full_slug}`
-          },
-          type: 'application/ld+json'
-        },
-       // Hubspot CTA Tracking Code
         {
           src: "https://js.hs-scripts.com/1873794.js",
           async: true,
           defer: true,
           id: "hs-script-loader"
         }
-      
-      ],
-
+      ]
     }
   },
-
   computed: {
     getBlogData() {
       return this.relatedPosts
     },
-  },
-
+  }
 }
-
 </script>
