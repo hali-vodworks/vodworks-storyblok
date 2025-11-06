@@ -17,8 +17,6 @@ header li:last-child ul li:last-child {
       font-size: 16px;
       font-weight: 700;
       padding: 20px 16px;
-      text-transform: uppercase;
-
       svg {
         -webkit-transition: all 0.3s ease;
         -moz-transition: all 0.3s ease;
@@ -53,8 +51,6 @@ header li:last-child ul li:last-child {
 
   }
 }
-
-
 .dropdown {
   position: absolute;
   width: -moz-max-content;
@@ -65,35 +61,21 @@ header li:last-child ul li:last-child {
 
   li {
     display: block;
-
     a {
-      padding: 8px 16px !important;
+      padding: 6px 16px !important;
     }
-
   }
-
-
 }
-
 .dropdown-parent:hover .dropdown {
   display: block;
 }
-
-
 .hasDropdown ul li {
   display: block;
   margin: 8px 0;
-
   a {
     font-size: 14px !important;
   }
-
 }
-
-
-
-
-
 @keyframes stickySlideDown {
   0% {
     opacity: 0.7;

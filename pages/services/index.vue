@@ -14,8 +14,8 @@
             Discuss your project
           </div>
         </div>
-        <div class="text-center mx-auto md:max-w-4/5 mt-8 lg:mt-16">
-          <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 mx-auto gap-2 md:gap-4 lg:gap-6">
+        <div class="text-center mx-auto mt-8 lg:mt-16">
+          <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-5 xl:grid-cols-5 mx-auto gap-2 md:gap-4 lg:gap-6">
             <template v-for="(card, i) in getServicesData.services">
               <ServiceCtaCard :key="i" :data="card" />
             </template>

@@ -3,14 +3,11 @@
     <!------------------------------------- Data Hero -------------------------------------->
     <section class="lg:py-32 py-14 bgColor-tertiary-black">
       <div class="mx-auto container">
-        <div class="text-center mx-auto md:max-w-4/5">
-          <h1 class="color-white">Data Management Services</h1>
-          <p class="mt-4 lg:mt-8 mb-8 lg:mb-12 text-big color-white">While most companies collect data, very few take
-            action on that data. Our team of dedicated data specialists is here to ensure your data becomes an asset
-            that
-            actively benefits your operations. We collaborate within your current analytics framework or provide
-            recommendations for tailored tools, guaranteeing consistent and dependable data delivery for seamless
-            consumption every time.
+        <div class="text-center mx-auto md:max-w-3/5">
+          <h1 class="color-white">Business Intelligence and Analytics Services</h1>
+          <p class="mt-4 lg:mt-8 mb-8 lg:mb-12 text-big color-white">Gain full visibility into business performance and
+            make insights accessible to everyone. Our data specialists build analytics frameworks and dashboards that
+            break down silos, so every team can see how their actions drive the company’s growth.
           </p>
           <div v-scroll-to="'#GetInTouchWithUs'" class="btn-primary btn-lg inline-block cursor-pointer">
             Talk with our experts
@@ -78,9 +75,11 @@
     <!------------------------------------------------------------------------------------->
 
     <!----------------------------We Work Across Industries-------------------------------->
-    <IndustriesListingSection :data='{
-      getIndustriesData
-    }' />
+    <IndustriesListingSection :data="{
+      title: 'We Work Across Industries',
+      description: `At Vodworks, we pride ourselves on our versatile approach, supporting clients across a spectrum of industries. Our team's extensive experience and commitment to understanding the unique nuances of your industry and company guarantee the success of your project, no matter the sector you operate in.`,
+      getIndustriesData,
+    }" />
     <!------------------------------------------------------------------------------------->
 
     <!------------------------------------------------------------------------------------->

@@ -1,9 +1,4 @@
 export default {
-    // base: {
-    //     name: "Home",
-    //     path: "/"
-    // },
-
     navigationItems: [
         {
             name: "Services",
@@ -12,22 +7,34 @@ export default {
             hasDropDown: true,
             list: [
                 {
-                    name: "Consulting",
+                    // name: "Consulting",
+                    name: "Tech Consultancy and Advisory",
+                    description: "Make confident, informed tech decisions",
                     path: "/services/consulting/",
                 },
                 {
-                    name: "Engineering",
+                    // name: "Engineering",
+                    name: "Custom Software Development",
+                    description: "Turn ideas into tailored products that drive impact ",
                     path: "/services/engineering/",
                 },
                 {
-                    name: "Data",
+                    // name: "Data",
+                    name: "Analytics and Business Intelligence",
+                    description: "Transform data into actionable insight",
                     path: "/services/data/",
                 },
                 {
-                    name: "Teams",
+                    name: "AI Readiness",
+                    description: "Get your data, systems, and people ready for AI success",
+                    path: "/services/ai-readiness/",
+                },
+                {
+                    // name: "Teams",
+                    name: "Team Augmentation",
+                    description: "Expand your team with trusted experts",
                     path: "/services/teams/",
                 },
-
             ],
 
         },

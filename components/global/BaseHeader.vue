@@ -50,22 +50,27 @@
           <ul v-show="isServicesActive" class="px-4">
             <li>
               <NuxtLink to="/services/consulting/" class="rounded-md inline-block" @click.native="showMenu = false">
-                Consulting
+                Tech Consultancy and Advisory
               </NuxtLink>
             </li>
             <li>
               <NuxtLink to="/services/engineering/" class="rounded-md inline-block" @click.native="showMenu = false">
-                Engineering
+                Custom Software Development
               </NuxtLink>
             </li>
             <li>
               <NuxtLink to="/services/data/" class="rounded-md inline-block" @click.native="showMenu = false">
-                Data
+                Analytics and Business Intelligence
+              </NuxtLink>
+            </li>
+            <li>
+              <NuxtLink to="/services/ai-readiness/" class="rounded-md inline-block" @click.native="showMenu = false">
+                AI Readiness
               </NuxtLink>
             </li>
             <li>
               <NuxtLink to="/services/teams/" class="rounded-md inline-block" @click.native="showMenu = false">
-                Teams
+                Team Augmentation
               </NuxtLink>
             </li>
           </ul>
@@ -114,14 +119,9 @@
                 ECOMMERCE & RETAIL
               </NuxtLink>
             </li>
-            <!--
             <li>
-              <NuxtLink to="/industries/web3/" class="rounded-md inline-block" @click.native="showMenu = false">
-                WEB3
-              </NuxtLink>
-            </li>-->
-            <li>
-              <NuxtLink to="/industries/sustainability/" class="rounded-md inline-block" @click.native="showMenu = false">
+              <NuxtLink to="/industries/sustainability/" class="rounded-md inline-block"
+                @click.native="showMenu = false">
                 SUSTAINABILITY
               </NuxtLink>
             </li>
@@ -188,6 +188,7 @@
         </li>
       </ul>
     </div>
+
   </div>
 </template>
 

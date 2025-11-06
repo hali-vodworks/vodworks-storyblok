@@ -56,7 +56,8 @@
             {{ getServicesData.description }}
           </p>
         </div>
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 mx-auto gap-4 mt-8 lg:mt-16">
+        
+        <div class="center-two-ele-in-grid mx-auto mt-8 lg:mt-16 gap-4">
           <template v-for="(card, i) in getServicesData.services">
             <ServiceCard :key="i" :data="card" />
           </template>

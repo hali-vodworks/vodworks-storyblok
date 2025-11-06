@@ -66,9 +66,11 @@
     <!--------------------------------------------------------------------------------------------------->
 
     <!----------------------------We Work Across Industries---------------------------------------------->
-    <IndustriesListingSection :data='{
-      getIndustriesData
-    }' />
+    <IndustriesListingSection :data="{
+      title: 'We Work Across Industries',
+      description: `At Vodworks, we pride ourselves on our versatile approach, supporting clients across a spectrum of industries. Our team's extensive experience and commitment to understanding the unique nuances of your industry and company guarantee the success of your project, no matter the sector you operate in.`,
+      getIndustriesData,
+    }" />
     <!-------------------------------------------------------------------------------------------------->
 
     <!-------------------------------------- About Vodworks -------------------------------------------->
