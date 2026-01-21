@@ -341,7 +341,7 @@ export default {
       },
 
       our_offices: {
-        title: "Our Offices",
+        title: "Our Global Team",
         description1: "We operate from offices spanning the globe, our major hubs are strategically located in the UK, Ukraine, Romania, Pakistan, and Cambodia. This allows us to serve clients across time-zones and across budget requirements.",
         description2: "We have more than 150 highly-skilled technical staff working for and with us globally. If we do not yet have the talent in house, we have a strong network to hire quickly and globally based on the client’s needs.",
         image: "map.png",
