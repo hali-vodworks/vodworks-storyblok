@@ -1,22 +1,5 @@
 import axios from "axios"
 
-// async function dynamicRoutes() {
-//   const token = process.env.NUXT_ENV_STORYBLOCK_ACCESS_TOKEN;
-//   const version = 'published';
-//   const page = 1;
-
-//   try {
-//     const spaceRes = await axios.get(`https://api.storyblok.com/v2/cdn/spaces/me?token=${token}`);
-//     const cacheVersion = spaceRes.data.space.version;
-
-//     const res = await axios.get(`https://api.storyblok.com/v2/cdn/stories?cv=${cacheVersion}&token=${token}&version=${version}&starts_with=blogs/&page=${page}&per_page=200`);
-//     return res.data.stories.map(blog => '/blogs/' + blog.slug);
-//   } catch (error) {
-//     console.error('Error generating routes:', error);
-//     return [];
-//   }
-// }
-
 async function fetchStories(token, version, startsWith, page = 1, perPage = 25) {
   const spaceRes = await axios.get(`https://api.storyblok.com/v2/cdn/spaces/me?token=${token}`);
   const cacheVersion = spaceRes.data.space.version;
@@ -152,6 +135,14 @@ export default {
         },
         type: 'application/ld+json'
       },
+      
+      // Hubspot CTA Tracking Code
+      {
+        src: "https://js.hs-scripts.com/1873794.js",
+        async: true,
+        defer: true,
+        id: "hs-script-loader"
+      }
     ]
   },
 
