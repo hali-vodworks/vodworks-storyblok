@@ -216,6 +216,15 @@ export default {
         },
 
       ],
+      // Hubspot CTA Tracking Code
+      script: [
+        {
+          src: "https://js.hs-scripts.com/1873794.js",
+          async: true,
+          defer: true,
+          id: "hs-script-loader"
+        }
+      ]
     }
   },
 
