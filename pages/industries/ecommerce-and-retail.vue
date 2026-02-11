@@ -1,21 +1,25 @@
 <template>
-  <div>
+  <div v-if="!pageData">
+    <div class="text-center py-20">
+      <h2 class="text-2xl font-bold">Oops! Page not found</h2>
+      <p class="mt-8">The requested content is not available.</p>
+    </div>
+  </div>
+
+  <div v-else>
     <!-------------------------------- Hero --------------------------------------------------------------->
-    <IndustriesHeroSection :industries="getIndustriesData" :page="getPageDetails" :button="{
-      btnURL: false
-    }" />
+    <IndustriesHeroSection :data="industryHeroSection" />
     <!---------------------------------------------------------------------------------------------------->
 
     <!---------------------------------------------------------------------------------------------------->
     <IndustriesSolutionCardsSection :data="{
-      SingleIndustrySolutionData,
+      industrySolutionSection,
       gridlayout: 'three-cols'
     }" />
     <!---------------------------------------------------------------------------------------------------->
 
     <!--------------------------------Our Success Stories------------------------------------------------->
     <CaseStudiesSection :data="{
-      // title: 'Retail & Ecommerce Case Studies',
       title: 'Our Case Studies',
       animated_word: '',
       description: '',
@@ -26,7 +30,7 @@
 
     <!------------------------------ Why Choose Vodworks?----------------------------------------------->
     <FeaturedCards3sInRow :data="{
-      content: why_choose_vodworks,
+      content: whyChooseVodWorksSection,
       isDarkMode: false
     }" />
     <!-------------------------------------------------------------------------------------------------->
@@ -74,132 +78,57 @@
 <script>
 export default {
   async asyncData(context) {
-    const path = context.route.path === '/' ? '/home' : context.route.path
-    const [pageDataRes, allCasesRes, allArticlesRes, allTestimonialsRes] = await Promise.all([
+    try {
+      const path =
+        context.route.path === '/'
+          ? 'home'
+          : context.route.path.replace(/^\/+/, '')
 
-      context.app.$storyapi.get(`cdn/stories/${path}`, {
-        version: 'published',
-        resolve_relations: 'industries-container.industries,faqs-container.list_of_faqs'
-      }),
-      context.app.$storyapi.get('cdn/stories/', {
-        version: 'published',
-        starts_with: 'cases/',
-        resolve_relations: 'case-studies-container.case_studies',
-      }),
-      context.app.$storyapi.get('cdn/stories/', {
-        version: 'published',
-        starts_with: 'blogs/',
-        per_page: 10,
-        resolve_relations: 'blog-container.blog',
-      }),
+      const [pageDataRes, allCasesRes, allArticlesRes, allTestimonialsRes] = await Promise.all([
 
-      context.app.$storyapi.get('cdn/stories/', {
-        version: 'published',
-        starts_with: 'testimonials/',
-        resolve_relations: 'testimonial-container.testimonials_list',
-      }),
-
-    ])
-    return {
-      pageData: pageDataRes.data,
-      allCases: allCasesRes.data,
-      allArticles: allArticlesRes.data,
-      allTestimonials: allTestimonialsRes.data,
+        context.app.$storyapi.get(`cdn/stories/${path}`, {
+          version: 'published',
+          resolve_relations: 'industries-container.industries,faqs-container.list_of_faqs'
+        }),
+        context.app.$storyapi.get('cdn/stories/', {
+          version: 'published',
+          starts_with: 'cases/',
+          per_page: 3,
+          sort_by: 'first_published_at:desc',
+          resolve_relations: 'case-studies-container.case_studies',
+        }),
+        context.app.$storyapi.get('cdn/stories/', {
+          version: 'published',
+          starts_with: 'blogs/',
+          per_page: 4,
+          sort_by: 'first_published_at:desc',
+          resolve_relations: 'blog-container.blog',
+        }),
+        context.app.$storyapi.get('cdn/stories/', {
+          version: 'published',
+          starts_with: 'testimonials/',
+          resolve_relations: 'testimonial-container.testimonials_list',
+        }),
+      ])
+      return {
+        pageData: pageDataRes.data,
+        allCases: allCasesRes.data,
+        allArticles: allArticlesRes.data,
+        allTestimonials: allTestimonialsRes.data,
+      }
     }
-
+    catch (err) {
+      // eslint-disable-next-line no-console
+      console.error("404 happened on route:", context.route.path)
+      // eslint-disable-next-line no-console
+      console.error(err.response?.data || err)
+      return { pageData: null }
+    }
   },
 
   data() {
     return {
       story: { content: {} },
-
-      SingleIndustrySolutionData: {
-        title: "Ecommerce Software & Retail Services",
-        animated_word: "We Offer",
-        list: [
-
-          {
-            icon: "locate-fixed.svg",
-            alt: "locate-fixed icon",
-
-            title: "Platform Implementation",
-            description: "We select and implement the best eCommerce platform for your business, with focus on driving revenue growth and improving online customer engagement. We also provide ongoing support and security measures to ensure continued success and compliance with industry standards",
-
-            btnText: "Let's talk",
-            btnURL: "#GetInTouchWithUs",
-          },
-          {
-            icon: "users-2.svg",
-            alt: "users icon",
-
-            title: "Custom Enterprise Solutions",
-            description: "We build custom enterprise solutions for eCommerce and retail, whether you require an end-user application or internal business tool. Our solutions are designed to meet your needs, optimising efficiency and improving customer experience",
-
-            btnText: "Let's talk",
-            btnURL: "#GetInTouchWithUs",
-          },
-          {
-            icon: "scan-face.svg",
-            alt: "scan-face icon",
-
-            title: "Custom Loyalty Applications",
-            description: "With strong knowledge and experience in loyalty applications and gamification, our team creates engaging solutions that will help drive your customer loyalty and build lasting engagement.",
-
-            btnText: "Let's talk",
-            btnURL: "#GetInTouchWithUs",
-          },
-          {
-            icon: "integration.svg",
-            alt: "integration icon",
-
-            title: "System Integration",
-            description: "We provide end-to-end system integration services, seamlessly integrating various software and systems to ensure smooth data flow, process automation and improving operational efficiency of your eCommerce and retail business",
-
-            btnText: "Let's talk",
-            btnURL: "#GetInTouchWithUs",
-          },
-          {
-            icon: "web3-assets.svg",
-            alt: "web3-assets icon",
-
-            title: "Web3 Asset Management and Monetisation",
-            description: "By leveraging the power of web3 technology, we build solutions for businesses to manage and monetise your digital assets, driving innovation and revenue growth",
-
-            btnText: "Let's talk",
-            btnURL: "#GetInTouchWithUs",
-          },
-          {
-            icon: "db.svg",
-            alt: "db icon",
-
-            title: "Data and BI Solutions",
-            description: "We provide secure, compliant, and optimised data services for eCommerce and retail players, offering your business invaluable insights to enhance operations and make informed decisions.",
-
-            btnText: "Let's talk",
-            btnURL: "#GetInTouchWithUs",
-          }
-        ]
-      },
-
-      why_choose_vodworks: {
-        title: "Why Choose Vodworks?",
-
-        list: [
-          {
-            title: "Proven Track Record",
-            description: "Our comprehensive experience in eCommerce and Retail will help deliver a revenue-driven solution that is both aligned with industry regulations, and has a seamless user experience."
-          },
-          {
-            title: "Innovative Custom Software Solutions",
-            description: "Committed to innovation, constant industry research and technology advancements, our team ensures your project stands out in the market and meets your needs."
-          },
-          {
-            title: "Cutting-Edge Tech Stack",
-            description: "With knowledge of a broad range of tools and technologies, team of Vodworks experts  will carefully select the appropriate tools and tech stack to ensure we deliver on time and within budget."
-          }
-        ]
-      },
-
       benefits: {
         title: "Get in Touch with Our Team",
         btnText: "Get in touch with us",
@@ -220,8 +149,7 @@ export default {
             remaning_title: "that meets your evolving business needs"
           },
         ]
-      },
-
+      }
     }
   },
 
@@ -245,7 +173,6 @@ export default {
           property: 'og:title',
           content: 'Ecommerce Software Development & Retail Solutions | Vodworks',
         },
-
         {
           hid: 'og:description',
           name: 'og:description',
@@ -253,56 +180,38 @@ export default {
           content:
             'Seamless Commerce Transformation: Vodworks - Pioneering Ecommerce Software Development and Retail Solutions for Success. Get in touch with us right now!',
         },
-
-      ],
-      script: [
-        {
-          type: 'application/ld+json',
-          json: this.generateFaqSchema(),
-        },
-      ],
+      ]
     }
   },
 
   computed: {
-    getPageDetails() {
-      return this.pageData.story.content
-    },
-    getIndustriesData() {
+    industryHeroSection() {
       return this.pageData.story.content.body.find(function (obj) {
-        return obj.component === 'industries-container';
+        return obj.component === 'industries_hero_section';
+      })
+    },
+    industrySolutionSection() {
+      return this.pageData.story.content.body.find(function (obj) {
+        return obj.component === 'industries_solution_section';
+      })
+    },
+    getCasesData() {
+      return this.allCases
+    },
+    whyChooseVodWorksSection() {
+      return this.pageData.story.content.body.find(function (obj) {
+        return obj.component === 'why_choose_vodworks';
       })
     },
     getBlogData() {
       return this.allArticles
     },
-    getCasesData() {
-      return this.allCases
+    FAQs() {
+      return this.pageData.story.content.body.find(obj => obj.component === 'faqs-container');
     },
     getTestimonialsData() {
       return this.allTestimonials
-    },
-    FAQs() {
-      return this.pageData.story.content.body.find(obj => obj.component === 'faqs-container');
-    }
-  },
-
-  methods: {
-    generateFaqSchema() {
-      return {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": this.FAQs.list_of_faqs.map(faq => ({
-          "@type": "Question",
-          "name": faq.content.question,
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": faq.content.answer
-          }
-        }))
-      };
     }
   }
-
 }
 </script>

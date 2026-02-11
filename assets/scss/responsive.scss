@@ -392,11 +392,11 @@
     }
 
     h2 {
-        font-size: 28px;
+        font-size: 28px !important;
     }
 
     h3 {
-        font-size: 18px;
+        font-size: 18px !important;
     }
 
     .text-big {
@@ -512,21 +512,15 @@
         }
     }
 
-
-
-
-
     .header {
         ul {
             li {
                 display: block;
-
                 .isActive svg {
                     transform: rotate(45deg);
                 }
-
                 a {
-                    padding: 8px;
+                    padding: 8px 0;
                     color: var(--color_prim_black);
 
                     &:hover {
@@ -829,7 +823,7 @@
             font-size: 24px !important;
         }
         h4{
-            font-size: 18px;
+            font-size: 18px;   
         }
     }
 
@@ -837,11 +831,6 @@
     .outcome{
         .total-info:first-child{
           border-right: none;
-        }
-        .awards-logos{
-            .item{
-              flex: 0 0 23%;
-            }
         }
       }
 
@@ -876,6 +865,7 @@
         }
     }
 
+
     .review {
         .quote-img {
             width: 28px;
@@ -895,6 +885,12 @@
             img{
                 width: 40px;
             }
+        }
+    }
+
+    .awards-logos{
+        .item{
+            flex: 0 0 23%;
         }
     }
     .myTvMovies-cs-cards{
@@ -917,4 +913,5 @@
     .youtube-iframe{
         height: 240px;
     }
+
 }

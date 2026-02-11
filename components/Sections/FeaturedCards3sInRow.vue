@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/no-multiple-template-root -->
 <template>
-    <section class="lg:py-32 py-14" :class="data.isDarkMode ? 'bgColor-tertiary-black color-white' : ''">
+    <section v-if="data" class="lg:py-32 py-14" :class="data.isDarkMode ? 'bgColor-tertiary-black color-white' : ''">
         <div class="mx-auto container">
             <div class="text-center">
                 <h2>{{ data.content.title }}</h2>

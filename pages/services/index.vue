@@ -50,18 +50,18 @@
     }" />
     <!------------------------------------------------------------------------------------------>
 
-    <!------------------------------------Featured CTA Version-1 ------------------------------->
+    <!------------------------------------Featured CTA Version-1 ----------------------------------------->
     <FeaturedCTA :data="{
-      title: `Discuss your project's future`,
-      btnText: 'Get in touch with us',
-      btnURL: '/contact/',
-      imgSrc: 'team-members.png',
+      title: featuredCTAVersion1.title,
+      btnText: featuredCTAVersion1.btn_text,
+      btnURL: featuredCTAVersion1.btn_url,
+      imgSrc: featuredCTAVersion1.expert_image.filename,
       col_1: 'md:col-span-5',
       col_2: 'md:col-span-7',
     }" />
-    <!------------------------------------------------------------------------------------------>
+    <!---------------------------------------------------------------------------------------------------->
 
-    <!--------------------------------Our Success Stories--------------------------------------->
+    <!--------------------------------Our Success Stories---------------------------------->
     <CaseStudiesSection :data="{
       title: 'Our Success',
       animated_word: 'Stories',
@@ -69,7 +69,7 @@
       getCasesData,
       isDarkMode: true,
     }" />
-    <!------------------------------------------------------------------------------------------>
+    <!------------------------------------------------------------------------------------->
 
     <!----------------------------- What Our Clients Say ------------------------------------->
     <WhatOurClientsSay :data="{
@@ -113,8 +113,6 @@ export default {
         starts_with: 'testimonials/',
         resolve_relations: 'testimonial-container.testimonials_list',
       }),
-
-
     ])
     return {
       pageData: pageDataRes.data,
@@ -156,12 +154,14 @@ export default {
           property: 'og:title',
           content: 'Vodworks | Explore Software Development Services',
         },
+
         {
           hid: 'og:description',
           name: 'og:description',
           property: 'og:description',
           content: "Empower your business with Vodworks' Software Development Services. We create tailored solutions for web, mobile, and custom software. Explore now!",
         },
+
         {
           hid: 'og:image',
           property: 'og:image',
@@ -182,6 +182,11 @@ export default {
     getServicesData() {
       return this.pageData.story.content.body.find(function (obj) {
         return obj.component === 'services-container';
+      })
+    },
+    featuredCTAVersion1() {
+      return this.pageData.story.content.body.find(function (obj) {
+        return obj.component === 'featured_CTA_version_1';
       })
     },
     getCasesData() {

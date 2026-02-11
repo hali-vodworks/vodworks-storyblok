@@ -7,9 +7,11 @@
           <h1 class="color-white">Software Consulting Services</h1>
           <p class="mt-4 lg:mt-8 mb-8 lg:mb-12 text-big color-white">Our software consulting services focus on helping
             clients make well-informed technology investments. Leveraging the expertise of our experts, we ensure your
-            software project is customised to your unique needs, minimising risk and maximising return the return on your
+            software project is customised to your unique needs, minimising risk and maximising return the return on
+            your
             technology investments
           </p>
+
           <div v-scroll-to="'#GetInTouchWithUs'" class="btn-primary btn-lg inline-block cursor-pointer">
             Consult our experts
           </div>
@@ -21,6 +23,7 @@
             </template>
           </div>
         </div>
+
       </div>
     </section>
     <!---------------------------------------------------------------------------------------------------->
@@ -38,13 +41,14 @@
             <template v-for="(card, i) in getConsultingServiceData.service_consulting_details">
               <ServiceLargeCard :key="i" :data="card" :button="{ text: `Let's Talk`, btnURL: 'isStatic' }" />
             </template>
+
           </div>
         </div>
       </div>
     </section>
-    <!---------------------------------------------------------------------------------------------------->
+    <!------------------------------------------------------------------------------------------>
 
-    <!--------------------------------- Our Consulting Approach ----------------------------------------->
+    <!--------------------------------- Our Consulting Approach --------------------------------->
     <section class="lg:py-32 py-14 bgColor-tertiary-black">
       <div class="mx-auto container">
         <div class="text-center mx-auto md:max-w-3/5 ">
@@ -74,9 +78,9 @@
         </div>
       </div>
     </section>
-    <!--------------------------------------------------------------------------------------------------->
+    <!------------------------------------------------------------------------------------------>
 
-    <!---------------------------------General CTA (Light) ---------------------------------------------->
+    <!---------------------------------General CTA (Light) --------------------------->
     <GeneralCTA :data="{
       title: 'Discuss your project with us!',
       btnText: 'Book a consultation',
@@ -86,24 +90,24 @@
       col_1: 'md:col-span-6',
       col_2: 'md:col-span-6',
     }" />
-    <!--------------------------------------------------------------------------------------------------->
+    <!------------------------------------------------------------------------------------------>
 
-    <!----------------------------- Meet Our Consulting Experts------------------------------------------>
+    <!----------------------------- Meet Our Consulting Experts-------------------------------->
     <MeetOurTeamSection :data="{
       title: 'Meet Our',
       animated_word: 'Consulting Experts',
       description: '',
       getTeamsData,
-      scrollToSection:true,
+      scrollToSection: true,
       btnText: 'Book a consultation',
       btnURL: '#GetInTouchWithUs',
       isDarkMode: true
     }" />
-    <!------------------------------------------------------------------------------------------------->
+    <!----------------------------------------------------------------------------------->
 
-    <!----------------------------- Get in Touch with us----------------------------------------------->
+    <!----------------------------- Get in Touch with us--------------------------------->
     <GetInTouchWithUs :data="{
-      title:'Get in Touch with us',
+      title: 'Get in Touch with us',
       isDarkSectionAtTop: true
     }" />
     <!----------------------------------------------------------------------------------->

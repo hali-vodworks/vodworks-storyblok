@@ -83,7 +83,6 @@
 </template>
 
 <script>
-
 const loadData = function ({
   api,
   cacheVersion,
@@ -115,9 +114,7 @@ const loadData = function ({
       }
     })
 }
-
 export default {
-
   asyncData(context) {
     // Check if we are in the editing mode
     let editMode = true
@@ -258,5 +255,4 @@ export default {
   },
 
 }
-
 </script>

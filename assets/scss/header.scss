@@ -1,11 +1,7 @@
 /* ------------------- Header Css ------------------- */
-
-
-header li:last-child ul li:last-child {
-  display: none;
-}
-
-
+// header li:last-child ul li:last-child {
+//   display: none;
+// }
 .header {
   position: sticky;
   top: 0;
@@ -24,10 +20,8 @@ header li:last-child ul li:last-child {
         transition: all 0.3s ease;
         width: 18px;
       }
-
       &:hover {
         color: var(--color_prim_red);
-
         svg {
           -webkit-transform: rotate(45deg);
           -moz-transform: rotate(45deg);
@@ -37,9 +31,7 @@ header li:last-child ul li:last-child {
             fill: var(--color_prim_red);
           }
         }
-
       }
-
       &.isActiveMenuItem {
         color: var(--color_prim_red);
 
@@ -48,7 +40,6 @@ header li:last-child ul li:last-child {
         }
       }
     }
-
   }
 }
 .dropdown {
@@ -58,7 +49,6 @@ header li:last-child ul li:last-child {
   padding: 0 8px;
   display: none;
   z-index: 999;
-
   li {
     display: block;
     a {
@@ -67,13 +57,17 @@ header li:last-child ul li:last-child {
   }
 }
 .dropdown-parent:hover .dropdown {
-  display: block;
+  display: grid;
 }
 .hasDropdown ul li {
   display: block;
-  margin: 8px 0;
+  border-radius: 4px;
+  padding: 6px 0;
   a {
     font-size: 14px !important;
+  }
+  &:hover{
+    background: var(--color_normal_grey);
   }
 }
 @keyframes stickySlideDown {
@@ -83,14 +77,12 @@ header li:last-child ul li:last-child {
     -moz-transform: translateY(-100%);
     transform: translateY(-100%);
   }
-
   100% {
     opacity: 1;
     -webkit-transform: translateY(0%);
     -moz-transform: translateY(0%);
     transform: translateY(0%);
   }
-
 }
 
 @keyframes stickySlideUp {
@@ -100,11 +92,33 @@ header li:last-child ul li:last-child {
     -moz-transform: translateY(0%);
     transform: translateY(0%);
   }
-
   100% {
     opacity: 1;
     -webkit-transform: translateY(-100%);
     -moz-transform: translateY(-100%);
     transform: translateY(-100%);
+  }
+}
+.mega-menu {
+  padding: 20px;
+  left: 44%;
+  max-width: 600px;
+  transform: translate(-44%);
+  width: -moz-max-content;
+  width: max-content;
+  z-index: 999;
+
+  .list-items{
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  &.has-social-media{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    .list-items{
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
   }
 }

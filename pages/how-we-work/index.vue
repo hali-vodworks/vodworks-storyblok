@@ -186,6 +186,8 @@ export default {
       context.app.$storyapi.get('cdn/stories/', {
         version: 'published',
         starts_with: 'cases/',
+        per_page: 3,
+        sort_by: 'first_published_at:desc',
         resolve_relations: 'case-studies-container.case_studies',
       }),
       context.app.$storyapi.get('cdn/stories/', {
@@ -280,14 +282,13 @@ export default {
   },
 
   computed: {
-
     getCasesData() {
       return this.allCases
     },
     getTestimonialsData() {
       return this.allTestimonials
     },
-
-  },
+  }
+  
 }
 </script>

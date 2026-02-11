@@ -1,12 +1,13 @@
 <template>
   <div>
-    <!------------------------------------- Services/Teams Hero ------------------------------------->
+    <!------------------------------------- Services/Teams Hero -------------------------------------->
     <section class="lg:py-32 py-14 bgColor-tertiary-black">
       <div class="mx-auto container">
         <div class="text-center mx-auto md:max-w-3/5">
           <h1 class="color-white">Vodworks Software Development Teams</h1>
           <p class="mt-4 lg:mt-8 mb-8 lg:mb-12 text-big color-white">With a proven track record in assembling
-            high-performing remote teams, our expertise lies in seamlessly integrating remote development teams worldwide,
+            high-performing remote teams, our expertise lies in seamlessly integrating remote development teams
+            worldwide,
             optimising processes for successful outcomes.
           </p>
           <NuxtLink to="/services/" class="btn-primary btn-lg inline-block">
@@ -22,7 +23,7 @@
         </div>
       </div>
     </section>
-    <!----------------------------------------------------------------------------------------------->
+    <!------------------------------------------------------------------------------------------>
 
     <!---------------------------- Services/Teams details Cards (larg Cards) ------------------------>
     <section class="lg:py-32 py-14 bgColor-normal-grey">
@@ -41,9 +42,9 @@
         </div>
       </div>
     </section>
-    <!----------------------------------------------------------------------------------------------->
+    <!------------------------------------------------------------------------------------------>
 
-    <!---------------- -Our Unique Approach to Building Teams --------------------------------------->
+    <!---------------- -Our Unique Approach to Building Teams ---------------------------------->
     <section class="lg:py-32 py-14 overflow-hidden bgColor-tertiary-black color-white">
       <div class="mx-auto container">
         <div class="text-center">
@@ -68,27 +69,27 @@
         </div>
       </div>
     </section>
-    <!----------------------------------------------------------------------------------------------->
+    <!----------------------------------------------------------------------------------->
 
-    <!------------------------------------Featured CTA Version-1 ------------------------------------>
+    <!------------------------------------Featured CTA Version-1 ----------------------------------------->
     <FeaturedCTA :data="{
-      title: `Build your development team!`,
-      btnText: 'Get in touch with us',
-      btnURL: '/contact/',
-      imgSrc: 'our-experts.png',
-      col_1: 'md:col-span-6',
-      col_2: 'md:col-span-6',
-    }" />
-    <!----------------------------------------------------------------------------------------------->
+        title: featuredCTAVersion1.title,
+        btnText: featuredCTAVersion1.btn_text,
+        btnURL: featuredCTAVersion1.btn_url,
+        imgSrc: featuredCTAVersion1.expert_image.filename,
+        col_1: 'md:col-span-6',
+        col_2: 'md:col-span-6',
+      }" />
+    <!---------------------------------------------------------------------------------------------------->
 
-    <!------------------------------ Why Choose Vodworks?-------------------------------------------->
+    <!------------------------------ Why Choose Vodworks?-------------------------------->
     <FeaturedCards3sInRow :data="{
       content: why_choose_vodworks,
       isDarkMode: true
     }" />
-    <!----------------------------------------------------------------------------------------------->
+    <!----------------------------------------------------------------------------------->
 
-    <!--------------------------------Our Success Stories-------------------------------------------->
+    <!--------------------------------Our Success Stories---------------------------------->
     <CaseStudiesSection :data="{
       title: 'Our Teams',
       animated_word: 'Success Stories',
@@ -96,25 +97,25 @@
       getCasesData,
       isDarkMode: false,
     }" />
-    <!---------------------------------------------------------------------------------------------->
+    <!------------------------------------------------------------------------------------->
 
-    <!------------------------------------ About Vodworks ------------------------------------------>
+    <!------------------------------------ About Vodworks ---------------------------------------->
     <AboutVodworks :data="{
       isDarkMode: true
     }" />
     <!---------------------------------------------------------------------------------------------->
 
-    <!------------------------------- Get in Touch with us ----------------------------------------->
+    <!------------------------------- Get in Touch with us-------------------------------------->
     <GetInTouchWithUs :data="{
       title: 'Get in Touch with us',
       isDarkSectionAtTop: true
     }" />
-    <!---------------------------------------------------------------------------------------------->
-  
+    <!------------------------------------------------------------------------------------------>
+
   </div>
 </template>
-<script>
 
+<script>
 export default {
   async asyncData(context) {
     const path = context.route.path === '/' ? '/home' : context.route.path
@@ -135,13 +136,11 @@ export default {
       pageData: pageDataRes.data,
       allCases: allCasesRes.data,
     }
-
   },
 
   data() {
     return {
       story: { content: {} },
-
       why_choose_vodworks: {
         title: "Why Choose Vodworks?",
         list: [
@@ -171,7 +170,6 @@ export default {
           }
         ]
       },
-
       teams_building_approach: {
         title: "Our Unique Approach to Building Teams",
         steps: [
@@ -219,7 +217,6 @@ export default {
 
         ]
       }
-
     }
   },
 
@@ -269,7 +266,7 @@ export default {
       ],
     }
   },
-  
+
   computed: {
     getTeamsServiceData() {
       return this.pageData.story.content.Services_Detailed_Content.find(function (obj) {
@@ -278,6 +275,11 @@ export default {
     },
     getCasesData() {
       return this.allCases
+    },
+    featuredCTAVersion1() {
+      return this.pageData.story.content.Services_Detailed_Content.find(function (obj) {
+        return obj.component === 'featured_CTA_version_1';
+      })
     },
   },
 }

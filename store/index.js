@@ -1,10 +1,7 @@
 /* eslint-disable no-undef */
-
 // export const strict = false
 export const state = () => ({
-
   sliders_configurations: {
-
     success_stories: {
       slidesToShow: 2,
       slidesToScroll: 1,
@@ -29,7 +26,6 @@ export const state = () => ({
 
       ],
     },
-
     our_team: {
       slidesToShow: 3,
       slidesToScroll: 1,
@@ -51,7 +47,6 @@ export const state = () => ({
             arrows: false,
           },
         },
-
         {
           breakpoint: 767,
           settings: {
@@ -62,10 +57,8 @@ export const state = () => ({
             arrows: false,
           },
         },
-
-      ],
+      ]
     },
-
     testimonials: {
       centerMode: true,
       slidesToShow: 1,
@@ -73,7 +66,7 @@ export const state = () => ({
       arrows: false,
       dots: true,
       centerPadding: '28%',
-      speed: 1000,
+      speed: 3000,
       infinite: true,
       autoplay: false,
       mobileFirst: true,
@@ -94,14 +87,13 @@ export const state = () => ({
             adaptiveHeight: true,
           },
         },
-      ],
+      ]
     },
-
     clients: {
       slidesToShow: 9,
       slidesToScroll: 1,
       autoplay: true,
-      speed: 1000,
+      speed: 3000,
       pauseOnHover: true,
       // cssEase: 'linear',
       arrows: false,
@@ -109,7 +101,6 @@ export const state = () => ({
       mobileFirst: true,
       centerMode: true,
       infinite: true,
-
       responsive: [
         {
           breakpoint: 1024,
@@ -117,22 +108,17 @@ export const state = () => ({
             slidesToShow: 6,
           },
         },
-
         {
           breakpoint: 767,
           settings: {
             slidesToShow: 4,
           },
         },
-
         {
           breakpoint: 476,
           settings: "unslick"
         },
-
-      ],
+      ]
     },
-
-  },
-
+  }
 })

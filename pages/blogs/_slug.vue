@@ -22,7 +22,8 @@ export default {
       context.app.$storyapi.get('cdn/stories/', {
         version: 'published',
         starts_with: 'blogs/',
-        per_page: 6,
+        per_page: 4,
+        sort_by: 'first_published_at:desc',
       }),
     ])
     return {
@@ -77,8 +78,7 @@ export default {
           name: 'twitter:card',
           content: `${this.pageData.story.content.featured_image.filename}`,
         },
-
-      ],
+      ]
     }
   },
   computed: {

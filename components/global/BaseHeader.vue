@@ -5,24 +5,55 @@
       <NuxtLink to="/" class="lg:justify-self-end mr-5 cursor-pointer" active-class="bg-transparent">
         <img class="logo-img" src="~/assets/img/vw-logo.svg" alt="Vodworks Logo" />
       </NuxtLink>
+
       <!-- Main Navigation bar -->
       <ul class="hidden md:inline-block">
+
         <li v-for="(item, index) in Navigations.navigationItems" :key="index" class="relative color-primary-black"
-          :class="item.list ? 'dropdown-parent hasDropdown' : ' '">
+          :class="item.list ? 'dropdown-parent hasDropdown' : ''">
+
           <NuxtLink :to="item.path" class="flex gap-2 items-center">
-            {{ item.name }} <div v-if="item.list">
+            {{ item.name }}
+            <div v-if="item.list">
               <TiltedArrow />
             </div>
           </NuxtLink>
-          <ul v-if="item.list" class="dropdown bgColor-light-grey">
-            <li v-for="(childItem, childIndex) in item.list" :key="childIndex">
-              <NuxtLink :to="childItem.path" class="inline-block">
-                {{ childItem.name }}
-              </NuxtLink>
-            </li>
+
+          <ul v-if="item.list" class="dropdown bgColor-light-grey gap-8 p-4" :class="{
+            'mega-menu': item.isMegaMenu,
+            'has-social-media': item.path === '/blogs/'
+          }">
+            <!-- Column 1: list items -->
+            <div class="list-items">
+
+              <li v-for="(childItem, childIndex) in item.list" :key="childIndex">
+                <NuxtLink :to="childItem.path" class="inline-block">
+                  {{ childItem.name }}
+                  <p class="font-normal mt-1">{{ childItem.description }}</p>
+                </NuxtLink>
+              </li>
+
+            </div>
+
+            <!-- Column 2: social media (only for blogs) -->
+            <div v-if="item.path === '/blogs/'" class="social-media">
+              <ul>
+                <li><a class="flex items-center gap-2 underline" target="_blank"
+                    href="https://www.linkedin.com/company/vodworks" rel="noopener noreferrer nofollow"><img
+                      src="~/assets/img/icon/linkedin.svg" alt="icon" /> LinkedIn <img
+                      src="~/assets/img/icon/arrow-up-right.svg" alt="icon" /></a></li>
+                <li><a class="flex items-center gap-2 underline" target="_blank"
+                    href="https://www.youtube.com/@vodworks" rel="noopener noreferrer nofollow"><img
+                      src="~/assets/img/icon/youtube.svg" alt="icon" /> YouTube <img
+                      src="~/assets/img/icon/arrow-up-right.svg" alt="icon" /></a></li>
+              </ul>
+            </div>
           </ul>
+
         </li>
+
       </ul>
+
       <!-- button -->
       <NuxtLink to="/contact/" class="btn-primary btn-md hidden lg:inline-block invisible md:visible">
         Get in touch
@@ -36,158 +67,37 @@
       </div>
     </header>
 
-    <!--Mobile Menus-->
+    <!-- Mobile Navigation -->
     <div class="mobileNavigation">
       <ul v-show="showMenu" class="text-h-font md:hidden flex flex-col items-start px-8 py-8 gap-2">
-        <!--- Services -------->
-        <li class="relative dropdown-parent hasDropdown w-full">
-          <div class="flex items-center justify-between" :class="isServicesActive ? 'isActive' : ''">
-            <NuxtLink to="/services/" @click.native="showMenu = false">
-              Services
+        <li v-for="(item, index) in Navigations.navigationItems" :key="index" class="relative dropdown-parent w-full">
+          <!-- Parent Row -->
+          <div class="flex items-center justify-between" :class="{ isActive: activeMobileDropdown === index }">
+            <NuxtLink :to="item.mobilePath || item.path" @click.native="showMenu = false">
+              {{ item.name }}
             </NuxtLink>
-            <TiltedArrow @click.native="isServicesActive = !isServicesActive" />
-          </div>
-          <ul v-show="isServicesActive" class="px-4">
-            <li>
-              <NuxtLink to="/services/consulting/" class="rounded-md inline-block" @click.native="showMenu = false">
-                Tech Consultancy and Advisory
-              </NuxtLink>
-            </li>
-            <li>
-              <NuxtLink to="/services/engineering/" class="rounded-md inline-block" @click.native="showMenu = false">
-                Custom Software Development
-              </NuxtLink>
-            </li>
-            <li>
-              <NuxtLink to="/services/data/" class="rounded-md inline-block" @click.native="showMenu = false">
-                Analytics and Business Intelligence
-              </NuxtLink>
-            </li>
-            <li>
-              <NuxtLink to="/services/ai-readiness/" class="rounded-md inline-block" @click.native="showMenu = false">
-                AI Readiness
-              </NuxtLink>
-            </li>
-            <li>
-              <NuxtLink to="/services/teams/" class="rounded-md inline-block" @click.native="showMenu = false">
-                Team Augmentation
-              </NuxtLink>
-            </li>
-          </ul>
-        </li>
-        <!--------Industries------->
-        <li class="relative dropdown-parent hasDropdown w-full">
-          <div class="flex items-center justify-between" :class="isIndustriesActive ? 'isActive' : ''">
-            <NuxtLink to="/industries/" class="py-2 flex gap-2 items-center" @click.native="showMenu = false">
-              Industries
-            </NuxtLink>
-            <TiltedArrow @click.native="isIndustriesActive = !isIndustriesActive" />
-          </div>
-          <ul v-show="isIndustriesActive" class="px-4">
-            <li>
-              <NuxtLink to="/industries/media-and-entertainment/" class="rounded-md inline-block"
-                @click.native="showMenu = false">
-                Media & Entertainment
-              </NuxtLink>
-            </li>
-            <li>
-              <NuxtLink to="/industries/telecommunications/" class="rounded-md inline-block"
-                @click.native="showMenu = false">
-                telecommunications
-              </NuxtLink>
-            </li>
-            <li>
-              <NuxtLink to="/industries/gaming/" class="rounded-md inline-block" @click.native="showMenu = false">
-                Gaming
-              </NuxtLink>
-            </li>
-            <li>
-              <NuxtLink to="/industries/finance-and-fintech/" class="rounded-md inline-block"
-                @click.native="showMenu = false">
-                Finance And Fintech
-              </NuxtLink>
-            </li>
-            <li>
-              <NuxtLink to="/industries/compliance-and-security/" class="rounded-md inline-block"
-                @click.native="showMenu = false">
-                COMPLIANCE AND SECURITY
-              </NuxtLink>
-            </li>
-            <li>
-              <NuxtLink to="/industries/ecommerce-and-retail/" class="rounded-md inline-block"
-                @click.native="showMenu = false">
-                ECOMMERCE & RETAIL
-              </NuxtLink>
-            </li>
-            <li>
-              <NuxtLink to="/industries/sustainability/" class="rounded-md inline-block"
-                @click.native="showMenu = false">
-                SUSTAINABILITY
-              </NuxtLink>
-            </li>
 
-          </ul>
-        </li>
-        <!------- Case Studies----->
-        <li>
-          <NuxtLink to="/cases/" class="py-2 flex gap-2 items-center" @click.native="showMenu = false">
-            Case Studies
-          </NuxtLink>
-        </li>
-        <!------- Blog ------------->
-        <li>
-          <NuxtLink to="/blogs/" class="py-2 flex gap-2 items-center" @click.native="showMenu = false">
-            Blog
-          </NuxtLink>
-        </li>
-        <!------- Company----------->
-        <li class="relative dropdown-parent hasDropdown w-full">
-          <div class="flex items-center justify-between" :class="isCompanyActive ? 'isActive' : ''">
-            <NuxtLink to="/about/" class="py-2 flex gap-2 items-center" @click.native="showMenu = false">
-              Company
-            </NuxtLink>
-            <TiltedArrow @click.native="isCompanyActive = !isCompanyActive" />
+            <!-- Arrow -->
+            <TiltedArrow v-if="item.hasDropDown" @click.native.stop="toggleMobileDropdown(index)" />
           </div>
-          <ul v-show="isCompanyActive" class="px-4">
-            <li>
-              <NuxtLink to="/about/" class="rounded-md inline-block" @click.native="showMenu = false">
-                About us
-              </NuxtLink>
-            </li>
-            <li>
-              <NuxtLink to="/how-we-work/" class="rounded-md inline-block" @click.native="showMenu = false">
-                How We Work
-              </NuxtLink>
-            </li>
-            <li>
-              <NuxtLink to="/for-startups/" class="rounded-md inline-block" @click.native="showMenu = false">
-                For Startups
-              </NuxtLink>
-            </li>
-            <li>
-              <NuxtLink to="/for-enterprise/" class="rounded-md inline-block" @click.native="showMenu = false">
-                For Enterprise
-              </NuxtLink>
-            </li>
-            <li>
-              <NuxtLink to="/for-web3/" class="rounded-md inline-block" @click.native="showMenu = false">
-                For Web3
-              </NuxtLink>
-            </li>
-            <li>
-              <NuxtLink to="/social-projects/" class="rounded-md inline-block" @click.native="showMenu = false">
-                Social Projects
-              </NuxtLink>
-            </li>
-            <li>
-              <NuxtLink to="/careers/" class="rounded-md inline-block" @click.native="showMenu = false">
-                Careers
-              </NuxtLink>
+
+          <!-- Dropdown -->
+          <ul v-if="item.hasDropDown && activeMobileDropdown === index" class="px-4 py-2">
+            <li v-for="(child, childIndex) in item.list" :key="childIndex" class="mb-3">
+              <NuxtLink :to="child.path" class="inline-block" @click.native="showMenu = false">
+                {{ child.name }} 
+                <p v-if="child.description" class="text-sm opacity-70 mt-1 font-normal">
+                  {{ child.description }}
+                </p>
+              </NuxtLink>              
             </li>
           </ul>
         </li>
       </ul>
     </div>
+
+
+
 
   </div>
 </template>
@@ -203,12 +113,21 @@ export default {
   },
   data() {
     return {
+      activeMobileDropdown: null,
       showMenu: false,
       isServicesActive: false,
       isIndustriesActive: false,
+      isContentActive: false,
       isCompanyActive: false,
       Navigations: AllRoutes,
     }
   },
+
+  methods: {
+    toggleMobileDropdown(index) {
+      this.activeMobileDropdown =
+        this.activeMobileDropdown === index ? null : index
+    }
+  }
 }
 </script>

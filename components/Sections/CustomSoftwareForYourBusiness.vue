@@ -12,7 +12,7 @@
                     {{ custom_software_for_your_business.description }}
                 </p>
             </div>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 mx-auto gap-4 mt-8 lg:mt-16">
+            <div class="grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 mx-auto gap-4 mt-8 lg:mt-16">
                 <template v-for="(card, i) in custom_software_for_your_business.list">
                     <div :key="i" class="default-card card-utilities hvr-effect business-card">
                         <img class="card-icon hvr-top lazyload" :src="`${require('~/assets/img/icons/' + card.icon)}`"
@@ -92,31 +92,31 @@ export default {
                         btnURL: "for-enterprise/",
 
                     },
-                    {
-                        icon: "Share.svg",
-                        alt: "share-icon",
+                    // {
+                    //     icon: "Share.svg",
+                    //     alt: "share-icon",
 
-                        title: "For Web3",
-                        description: "Using our expertise in web3, we collaborate closely with clients across different industries to identify how web3 technologies can optimise processes and unlock new business opportunities.",
+                    //     title: "For Web3",
+                    //     description: "Using our expertise in web3, we collaborate closely with clients across different industries to identify how web3 technologies can optimise processes and unlock new business opportunities.",
 
-                        market_prospects: [
-                            {
-                                title: "- Web3 consulting",
-                            },
-                            {
-                                title: "- MVP and rapid PoCs",
-                            },
-                            {
-                                title: "- DApp development",
-                            },
-                            {
-                                title: "- Web3 monetisation and loyalty",
-                            }
-                        ],
+                    //     market_prospects: [
+                    //         {
+                    //             title: "- Web3 consulting",
+                    //         },
+                    //         {
+                    //             title: "- MVP and rapid PoCs",
+                    //         },
+                    //         {
+                    //             title: "- DApp development",
+                    //         },
+                    //         {
+                    //             title: "- Web3 monetisation and loyalty",
+                    //         }
+                    //     ],
 
-                        btnURL: "/for-web3/",
+                    //     btnURL: "/for-web3/",
 
-                    }
+                    // }
                 ]
             },
         }

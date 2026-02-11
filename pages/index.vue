@@ -56,7 +56,6 @@
             {{ getServicesData.description }}
           </p>
         </div>
-        
         <div class="center-two-ele-in-grid mx-auto mt-8 lg:mt-16 gap-4">
           <template v-for="(card, i) in getServicesData.services">
             <ServiceCard :key="i" :data="card" />
@@ -80,7 +79,7 @@
     <CustomSoftwareForYourBusiness />
     <!----------------------------------------------------------------------------------->
 
-    <!--------------------------------Our Success Stories-------------------------------->
+    <!--------------------------------Our Success Stories---------------------------------->
     <CaseStudiesSection :data="{
       title: 'Our Success',
       animated_word: 'Stories',
@@ -88,25 +87,25 @@
       getCasesData,
       isDarkMode: true,
     }" />
-    <!----------------------------------------------------------------------------------->
+    <!------------------------------------------------------------------------------------->
 
-    <!----------------------------- What Our Clients Say -------------------------------->
+    <!----------------------------- What Our Clients Say ---------------------------------->
     <WhatOurClientsSay :data="{
       title: 'What Our Clients',
       animated_word: 'Say',
       getTestimonialsData,
       isDarkMode: false
     }" />
-    <!----------------------------------------------------------------------------------->
+    <!----------------------------------------------------------------------------------------->
 
     <!------------------------------ Why Choose Vodworks?-------------------------------->
     <BenefitsOfChoosingVodworks :data="{
       isDarkMode: true
     }
-      " />
+    " />
     <!----------------------------------------------------------------------------------->
 
-    <!--------------------------- Meet Our Team ----------------------------------------->
+    <!--------------------------- Meet Our Team --------------------------->
     <MeetOurTeamSection :data="{
       title: 'Meet Our',
       animated_word: 'Team',
@@ -126,7 +125,6 @@
     }
       " />
     <!----------------------------------------------------------------------------------->
-
   </div>
 </template>
 
@@ -148,7 +146,8 @@ export default {
       context.app.$storyapi.get('cdn/stories/', {
         version: 'published',
         starts_with: 'cases/',
-        per_page: 8,
+        per_page: 3,
+        sort_by: 'first_published_at:desc',
         resolve_relations: 'case-studies-container.case_studies',
       }),
       context.app.$storyapi.get('cdn/stories/', {
@@ -163,14 +162,13 @@ export default {
         per_page: 8,
         resolve_relations: 'teams-container.teams',
       }),
-
       context.app.$storyapi.get('cdn/stories/', {
         version: 'published',
         starts_with: 'our-clients/',
         per_page: 18,
+        sort_by: 'first_published_at:desc',
         resolve_relations: 'our-clients-container.slides',
       }),
-
     ])
     return {
       pageData: pageDataRes.data,
@@ -179,13 +177,10 @@ export default {
       allTeam: allTeamRes.data,
       ourClients: allClientsRes.data,
     }
-
   },
-
   data() {
     return {
       statistics,
-
       hero: {
         title: "Vodworks -",
         subtitle: "Solving your technology puzzles",
@@ -193,7 +188,6 @@ export default {
         image: "hero-img.webp",
         alt: "our team",
       },
-
       benefits: {
         title: "Tech-empower your business",
 
@@ -218,11 +212,9 @@ export default {
       },
     }
   },
-
   head() {
     return {
       title: 'Software Development Company | Vodworks',
-
       meta: [
         {
           hid: 'description',
@@ -240,7 +232,6 @@ export default {
           property: 'og:title',
           content: 'Software Development Company | Vodworks',
         },
-
         {
           hid: 'og:description',
           name: 'og:description',
@@ -248,17 +239,14 @@ export default {
           content:
             'Experience End-to-end software and product engineering services with Vodworks: Software Development, POCs, Augmented Teams, DevOps and much more',
         },
-
         {
           hid: 'og:image',
           property: 'og:image',
           content: ogImage,
         }
-
       ],
     }
   },
-
   computed: {
     getServicesData() {
       return this.pageData.story.content.body.find(function (obj) {
@@ -277,8 +265,6 @@ export default {
     getOurClientsData() {
       return this.ourClients
     },
-
-  },
-
+  }
 }
 </script>

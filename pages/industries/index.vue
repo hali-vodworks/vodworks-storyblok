@@ -1,5 +1,11 @@
 <template>
-  <div>
+  <div v-if="!pageData">
+    <div class="text-center py-20">
+      <h2 class="text-2xl font-bold">Oops! Page not found</h2>
+      <p class="mt-8">The requested content is not available.</p>
+    </div>
+  </div>
+  <div v-else>
     <!-- 
     <IndustriesHeroSection :industries="getIndustriesData" :page="getPageDetails" :button="{
       btnURL: true
@@ -18,7 +24,7 @@
         </div>
         <div class="text-center mx-auto md:max-w-4/5 mt-8 lg:mt-16">
           <!--grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 mx-auto gap-2 md:gap-4 lg:gap-6-->
-          <div class="four-ele-in-grid two-on-mobile mx-auto gap-2 md:gap-4 lg:gap-6">
+          <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 mx-auto gap-2 md:gap-4 lg:gap-6">
             <template v-for="(card, i) in getIndustriesData.industries">
               <IndustryCtaCard :key="i" :data="card" />
             </template>
@@ -42,10 +48,10 @@
 
     <!------------------------------------Featured CTA Version-1 ------------------------------->
     <FeaturedCTA :data="{
-      title: `Consult with our tech experts`,
-      btnText: 'Get in touch with us',
-      btnURL: '/contact/',
-      imgSrc: 'team-members.png',
+      title: featuredCTAVersion1.title,
+      btnText: featuredCTAVersion1.btn_text,
+      btnURL: featuredCTAVersion1.btn_url,
+      imgSrc: featuredCTAVersion1.expert_image.filename,
       col_1: 'md:col-span-5',
       col_2: 'md:col-span-7',
     }" />
@@ -88,28 +94,42 @@
 import ogImage from '~/static/preview-industries.jpg';
 export default {
   async asyncData(context) {
-    const path = context.route.path === '/' ? '/home' : context.route.path
-    const [pageDataRes, allCasesRes, allTestimonialsRes] = await Promise.all([
+    try {
+      const path =
+        context.route.path === '/'
+          ? 'home'
+          : context.route.path.replace(/^\/+/, '')
 
-      context.app.$storyapi.get(`cdn/stories/${path}`, {
-        version: 'published',
-        resolve_relations: 'industries-container.industries'
-      }),
-      context.app.$storyapi.get('cdn/stories/', {
-        version: 'published',
-        starts_with: 'cases/',
-        resolve_relations: 'case-studies-container.case_studies',
-      }),
-      context.app.$storyapi.get('cdn/stories/', {
-        version: 'published',
-        starts_with: 'testimonials/',
-        resolve_relations: 'testimonial-container.testimonials_list',
-      }),
-    ])
-    return {
-      pageData: pageDataRes.data,
-      allCases: allCasesRes.data,
-      allTestimonials: allTestimonialsRes.data,
+      const [pageDataRes, allCasesRes, allTestimonialsRes] = await Promise.all([
+        context.app.$storyapi.get(`cdn/stories/${path}`, {
+          version: 'published',
+          resolve_relations: 'industries-container.industries'
+        }),
+        context.app.$storyapi.get('cdn/stories/', {
+          version: 'published',
+          starts_with: 'cases/',
+          per_page: 3,
+          sort_by: 'first_published_at:desc',
+          resolve_relations: 'case-studies-container.case_studies',
+        }),
+        context.app.$storyapi.get('cdn/stories/', {
+          version: 'published',
+          starts_with: 'testimonials/',
+          resolve_relations: 'testimonial-container.testimonials_list',
+        }),
+      ])
+      return {
+        pageData: pageDataRes.data,
+        allCases: allCasesRes.data,
+        allTestimonials: allTestimonialsRes.data,
+      }
+    }
+    catch (err) {
+      // eslint-disable-next-line no-console
+      console.error("404 happened on route:", context.route.path)
+      // eslint-disable-next-line no-console
+      console.error(err.response?.data || err)
+      return { pageData: null }
     }
   },
 
@@ -122,7 +142,6 @@ export default {
   head() {
     return {
       title: 'Vodworks | Software Development by Industry',
-
       meta: [
         {
           hid: 'description',
@@ -145,7 +164,6 @@ export default {
           property: 'og:title',
           content: 'Vodworks | Software Development by Industry',
         },
-
         {
           hid: 'og:description',
           name: 'og:description',
@@ -153,7 +171,6 @@ export default {
           content:
             'Experience innovation and excellence with Vodworks in the software development industry. Elevate your digital solutions today!',
         },
-         
         {
           hid: 'og:image',
           property: 'og:image',
@@ -164,7 +181,6 @@ export default {
           name: 'twitter:card',
           content: ogImage,
         },
-
       ],
     }
   },
@@ -180,6 +196,11 @@ export default {
     },
     getCasesData() {
       return this.allCases
+    },
+    featuredCTAVersion1() {
+      return this.pageData.story.content.body.find(function (obj) {
+        return obj.component === 'featured_CTA_version_1';
+      })
     },
     getTestimonialsData() {
       return this.allTestimonials

@@ -102,6 +102,8 @@ export default {
       context.app.$storyapi.get('cdn/stories/', {
         version: 'published',
         starts_with: 'cases/',
+        per_page: 3,
+        sort_by: 'first_published_at:desc',
         resolve_relations: 'case-studies-container.case_studies',
       }),
       context.app.$storyapi.get('cdn/stories/', {
@@ -292,13 +294,7 @@ export default {
           property: 'og:description',
           content: "Empower Your Enterprise with Custom Software Development Services. Vodworks Offers Expert Development Solutions for Seamless Business Transformation.",
         },
-      ],
-      script: [
-        {
-          type: 'application/ld+json',
-          json: this.generateFaqSchema(),
-        },
-      ],
+      ]
     }
   },
 
@@ -311,23 +307,6 @@ export default {
     },
     FAQs() {
       return this.pageData.story.content.body.find(obj => obj.component === 'faqs-container');
-    }
-  },
-
-  methods: {
-    generateFaqSchema() {
-      return {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": this.FAQs.list_of_faqs.map(faq => ({
-          "@type": "Question",
-          "name": faq.content.question,
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": faq.content.answer
-          }
-        }))
-      };
     }
   }
 

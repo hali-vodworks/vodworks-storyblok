@@ -3,8 +3,9 @@ export default {
         {
             name: "Services",
             path: "/services/",
-            mobilePath: "#",
+            mobilePath: "/services/",
             hasDropDown: true,
+            isMegaMenu: true,
             list: [
                 {
                     // name: "Consulting",
@@ -35,45 +36,43 @@ export default {
                     description: "Expand your team with trusted experts",
                     path: "/services/teams/",
                 },
-            ],
-
+            ]
         },
         {
             name: "Industries",
             path: "/industries/",
-            mobilePath: "#",
+            mobilePath: "/industries/",
             hasDropDown: true,
+            isMegaMenu: true,
             list: [
                 {
                     name: "Media & Entertainment",
+                    description: "Launch streaming platforms with proven engineering support.",
                     path: "/industries/media-and-entertainment/",
                 },
                 {
                     name: "Telecommunications",
+                    description: "Accelerate telecom transformation from roadmap to release.",
                     path: "/industries/telecommunications/",
                 },
                 {
                     name: "Gaming",
+                    description: "Bring your game from pre-production to launch and beyond.",
                     path: "/industries/gaming/",
                 },
                 {
-                    name: "Finance and Fintech",
-                    path: "/industries/finance-and-fintech/",
-                },
-                {
-                    name: "Compliance and Security",
-                    path: "/industries/compliance-and-security/",
+                    name: "Fintech and Compliance",
+                    description: "Scale fintech safely with AML, compliance, and risk controls.",
+                    path: "/industries/fintech-and-compliance/",
                 },
                 {
                     name: "Ecommerce & Retail",
+                    description: "Drive ecommerce and retail success with full-cycle support.",
                     path: "/industries/ecommerce-and-retail/",
                 },
-                // {
-                //     name: "Web3",
-                //     path: "/industries/web3/",
-                // },
                 {
                     name: "Sustainability",
+                    description: "Shape sustainability strategy and execute with confidence.",
                     path: "/industries/sustainability/",
                 }
             ]
@@ -89,53 +88,66 @@ export default {
             path: "/blogs/",
             mobilePath: "/blogs/",
             hasDropDown: false,
+            // isMegaMenu: true,
+            // list: [
+            //     {
+            //         name: "Articles",
+            //         description: "Insights and ideas shaping technology and innovation",
+            //         path: "/blogs/",
+            //     },
+            //     {
+            //         name: "Videos",
+            //         description: "Conversations, stories, and demos from us and industry innovators ",
+            //         path: "javascript:void(0)",
+            //     },
+            //     {
+            //         name: "Practical Resources",
+            //         description: "Downloadable tools to help you put ideas into action",
+            //         path: "javascript:void(0)",
+            //     },
+            // ]
         },
         {
             name: "Company",
             path: "/about/",
             mobilePath: "#",
             hasDropDown: true,
+            isMegaMenu: true,
             list: [
                 {
-                    name: "About us",
+                    name: "About Us",
+                    description: "Our story, mission and core team",
                     path: "/about/",
                 },
                 {
-                    name: "How we work",
+                    name: "How We Work",
+                    description: "Our approach to software delivery",
                     path: "/how-we-work/",
                 },
                 {
                     name: "For Startups",
+                    description: "Software development services & solutions",
                     path: "/for-startups/",
                 },
                 {
                     name: "For Enterprise",
+                    description: "Software development solutions",
                     path: "/for-enterprise/",
                 },
                 {
-                    name: "For Web3",
-                    path: "/for-web3/",
-                },
-                {
                     name: "Social Projects",
+                    description: "Technology that made an impact",
                     path: "/social-projects/",
                 },
                 {
                     name: "Careers",
+                    description: "Our values, benefits and current openings",
                     path: "/careers/",
-                },
-                {
-                    name: "Privacy Policy",
-                    path: "/privacy-policy/",
                 }
             ]
         }
     ],
-
-
-
     quick_links: {
-
         list: [
             {
                 name: "Industries",
@@ -150,12 +162,11 @@ export default {
                 path: "/blogs/",
             },
             {
-                name: "Contact us",
+                name: "Contact Us",
                 path: "/contact/",
             }
         ]
     },
-
     socials: [
         {
             name: "LinkedIn",
@@ -169,6 +180,5 @@ export default {
             name: "Facebook",
             path: "https://www.facebook.com/vodworks/"
         }
-    ],
-
+    ]
 }

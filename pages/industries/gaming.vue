@@ -1,21 +1,26 @@
 <template>
-  <div>
+  <div v-if="!pageData">
+    <div class="text-center py-20">
+      <h2 class="text-2xl font-bold">Oops! Page not found</h2>
+      <p class="mt-8">The requested content is not available.</p>
+    </div>
+  </div>
+
+  <div v-else>
+
     <!-------------------------------- Hero --------------------------------------------------------------->
-    <IndustriesHeroSection :industries="getIndustriesData" :page="getPageDetails" :button="{
-      btnURL: false
+    <IndustriesHeroSection :data="industryHeroSection" />
+    <!---------------------------------------------------------------------------------------------------->
+
+    <!------------------- Fintech and Compliance Industry Solutions ----------------------------------------->
+    <IndustriesSolutionCardsSection :data="{
+      industrySolutionSection,
+      gridlayout: 'three-cols'
     }" />
     <!---------------------------------------------------------------------------------------------------->
 
-    <!------------------- Our Software Solutions for Gaming ---------------------------------------------->
-    <IndustriesSolutionCardsSection :data="{
-      SingleIndustrySolutionData,
-      gridlayout: 'three-cols'
-    }" />
-    <!--------------------------------------------------------------------------------------------------->
-
     <!-------------------------------- Our Success Stories----------------------------------------------->
     <CaseStudiesSection :data="{
-      // title: 'Gaming Software Case Studies',
       title: 'Our Case Studies',
       animated_word: '',
       description: '',
@@ -25,14 +30,16 @@
     <!-------------------------------------------------------------------------------------------------->
 
     <!------------------------------------Featured CTA Version-1 --------------------------------------->
-    <FeaturedCTA :data="{
-      title: `Consult with our Gaming Industry Expert!`,
-      btnText: 'Get in touch',
-      btnURL: '/contact/',
-      imgSrc: 'gaming-industry-expert.png',
-      col_1: 'md:col-span-7',
-      col_2: 'md:col-span-4',
-    }" />
+    <div v-if="featuredCTAVersion1" class="bgColor-normal-grey">
+      <FeaturedCTA :data="{
+        title: featuredCTAVersion1.title,
+        btnText: featuredCTAVersion1.btn_text,
+        btnURL: featuredCTAVersion1.btn_url,
+        imgSrc: featuredCTAVersion1.expert_image.filename,
+        col_1: 'md:col-span-7',
+        col_2: 'md:col-span-4',
+      }" />
+    </div>
     <!------------------------------------------------------------------------------------------------->
 
     <!----------------------------------------- Blog -------------------------------------------------->
@@ -102,119 +109,61 @@
 
 <script>
 export default {
-
   async asyncData(context) {
-    const path = context.route.path === '/' ? '/home' : context.route.path
-    const [pageDataRes, allCasesRes, allArticlesRes, allTestimonialsRes] = await Promise.all([
+    try {
+      const path =
+        context.route.path === '/'
+          ? 'home'
+          : context.route.path.replace(/^\/+/, '')
 
-      context.app.$storyapi.get(`cdn/stories/${path}`, {
-        version: 'published',
-        resolve_relations: 'industries-container.industries,faqs-container.list_of_faqs'
-      }),
-      context.app.$storyapi.get('cdn/stories/', {
-        version: 'published',
-        starts_with: 'cases/',
-        resolve_relations: 'case-studies-container.case_studies',
-      }),
-      context.app.$storyapi.get('cdn/stories/', {
-        version: 'published',
-        starts_with: 'blogs/',
-        per_page: 10,
-        resolve_relations: 'blog-container.blog',
-      }),
-      context.app.$storyapi.get('cdn/stories/', {
-        version: 'published',
-        starts_with: 'testimonials/',
-        resolve_relations: 'testimonial-container.testimonials_list',
-      }),
-
-    ])
-    return {
-      pageData: pageDataRes.data,
-      allCases: allCasesRes.data,
-      allArticles: allArticlesRes.data,
-      allTestimonials: allTestimonialsRes.data,
+      const [pageDataRes, allCasesRes, allArticlesRes, allTestimonialsRes] = await Promise.all([
+        context.app.$storyapi.get(`cdn/stories/${path}`, {
+          version: 'published',
+          resolve_relations: 'industries-container.industries,faqs-container.list_of_faqs'
+        }),
+        context.app.$storyapi.get('cdn/stories/', {
+          version: 'published',
+          starts_with: 'cases/',
+          per_page: 3,
+          sort_by: 'first_published_at:desc',
+          resolve_relations: 'case-studies-container.case_studies',
+        }),
+        context.app.$storyapi.get('cdn/stories/', {
+          version: 'published',
+          starts_with: 'blogs/',
+          per_page: 4,
+          sort_by: 'first_published_at:desc',
+          resolve_relations: 'blog-container.blog',
+        }),
+        context.app.$storyapi.get('cdn/stories/', {
+          version: 'published',
+          starts_with: 'testimonials/',
+          resolve_relations: 'testimonial-container.testimonials_list',
+        }),
+      ])
+      return {
+        pageData: pageDataRes.data,
+        allCases: allCasesRes.data,
+        allArticles: allArticlesRes.data,
+        allTestimonials: allTestimonialsRes.data,
+      }
     }
-
+    catch (err) {
+      // eslint-disable-next-line no-console
+      console.error("404 happened on route:", context.route.path)
+      // eslint-disable-next-line no-console
+      console.error(err.response?.data || err)
+      return { pageData: null }
+    }
   },
-
   data() {
     return {
       story: { content: {} },
-      SingleIndustrySolutionData: {
-        title: "Our Software Solutions for",
-        animated_word: "Gaming",
-        list: [
-          {
-            icon: "layers.svg",
-            alt: "layers icon",
-
-            title: "Enterprise Gaming Infrastructure",
-            description: "We seamlessly incorporate enterprise gaming infrastructure into your business, ensuring it aligns with your overarching architecture, is optimised for performance, and improves your customers' experiences.",
-
-            btnText: "Let's talk",
-            btnURL: "#GetInTouchWithUs",
-          },
-          {
-            icon: "shrink.svg",
-            alt: "shrink icon",
-
-            title: "Gaming DevOps and Scalability",
-            description: "We help your business build and implement scalable software infrastructure to handle mass concurrent users while reducing costs",
-
-            btnText: "Let's talk",
-            btnURL: "#GetInTouchWithUs",
-          },
-          {
-            icon: "star.svg",
-            alt: "star icon",
-
-            title: "Game Design",
-            description: "We recognize the vital role of UX and UI design in shaping immersive gaming. Our skilled designers create intuitive, captivating interfaces to boost gamer engagement and retention.",
-
-            btnText: "Let's talk",
-            btnURL: "#GetInTouchWithUs",
-          },
-          {
-            icon: "rocket.svg",
-            alt: "rocket icon",
-
-            title: "Game Development",
-            description: "We work closely with your team to conceive, strategize, and meticulously documet game designs, ensuring thorough consideration of every aspect of the gaming experience",
-
-            btnText: "Let's talk",
-            btnURL: "#GetInTouchWithUs",
-          },
-          {
-            icon: "db.svg",
-            alt: "db icon",
-
-            title: "Data and BI Solutions",
-            description: "We deliver secure, compliant, and optimised gaming data service, giving your business access to invaluable insights for operational improvements and better decision making",
-
-            btnText: "Let's talk",
-            btnURL: "#GetInTouchWithUs",
-          },
-          {
-            icon: "gamepad.svg",
-            alt: "Gamepad icon",
-
-            title: "Web3 Gaming Integration",
-            description: "We transform your web2 economies for seamless integration with web3 technologies, enabling your business to harness the opportunities in the web3 landscape",
-
-            btnText: "Let's talk",
-            btnURL: "#GetInTouchWithUs",
-          },
-
-        ]
-      },
     }
   },
-
   head() {
     return {
       title: 'Gaming Software Development  | Vodworks',
-
       meta: [
         {
           hid: 'description',
@@ -232,7 +181,6 @@ export default {
           property: 'og:title',
           content: 'Gaming Software Development  | Vodworks',
         },
-
         {
           hid: 'og:description',
           name: 'og:description',
@@ -240,57 +188,42 @@ export default {
           content:
             'Vodworks pioneers Gaming Software Development, shaping immersive experiences. Join us to redefine interactive entertainment TODAY!',
         },
-
-      ],
-
-      script: [
-        {
-          type: 'application/ld+json',
-          json: this.generateFaqSchema(),
-        },
       ],
     }
   },
 
   computed: {
-    getPageDetails() {
-      return this.pageData.story.content
-    },
-    getIndustriesData() {
+    industryHeroSection() {
       return this.pageData.story.content.body.find(function (obj) {
-        return obj.component === 'industries-container';
+        return obj.component === 'industries_hero_section';
       })
     },
-    getBlogData() {
-      return this.allArticles
+    industrySolutionSection() {
+      return this.pageData.story.content.body.find(function (obj) {
+        return obj.component === 'industries_solution_section';
+      })
     },
     getCasesData() {
       return this.allCases
     },
-    getTestimonialsData() {
-      return this.allTestimonials
+    featuredCTAVersion1() {
+      return this.pageData.story.content.body.find(function (obj) {
+        return obj.component === 'featured_CTA_version_1';
+      })
+    },    
+    getBlogData() {
+      return this.allArticles
     },
+
+    // Why Vodworks as your Gaming Development Partner
+
     FAQs() {
       return this.pageData.story.content.body.find(obj => obj.component === 'faqs-container');
+    },
+    getTestimonialsData() {
+      return this.allTestimonials
     }
   },
-
-  methods: {
-    generateFaqSchema() {
-      return {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": this.FAQs.list_of_faqs.map(faq => ({
-          "@type": "Question",
-          "name": faq.content.question,
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": faq.content.answer
-          }
-        }))
-      };
-    }
-  }
 
 }
 </script>

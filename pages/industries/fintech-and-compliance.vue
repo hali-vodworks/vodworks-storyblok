@@ -11,14 +11,14 @@
     <IndustriesHeroSection :data="industryHeroSection" />
     <!---------------------------------------------------------------------------------------------------->
 
-    <!------------------- Industry Solutions ----------------------------------------->
+    <!------------------- Fintech and Compliance Industry Solutions ----------------------------------------->
     <IndustriesSolutionCardsSection :data="{
       industrySolutionSection,
-      gridlayout: 'three-cols'
+      gridlayout: 'four-cols'
     }" />
     <!---------------------------------------------------------------------------------------------------->
 
-    <!------------------------------- Our Success Stories------------------------------------------------->
+    <!--------------------------------Our Success Stories------------------------------------------------->
     <CaseStudiesSection :data="{
       title: 'Our Case Studies',
       animated_word: '',
@@ -26,38 +26,43 @@
       getCasesData,
       isDarkMode: true,
     }" />
+    <!---------------------------------------------------------------------------------------------------->
+
+    <!------------------- Why Choose Vodworks? ----------------------------------------------------------->
+    <FeaturedCards3sInRow :data="{
+      content: whyChooseVodWorksSection,
+      isDarkMode: false
+    }" />
     <!--------------------------------------------------------------------------------------------------->
 
-    <!----------------------------------------- Blog --------------------------------------------------->
+    <!------------------------------------Featured CTA Version-1 ----------------------------------------->
+    <div v-if="featuredCTAVersion1" class="bgColor-normal-grey">
+      <FeaturedCTA :data="{
+        title: featuredCTAVersion1.title,
+        btnText: featuredCTAVersion1.btn_text,
+        btnURL: featuredCTAVersion1.btn_url,
+        imgSrc: featuredCTAVersion1.expert_image.filename,
+        col_1: 'md:col-span-7',
+        col_2: 'md:col-span-5',
+      }" />
+    </div>
+    <!---------------------------------------------------------------------------------------------------->
+
+    <!----------------------------------------- Blog ----------------------------------------------------->
     <ArticlesSections :data="{
-      title: 'Our Latest Blog ',
-      animated_word: 'Posts',
+      title: 'Vodworks Related Blog ',
+      animated_word: 'Insights',
       getBlogData,
       isDarkMode: false
     }" />
-    <!------------------------------------------------------------------------------------------------>
+    <!---------------------------------------------------------------------------------------------------->
 
-    <!----------------------------- What Our Clients Say --------------------------------------------->
-    <WhatOurClientsSay :data="{
-      title: 'What Our Clients',
-      animated_word: 'Say',
-      getTestimonialsData,
-      isDarkMode: true
-    }" />
-    <!---------------------------------------------------------------------------------------------->
-
-    <!--------------------------------------------------------------------------------------------->
-    <AboutVodworks :data="{
-      isDarkMode: false
-    }" />
-    <!--------------------------------------------------------------------------------------------->
-
-    <!----------------------------- Get in Touch with us------------------------------------------->
+    <!----------------------------- Get in Touch with us-------------------------------------------------->
     <GetInTouchWithUs :data="{
       title: 'Get in Touch with us',
-      isDarkSectionAtTop: false
+      isDarkSectionAtTop: true
     }" />
-    <!-------------------------------------------------------------------------------------------->
+    <!--------------------------------------------------------------------------------------------------->
 
   </div>
 </template>
@@ -65,14 +70,12 @@
 <script>
 export default {
   async asyncData(context) {
-
     try {
       const path =
         context.route.path === '/'
           ? 'home'
           : context.route.path.replace(/^\/+/, '')
-
-      const [pageDataRes, allCasesRes, allArticlesRes, allTestimonialsRes] = await Promise.all([
+      const [pageDataRes, allCasesRes, allArticlesRes] = await Promise.all([
         context.app.$storyapi.get(`cdn/stories/${path}`, {
           version: 'published',
           resolve_relations: 'industries-container.industries'
@@ -91,20 +94,13 @@ export default {
           sort_by: 'first_published_at:desc',
           resolve_relations: 'blog-container.blog',
         }),
-        context.app.$storyapi.get('cdn/stories/', {
-          version: 'published',
-          starts_with: 'testimonials/',
-          resolve_relations: 'testimonial-container.testimonials_list',
-        })
       ])
       return {
         pageData: pageDataRes.data,
         allCases: allCasesRes.data,
         allArticles: allArticlesRes.data,
-        allTestimonials: allTestimonialsRes.data,
       }
-    }
-    catch (err) {
+    } catch (err) {
       // eslint-disable-next-line no-console
       console.error("404 happened on route:", context.route.path)
       // eslint-disable-next-line no-console
@@ -121,29 +117,29 @@ export default {
 
   head() {
     return {
-      title: 'Telecommunication Software Development | Vodworks ',
+      title: 'Financial Software Development & Compliance Solutions | Vodworks',
       meta: [
         {
           hid: 'description',
           name: 'description',
-          content: 'Empowering telecom through advanced software solutions. Vodworks drives innovation in telecommunication software development industry.'
+          content: 'Financial software development and compliance solutions by Vodworks: streamlining operations, compliance workflows, and risk controls.'
         },
         {
           hid: 'keywords',
           name: 'keywords',
-          content: 'telecommunication industry, telco industry, telecom software development, telecommunication services industry, innovation in telecommunication industry, telecom software development services, telecom software services, telecom software solutions, telecom application development, telecommunications software solutions, telecoms software development, software telecom'
+          content: 'Financial Software Development, Compliance Solutions'
         },
         {
           hid: 'og:title',
           name: 'og:title',
           property: 'og:title',
-          content: 'Telecommunication Software Development | Vodworks ',
+          content: 'Financial Software Development & Compliance Solutions | Vodworks',
         },
         {
           hid: 'og:description',
           name: 'og:description',
           property: 'og:description',
-          content: 'Empowering telecom through advanced software solutions. Vodworks drives innovation in telecommunication software development industry.',
+          content: 'Financial software development and compliance solutions by Vodworks: streamlining operations, compliance workflows, and risk controls.',
         },
       ],
     }
@@ -163,14 +159,19 @@ export default {
     getCasesData() {
       return this.allCases
     },
+    whyChooseVodWorksSection() {
+      return this.pageData.story.content.body.find(function (obj) {
+        return obj.component === 'why_choose_vodworks';
+      })
+    },
+    featuredCTAVersion1() {
+      return this.pageData.story.content.body.find(function (obj) {
+        return obj.component === 'featured_CTA_version_1';
+      })
+    },
     getBlogData() {
       return this.allArticles
     },
-    getTestimonialsData() {
-      return this.allTestimonials
-    },
-    // About Vodworks
-
   }
 }
 </script>

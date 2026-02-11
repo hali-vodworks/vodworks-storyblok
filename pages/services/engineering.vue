@@ -22,9 +22,9 @@
         </div>
       </div>
     </section>
-    <!------------------------------------------------------------------------------------------------------>
+    <!------------------------------------------------------------------------------------------>
 
-    <!---------------------------- Services/Engineering details Cards (larg Cards) ------------------------->
+    <!---------------------------- Services/Engineering details Cards (larg Cards) ------------------------>
     <section class="lg:py-32 py-14 bgColor-normal-grey">
       <div class="mx-auto container">
         <div class="text-center">
@@ -38,12 +38,13 @@
               <ServiceLargeCard :key="i" :data="card" :button="{ text: `Start a conversation`, btnURL: 'isStatic' }" />
             </template>
           </div>
+
         </div>
       </div>
     </section>
-    <!----------------------------------------------------------------------------------------------------->
+    <!------------------------------------------------------------------------------------------>
 
-    <!----------------------------General CTA (Dark)------------------------------------------------------->
+    <!----------------------------General CTA (Dark)---------------------------------------->
     <GeneralCTA :data="{
       title: 'Bring your ideas and innovations to life!',
       btnText: 'Get in touch with us',
@@ -53,9 +54,9 @@
       col_1: 'md:col-span-7',
       col_2: 'md:col-span-5',
     }" />
-    <!---------------------------------------------------------------------------------------------------->
+    <!------------------------------------------------------------------------------------------>
 
-    <!--------------------------------Our Success Stories------------------------------------------------>
+    <!--------------------------------Our Success Stories---------------------------------->
     <CaseStudiesSection :data="{
       title: 'Our engineering ',
       animated_word: 'Success Stories',
@@ -63,37 +64,37 @@
       getCasesData,
       isDarkMode: false,
     }" />
-    <!--------------------------------------------------------------------------------------------------->
+    <!------------------------------------------------------------------------------------->
 
-    <!----------------------------We Work Across Industries---------------------------------------------->
+    <!----------------------------We Work Across Industries---------------------------------------->
     <IndustriesListingSection :data="{
       title: 'We Work Across Industries',
       description: `At Vodworks, we pride ourselves on our versatile approach, supporting clients across a spectrum of industries. Our team's extensive experience and commitment to understanding the unique nuances of your industry and company guarantee the success of your project, no matter the sector you operate in.`,
       getIndustriesData,
     }" />
-    <!-------------------------------------------------------------------------------------------------->
+    <!---------------------------------------------------------------------------------------------->
 
-    <!-------------------------------------- About Vodworks -------------------------------------------->
+    <!-------------------------------------- About Vodworks ---------------------------------------->
     <AboutVodworks :data="{
       isDarkMode: false
     }" />
-    <!------------------------------------------------------------------------------------------------->
+    <!---------------------------------------------------------------------------------------------->
 
-    <!------------------------------- Get in Touch with us--------------------------------------------->
+    <!------------------------------- Get in Touch with us-------------------------------------->
     <GetInTouchWithUs :data="{
-      title:'Get in Touch with us',
+      title: 'Get in Touch with us',
       isDarkSectionAtTop: false
     }" />
     <!------------------------------------------------------------------------------------------>
   </div>
 </template>
 
-
 <script>
 export default {
   async asyncData(context) {
     const path = context.route.path === '/' ? '/home' : context.route.path
     const [pageDataRes, allCasesRes] = await Promise.all([
+
       context.app.$storyapi.get(`cdn/stories/${path}`, {
         version: 'published',
         resolve_relations: 'service_engineering_details_container.service_engineering_details,industries-container.industries'

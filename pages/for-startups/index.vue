@@ -100,13 +100,13 @@
 
     <!-----------------------Featured CTA Version-1 ----------------------------------->
     <FeaturedCTA :data="{
-      title: `Looking for a Bespoke Software Solution for Your Start-up?`,
-      btnText: 'Get in touch with us',
-      btnURL: '/contact/',
-      imgSrc: 'jaffer-hussain.png',
-      col_1: 'md:col-span-7',
-      col_2: 'md:col-span-4',
-    }" />
+        title: featuredCTAVersion1.title,
+        btnText: featuredCTAVersion1.btn_text,
+        btnURL: featuredCTAVersion1.btn_url,
+        imgSrc: featuredCTAVersion1.expert_image.filename,
+        col_1: 'md:col-span-7',
+        col_2: 'md:col-span-4',
+      }" />
     <!---------------------------------------------------------------------------------------------------->
 
     <!----------------------------- Get in Touch with us--------------------------------->
@@ -131,6 +131,8 @@ export default {
       context.app.$storyapi.get('cdn/stories/', {
         version: 'published',
         starts_with: 'cases/',
+        per_page: 3,
+        sort_by: 'first_published_at:desc',
         resolve_relations: 'case-studies-container.case_studies',
       }),
       context.app.$storyapi.get('cdn/stories/', {
@@ -278,13 +280,7 @@ export default {
           property: 'og:description',
           content: "Nurturing startup dreams: Vodworks - your partner in bespoke startup software development tailored for success. Know more about key expertise now!",
         },
-      ],
-      script: [
-        {
-          type: 'application/ld+json',
-          json: this.generateFaqSchema(),
-        },
-      ],
+      ]
     }
   },
 
@@ -295,27 +291,15 @@ export default {
     getTestimonialsData() {
       return this.allTestimonials
     },
+    featuredCTAVersion1() {
+      return this.pageData.story.content.body.find(function (obj) {
+        return obj.component === 'featured_CTA_version_1';
+      })
+    },
     FAQs() {
       return this.pageData.story.content.body.find(obj => obj.component === 'faqs-container');
     }
-  },
-  
-  methods: {
-    generateFaqSchema() {
-      return {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": this.FAQs.list_of_faqs.map(faq => ({
-          "@type": "Question",
-          "name": faq.content.question,
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": faq.content.answer
-          }
-        }))
-      };
-    }
   }
-
+  
 }
 </script>

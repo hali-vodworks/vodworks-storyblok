@@ -127,6 +127,8 @@ export default {
       context.app.$storyapi.get('cdn/stories/', {
         version: 'published',
         starts_with: 'cases/',
+        per_page: 3,
+        sort_by: 'first_published_at:desc',
         resolve_relations: 'case-studies-container.case_studies',
       }),
       context.app.$storyapi.get('cdn/stories/', {
@@ -140,7 +142,6 @@ export default {
       allCases: allCasesRes.data,
       allTestimonials: allTestimonialsRes.data,
     }
-
   },
 
   data() {
@@ -309,20 +310,13 @@ export default {
           property: 'og:title',
           content: 'Web3 Software Development Services & Solutions | Vodworks',
         },
-
         {
           hid: 'og:description',
           name: 'og:description',
           property: 'og:description',
           content: "Unleash Web 3 Potential: Vodworks - Your Partner in Innovative Web3 Software Development for the Next Generation of Online Experiences.",
         },
-      ],
-      script: [
-        {
-          type: 'application/ld+json',
-          json: this.generateFaqSchema(),
-        },
-      ],
+      ]
     }
   },
 
@@ -336,24 +330,6 @@ export default {
     FAQs() {
       return this.pageData.story.content.body.find(obj => obj.component === 'faqs-container');
     }
-  },
-
-  methods: {
-    generateFaqSchema() {
-      return {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": this.FAQs.list_of_faqs.map(faq => ({
-          "@type": "Question",
-          "name": faq.content.question,
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": faq.content.answer
-          }
-        }))
-      };
-    }
-  },
-
+  }
 }
 </script>

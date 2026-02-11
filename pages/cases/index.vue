@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/valid-v-for -->
 <template>
   <div>
-    <!-----------------------------------HERO-------------------------------------------->
+    <!-------------------------- Hero Section ------------------------------------------->
     <PageHeroWithAnimatedTitle :data="{
       title: 'Case',
       animated_word: 'Studies',
@@ -9,28 +9,27 @@
     }" />
     <!----------------------------------------------------------------------------------->
 
-    <!---------------------------Case Studies Listing------------------------------------>
+    <!-------------------------- Case Studies Listing------------------------------------>
     <div class="lg:py-32 py-14 bgColor-normal-grey">
       <div class="mx-auto container">
         <div class="grid lg:grid-cols-2 xl:grid-cols-2 gap-4 lg:gap-8 w-full mx-auto lg:w-4/5">
-          <article v-for="(caseStudy, i) in publishedCaseStudies" :key="i"
-            class="zoom-in overflow-hidden cursor-pointer mb-8">
-
-            <NuxtLink :to="`/cases/${caseStudy.slug}` + '/'">
-              <div v-if="getFeaturedImage(caseStudy)" class="blog-thumbnail-wrapper">
-                <img :src="getFeaturedImage(caseStudy).filename" class="scaleable-img"
-                  :alt="getFeaturedImage(caseStudy).alt" />
-              </div>
-              <div class="article-content">
-                <h4 class="line-clamp-2 mt-4">
-                  {{ caseStudy.content.title }}
-                </h4>
-                <p class="line-clamp-3">{{ caseStudy.content.description }}</p>
-                <p class="btn-text mt-4 inline-block">Read More</p>
-              </div>
+          <template v-for="(caseStudy, i) in getCasesData.stories">
+            <article :key="i" class="zoom-in overflow-hidden cursor-pointer mb-8">
+              <NuxtLink :to="`/cases/${caseStudy.slug}` + '/'">
+                <div v-if="getFeaturedImage(caseStudy)" class="blog-thumbnail-wrapper">
+                  <img :src="getFeaturedImage(caseStudy).filename" class="scaleable-img"
+                    :alt="getFeaturedImage(caseStudy).alt" />
+                </div>
+                <div class="article-content">
+                  <h4 class="line-clamp-2 mt-4">
+                    {{ caseStudy.content.title }}
+                  </h4>
+                  <p class="line-clamp-3">{{ caseStudy.content.description }}</p>
+                  <p class="btn-text mt-4 inline-block">Read More</p>
+                </div>
               </NuxtLink>
-
-          </article>
+            </article>
+          </template>
         </div>
       </div>
     </div>
@@ -43,39 +42,35 @@
     }
       " />
     <!----------------------------------------------------------------------------------->
+
   </div>
 </template>
 
 <script>
-
 export default {
-
   async asyncData(context) {
-    // const path = context.route.path === '/' ? '/home' : context.route.path
+    const version = context.$config.storyblokVersion
     const [allCasesRes, allTestimonialsRes] = await Promise.all([
-
       context.app.$storyapi.get('cdn/stories/', {
-        version: 'published',
+        version,
         starts_with: 'cases/',
+        sort_by: 'first_published_at:desc',
         resolve_relations: 'case-studies-container.case_studies',
       }),
       context.app.$storyapi.get('cdn/stories/', {
-        version: 'published',
+        version,
         starts_with: 'testimonials/',
         resolve_relations: 'testimonial-container.testimonials_list',
       }),
-
     ])
     return {
       allCases: allCasesRes.data,
       allTestimonials: allTestimonialsRes.data,
     }
   },
-
   data() {
     return { story: { content: {} } }
   },
-
   head() {
     return {
       title: 'Software Development Case Studies | Vodworks',
@@ -96,7 +91,6 @@ export default {
           property: 'og:title',
           content: 'Software Development Case Studies | Vodworks',
         },
-
         {
           hid: 'og:description',
           name: 'og:description',
@@ -113,32 +107,21 @@ export default {
           name: 'twitter:card',
           content: `${this.allCases.stories[0].content.thumbnail.filename}`,
         },
-
       ],
     }
   },
-
   computed: {
-    publishedCaseStudies() {
-      return this.allCases.stories.filter(
-        (story) => story.content.is_published_on_production
-      );
+    getCasesData() {
+      return this.allCases
     },
     getTestimonialsData() {
       return this.allTestimonials
     },
   },
-
   methods: {
     getFeaturedImage(caseStudy) {
       return caseStudy.content.thumbnail
     },
-    gotoSingleCaseStudy(slug) {
-      this.$router.push({
-        path: '/cases/' + slug + '/',
-      })
-    },
   }
-
 }
 </script>

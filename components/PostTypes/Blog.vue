@@ -128,7 +128,7 @@
 
         <div class="md:col-span-3">
           <div class="cs-cta">
-            <img src="~/assets/img/case-bg.png" alt="img" />
+            <img src="~/assets/img/case-bg.webp" alt="img" />
             <div class="content">
               <a href="/cases/" target="_blank" rel="noopener noreferrer" class="btn-primary btn-md block mt-4">More
                 Case

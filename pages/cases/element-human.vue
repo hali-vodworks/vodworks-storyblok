@@ -92,7 +92,6 @@
 </template>
 
 <script>
-
 const loadData = function ({
   api,
   cacheVersion,
@@ -124,9 +123,7 @@ const loadData = function ({
       }
     })
 }
-
 export default {
-
   asyncData(context) {
     // Check if we are in the editing mode
     let editMode = true
@@ -154,7 +151,6 @@ export default {
       path,
     })
   },
-
 
   head() {
     return {
@@ -197,16 +193,9 @@ export default {
           name: 'twitter:card',
           content: `${this.story.content.thumbnail.filename}`,
         },
-      ],
-      script: [
-        {
-          type: 'application/ld+json',
-          json: this.generateFaqSchema(),
-        },
-      ],
+      ]
     }
   },
-
 
   computed: {
     getSingleCsHero() {
@@ -277,25 +266,7 @@ export default {
         window.location.reload()
       }
     })
-  },
-
-  methods: {
-    generateFaqSchema() {
-      return {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": this.FAQs.list_of_faqs.map(faq => ({
-          "@type": "Question",
-          "name": faq.content.question,
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": faq.content.answer
-          }
-        }))
-      };
-    }
   }
 
 }
-
 </script>

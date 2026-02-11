@@ -1,4 +1,4 @@
-te<!-- eslint-disable vue/no-v-html -->
+<!-- eslint-disable vue/no-v-html -->
 <template>
   <div>
     <!-----------  Hero section -------------------------------------------------------->
@@ -104,7 +104,6 @@ te<!-- eslint-disable vue/no-v-html -->
 </template>
 
 <script>
-
 const loadData = function ({
   api,
   cacheVersion,
@@ -136,9 +135,7 @@ const loadData = function ({
       }
     })
 }
-
 export default {
-
   asyncData(context) {
     // Check if we are in the editing mode
     let editMode = true
@@ -166,7 +163,6 @@ export default {
       path,
     })
   },
-
 
   head() {
     return {
@@ -209,11 +205,9 @@ export default {
           name: 'twitter:card',
           content: `${this.story.content.thumbnail.filename}`,
         },
-
       ],
     }
   },
-
 
   computed: {
     getSingleCsHero() {
@@ -262,9 +256,6 @@ export default {
         return obj.component === 'cs-outcome';
       })
     },
-
-
-
   },
 
   mounted() {
@@ -284,7 +275,5 @@ export default {
       return `background-image: url(${require('~/assets' + path)});`
     },
   }
-
 }
-
 </script>
