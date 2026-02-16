@@ -1,264 +1,125 @@
 <!-- eslint-disable vue/no-v-html -->
 <template>
-    <div>
-        <!-----------  Hero section -------------------------------------------------------->
-        <CsHero :data="{
-            content: getSingleCsHero,
-            hasMorePadding: true,
-            imageHeightFull: false,
-        }" />
-        <!----------------------------------------------------------------------------------->
-
-        <!-------------- About The Client --------------------------------------------------->
-        <CsBrief :data="Brief" />
-        <!----------------------------------------------------------------------------------->
-
-        <!--------------- The Scope  -------------------------------------------------------->
-        <CsScope :data="Scope" />
-        <!----------------------------------------------------------------------------------->
-
-        <!-------------- Featured Image 1---------------------------------------------------->
-        <CsFeaturedImage :data="getSingleCsFeaturedImage1" />
-        <!----------------------------------------------------------------------------------->
-
-        <!--------------- How Vodworks Helped  ---------------------------------------------->
-        <section v-if="Approach" class="single-cs lg:py-32 py-14 bgColor-normal-grey">
-            <div class="mx-auto container">
-                <div class="md:max-w-4/5 mx-auto">
-                    <div class="text-center md:max-w-4/5 mx-auto">
-                        <AnimatedHeading :data="{
-                            simpleWords: null,
-                            animatedWords: Approach.title,
-                            isBgDark: false
-                        }" />
-                    </div>
-                    <div class="mt-8 lg:mt-16 text-center" v-html="$md.render(Approach.description)"> </div>
-                    <div class="video-container">
-                        <iframe class="mt-8 lg:mt-16" src="https://player.vimeo.com/video/702593566?h=584daa3463"
-                            frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!----------------------------------------------------------------------------------->
-
-        <!---------------  Technical Stack -------------------------------------------------->
-        <CsTechStack :data="{
-            content: TechnicalStack,
-            layout: 'cols-3',
-        }" />
-        <!----------------------------------------------------------------------------------->
-
-        <!---------------- Team ------------------------------------------------------------->
-        <CsTeam :data="{
-            content: Team,
-            layout: 'center-two-ele-in-grid'
-        }" />
-        <!----------------------------------------------------------------------------------->
-
-        <!-------------- Featured Image 2---------------------------------------------------->
-        <CsFeaturedImage :data="getSingleCsFeaturedImage2" />
-        <!----------------------------------------------------------------------------------->
-
-        <!--------------- Features  --------------------------------------------------------->
-        <CsFeatures :data="{
-            Features,
-            layout: 'grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3'
-        }" />
-        <!---------------------------------------------------------------------------------->
-
-        <!--------------- The Result ------------------------------------------------------->
-        <CsResult :data="Result" />
-        <!---------------------------------------------------------------------------------->
-
-        <!---------------------------FAQs--------------------------------------------------->
-        <FAQs :payload="FAQs" />
-        <!---------------------------------------------------------------------------------->
-
-        <!------------------------------- Get in Touch with us------------------------------>
-        <GetInTouchWithUs :data="{
-            title: 'Get in Touch with us',
-            isDarkSectionAtTop: true
-        }" />
-        <!---------------------------------------------------------------------------------->
-
+  <div v-if="!story" class="text-center py-20">
+    <h2 class="text-2xl font-bold">Oops! Page not found</h2>
+    <p class="mt-8">The requested content is not available.</p>
+  </div>
+  <div v-else>
+    <div v-for="(section, index) in allSections" :key="index">
+      <component :is="componentMap[section.component]" v-if="componentMap[section.component]" :data="section" />
+      <div v-else class="text-center py-12 lg:py-24">
+        <p>No component found for {{ section.component }}</p>
+      </div>
     </div>
+    <!------------------------------- Get in Touch with us------------------------------->
+    <GetInTouchWithUs :data="{
+      title: 'Get in Touch with us',
+      isDarkSectionAtTop: true
+    }" />
+    <!---------------------------------------------------------------------------------->
+  </div>
 </template>
 
 <script>
-const loadData = function ({
-    api,
-    cacheVersion,
-    errorCallback,
-    version,
-    path,
-}) {
-    return api
-        .get(`cdn/stories${path}`, {
-            version,
-            resolve_links: 'story,url',
-            resolve_relations: 'case-studies-container.case_studies,case_studies.case-study,case-studies-container.case-study,faqs-container.list_of_faqs',
-            cv: cacheVersion,
-        })
-        .then((res) => {
-            return res.data
-        })
-        .catch((res) => {
-            if (!res.response) {
-                errorCallback({
-                    statusCode: 404,
-                    message: 'Failed to receive content form api',
-                })
-            } else {
-                errorCallback({
-                    statusCode: res.response.status,
-                    message: res.response.data,
-                })
-            }
-        })
-}
+import CsHero from '~/components/Sections/Cases/CsHero.vue'
+import CsBrief from '~/components/Sections/Cases/CsBrief.vue'
+import CsScope from '~/components/Sections/Cases/CsScope.vue'
+import CsFeaturedImage from '~/components/Sections/Cases/CsFeaturedImage.vue'
+import CsApproachWithCards from '~/components/Sections/Cases/CsApproachWithCards.vue'
+import CsTechStack from '~/components/Sections/Cases/CsTechStack.vue'
+import CsTeam from '~/components/Sections/Cases/CsTeam.vue'
+import CsFeatures from '~/components/Sections/Cases/CsFeatures.vue'
+import CsFullWidthWhiteBg from '~/components/Sections/Cases/CsFullWidthWhiteBg.vue'
+import CsFullWidthGreyBg from '~/components/Sections/Cases/CsFullWidthGreyBg.vue'
+import CsReview from '~/components/Sections/Cases/CsReview.vue'
+import CsResult from '~/components/Sections/Cases/CsResult.vue'
+import CsFAQs from '~/components/Sections/Cases/FAQs.vue'
+
 export default {
-    asyncData(context) {
-        // Check if we are in the editing mode
-        let editMode = true
-        if (
-            context.query._storyblok ||
-            context.isDev ||
-            (typeof window !== 'undefined' &&
-                window.localStorage.getItem('_storyblok_draft_mode'))
-        ) {
-            if (typeof window !== 'undefined') {
-                window.localStorage.setItem('_storyblok_draft_mode', '1')
-                if (window.location === window.parent.location) {
-                    window.localStorage.removeItem('_storyblok_draft_mode')
-                }
-            }
-            editMode = true
-        }
-        const version = editMode ? 'draft' : 'published'
-        const path = context.route.path === '/' ? '/home' : context.route.path
-        // Load the JSON from the API
-        return loadData({
-            version,
-            api: context.app.$storyapi,
-            errorCallback: context.error,
-            path,
-        })
-    },
-    head() {
-        return {
-            title: `${this.story.content.title}`,
-            meta: [
-                {
-                    hid: 'description',
-                    name: 'description',
-                    content: `${this.story.content.description}`,
-                },
-                {
-                    hid: 'og-type',
-                    property: 'og:type',
-                    content: 'website'
-                },
-                {
-                    hid: 'og:title',
-                    name: 'og:title',
-                    content: `${this.story.content.title}`,
-                },
-                {
-                    hid: 'og:description',
-                    name: 'og:description',
-                    property: 'og:description',
-                    content: `${this.story.content.description}`,
-                },
-                {
-                    hid: 'og:image',
-                    property: 'og:image',
-                    content: `${this.story.content.thumbnail.filename}`,
-                },
-                {
-                    hid: 'og:url',
-                    property: 'og:url',
-                    content: `/${this.story.full_slug}`,
-                },
-                // For Twitter
-                {
-                    hid: 't-type',
-                    name: 'twitter:card',
-                    content: `${this.story.content.thumbnail.filename}`,
-                },
-            ]
-        }
-    },
+  async asyncData({ app, route }) {
+    try {
+      const slug = route.path === '/' ? 'home' : route.path
 
-    computed: {
-        getSingleCsHero() {
-            return this.story.content.cs_full_details.find(function (obj) {
-                return obj.component === 'single-cs-hero';
-            })
+      const res = await app.$storyapi.get(`cdn/stories/${slug}`, {
+        version: process.env.NODE_ENV === 'development' ? 'draft' : 'published',
+        resolve_links: 'story',
+        resolve_relations:
+          'case-studies-container.case_studies,case_studies.case-study,case-studies-container.case-study,faqs-container.list_of_faqs',
+      })
+      return {
+        story: res.data.story || null,
+      }
+    } catch (err) {
+      console.warn('Storyblok error:', err?.response?.status)
+      return { story: null }
+    }
+  },
+  head() {
+    if (!this.story) return { title: 'Page not found' }
+    return {
+      title: this.story.content.title || 'Case Study',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: `${this.story.content.description}`,
         },
-        Brief() {
-            return this.story.content.cs_full_details.find(function (obj) {
-                return obj.component === 'cs-fw-brief';
-            })
+        {
+          hid: 'og-type',
+          property: 'og:type',
+          content: 'website'
         },
-        Scope() {
-            return this.story.content.cs_full_details.find(function (obj) {
-                return obj.component === 'cs-scope';
-            })
+        {
+          hid: 'og:title',
+          name: 'og:title',
+          content: `${this.story.content.title}`,
         },
-        getSingleCsFeaturedImage1() {
-            return this.story.content.cs_full_details.find(function (obj) {
-                return obj.component === 'single-cs-featured-image-1';
-            })
+        {
+          hid: 'og:description',
+          name: 'og:description',
+          property: 'og:description',
+          content: `${this.story.content.description}`,
         },
-        Approach() {
-            return this.story.content.cs_full_details.find(function (obj) {
-                return obj.component === 'cs-approach_with_cards';
-            })
+        {
+          hid: 'og:image',
+          property: 'og:image',
+          content: `${this.story.content.thumbnail.filename}`,
         },
-        TechnicalStack() {
-            return this.story.content.cs_full_details.find(function (obj) {
-                return obj.component === 'cs-technical-stack';
-            })
+        {
+          hid: 'og:url',
+          property: 'og:url',
+          content: `/${this.story.full_slug}`,
         },
-        Team() {
-            return this.story.content.cs_full_details.find(function (obj) {
-                return obj.component === 'cs_team';
-            })
+        // For Twitter
+        {
+          hid: 't-type',
+          name: 'twitter:card',
+          content: `${this.story.content.thumbnail.filename}`,
         },
-        getSingleCsFeaturedImage2() {
-            return this.story.content.cs_full_details.find(function (obj) {
-                return obj.component === 'single-cs-featured-image-2';
-            })
-        },
-        Features() {
-            return this.story.content.cs_full_details.find(function (obj) {
-                return obj.component === 'cs_features';
-            })
-        },
-        Result() {
-            return this.story.content.cs_full_details.find(function (obj) {
-                return obj.component === 'cs-result';
-            })
-        },
-        FAQs() {
-            return this.story.content.cs_full_details.find(function (obj) {
-                return obj.component === 'faqs-container';
-            })
-        },
+      ]
+    }
+  },
+  computed: {
+    allSections() {
+      return this.story?.content?.cs_full_details || []
     },
-
-    mounted() {
-        this.$storybridge.on(['input', 'published', 'change'], (event) => {
-            if (event.action === 'input') {
-                if (event.story.id === this.story.id) {
-                    this.story.content = event.story.content
-                }
-            } else if (!event.slugChanged) {
-                window.location.reload()
-            }
-        })
+    componentMap() {
+      return {
+        'single-cs-hero': CsHero,
+        'cs-fw-brief': CsBrief,
+        'cs-scope': CsScope,
+        'cs-fw-featured-image': CsFeaturedImage,
+        'cs-approach_with_cards': CsApproachWithCards,
+        'single-cs-full-width-white-bg': CsFullWidthWhiteBg,
+        'cs-technical-stack': CsTechStack,
+        'cs_team': CsTeam,
+        'cs_features': CsFeatures,
+        'single-cs-section-12-cols-with-grey-bg': CsFullWidthGreyBg,
+        'cs-review': CsReview,
+        'cs-result': CsResult,
+        'faqs-container': CsFAQs,
+      }
     },
-
+  },
 }
 </script>

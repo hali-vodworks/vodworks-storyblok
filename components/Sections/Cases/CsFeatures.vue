@@ -1,13 +1,13 @@
 <template>
-    <section v-if="data.Features" class="single-cs lg:py-32 py-14 bgColor-normal-grey">
+    <section v-if="data" class="single-cs lg:py-32 py-14 bgColor-normal-grey">
         <div class="mx-auto container">
             <div class="mx-auto">
                 <div class="text-center single-cs md:max-w-4/5 mx-auto">
-                    <h3>{{ data.Features.title }}</h3>
-                    <div v-if="data.Features.description" v-html="$md.render(data.Features.description)"></div>
+                    <h3>{{ data.title }}</h3>
+                    <div v-if="data.description" v-html="$md.render(data.description)"></div>
                 </div>
                 <div :class="data.layout" class="gap-4 mx-auto mt-8 lg:mt-16">
-                    <template v-for="(card, i) in data.Features.cards">
+                    <template v-for="(card, i) in data.cards">
                         <div :key="i" class="default-card card-utilities hvr-effect item">
                             <img v-if="card.image.filename" class="mb-4" :src="card.image.filename"
                                 :alt="card.image.alt" />

@@ -1,158 +1,60 @@
 <!-- eslint-disable vue/no-v-html -->
 <template>
-  <div>
-    <!-----------  Hero section -------------------------------------------------------->
-    <CsHero :data="{
-      content: getSingleCsHero,
-      hasMorePadding: true,
-      imageHeightFull: false,
-    }" />
-    <!---------------------------------------------------------------------------------->
-
-    <!-------------- Brief -------------------------------------------------------------->
-    <CsBrief :data="Brief" />
-    <!----------------------------------------------------------------------------------->
-
-    <!-------------- Featured Image 1---------------------------------------------------->
-    <CsFeaturedImage :data="getSingleCsFeaturedImage1" />
-    <!----------------------------------------------------------------------------------->
-
-    <!--------------- The Scope  -------------------------------------------------------->
-    <CsScope :data="Scope" />
-    <!----------------------------------------------------------------------------------->
-
-    <!---------------  Review ----------------------------------------------------------->
-    <CsReview :data="Review" />
-    <!----------------------------------------------------------------------------------->
-
-    <!--------------- How Vodworks Helped ----------------------------------------------->
-    <section v-if="Approach" class="single-cs lg:py-32 py-14 bgColor-normal-grey">
-      <div class="mx-auto container">
-        <div class="">
-          <div class="text-center md:max-w-4/5 mx-auto">
-            <AnimatedHeading :data="{
-              simpleWords: null,
-              animatedWords: Approach.title,
-              isBgDark: false
-            }" />
-            <div class="mt-8 lg:mt-16 text-left" v-html="$md.render(Approach.description)"> </div>
-          </div>
-
-          <div class="myTvMovies-cs-cards">
-            <NuxtLink to="/cases/vidscape/"><img class="default-card card-utilities card"
-                src="~/assets/img/cases/mytvmovies/VS-wv.png" alt="image" /></NuxtLink>
-            <img class="operator" src="~/assets/img/cases/mytvmovies/plus.svg" alt="image" />
-            <img class="default-card card-utilities card" src="~/assets/img/cases/mytvmovies/roe-r1.png" alt="image" />
-            <img class="operator" src="~/assets/img/cases/mytvmovies/arrow-right.svg" alt="image" />
-            <img class="default-card card-utilities card" src="~/assets/img/cases/mytvmovies/mytvmovies-com.png"
-              alt="image" />
-          </div>
-
-        </div>
+  <div v-if="!story" class="text-center py-20">
+    <h2 class="text-2xl font-bold">Oops! Page not found</h2>
+    <p class="mt-8">The requested content is not available.</p>
+  </div>
+  <div v-else>
+    <div v-for="(section, index) in allSections" :key="index">
+      <component :is="componentMap[section.component]" v-if="componentMap[section.component]" :data="section" />
+      <div v-else class="text-center py-12 lg:py-24">
+        <p>No component found for {{ section.component }}</p>
       </div>
-    </section>
-    <!----------------------------------------------------------------------------------->
-
-    <!-------------- Featured Image 2---------------------------------------------------->
-    <CsFeaturedImage :data="getSingleCsFeaturedImage2" />
-    <!----------------------------------------------------------------------------------->
-
-    <!---------------  Technical Stack -------------------------------------------------->
-    <CsTechStack :data="{
-      content: TechnicalStack,
-      layout: 'cols-4 vidscape',
-    }" />
-    <!----------------------------------------------------------------------------------->
-
-    <!----------------------------------Team--------------------------------------------->
-    <CsTeam :data="{
-      content: Team,
-      layout: 'center-two-ele-in-grid'
-    }" />
-    <!----------------------------------------------------------------------------------->
-
-    <!--------------- The Result -------------------------------------------------------->
-    <CsResult :data="Result" />
-    <!----------------------------------------------------------------------------------->
-
-    <!---------------------------FAQs----------------------------------------------------->
-    <FAQs :payload="FAQs" />
-    <!------------------------------------------------------------------------------------>
-
-    <!------------------------------- Get in Touch with us-------------------------------->
+    </div>
+    <!------------------------------- Get in Touch with us------------------------------->
     <GetInTouchWithUs :data="{
       title: 'Get in Touch with us',
       isDarkSectionAtTop: true
     }" />
-    <!------------------------------------------------------------------------------------->
-
+    <!---------------------------------------------------------------------------------->
   </div>
 </template>
 
 <script>
-const loadData = function ({
-  api,
-  cacheVersion,
-  errorCallback,
-  version,
-  path,
-}) {
-  return api
-    .get(`cdn/stories${path}`, {
-      version,
-      resolve_links: 'story,url',
-      resolve_relations: 'case-studies-container.case_studies,case_studies.case-study,case-studies-container.case-study,faqs-container.list_of_faqs',
-      cv: cacheVersion,
-    })
-    .then((res) => {
-      return res.data
-    })
-    .catch((res) => {
-      if (!res.response) {
-        errorCallback({
-          statusCode: 404,
-          message: 'Failed to receive content form api',
-        })
-      } else {
-        errorCallback({
-          statusCode: res.response.status,
-          message: res.response.data,
-        })
-      }
-    })
-}
-export default {
-  asyncData(context) {
-    // Check if we are in the editing mode
-    let editMode = true
-    if (
-      context.query._storyblok ||
-      context.isDev ||
-      (typeof window !== 'undefined' &&
-        window.localStorage.getItem('_storyblok_draft_mode'))
-    ) {
-      if (typeof window !== 'undefined') {
-        window.localStorage.setItem('_storyblok_draft_mode', '1')
-        if (window.location === window.parent.location) {
-          window.localStorage.removeItem('_storyblok_draft_mode')
-        }
-      }
-      editMode = true
-    }
-    const version = editMode ? 'draft' : 'published'
-    const path = context.route.path === '/' ? '/home' : context.route.path
-    // Load the JSON from the API
-    return loadData({
-      version,
-      api: context.app.$storyapi,
-      errorCallback: context.error,
-      path,
-    })
-  },
+import CsHero from '~/components/Sections/Cases/CsHero.vue'
+import CsBrief from '~/components/Sections/Cases/CsBrief.vue'
+import CsFeaturedImage from '~/components/Sections/Cases/CsFeaturedImage.vue'
+import CsScope from '~/components/Sections/Cases/CsScope.vue'
+import CsReview from '~/components/Sections/Cases/CsReview.vue'
+import CsApproachWithCards from '~/components/Sections/Cases/CsMyTvMoviesApproachWithCards.vue'
+import CsTechStack from '~/components/Sections/Cases/CsTechStack.vue'
+import CsTeam from '~/components/Sections/Cases/CsTeam.vue'
+import CsResult from '~/components/Sections/Cases/CsResult.vue'
+import CsFAQs from '~/components/Sections/Cases/FAQs.vue'
 
+export default {
+  async asyncData({ app, route }) {
+    try {
+      const slug = route.path === '/' ? 'home' : route.path
+
+      const res = await app.$storyapi.get(`cdn/stories/${slug}`, {
+        version: process.env.NODE_ENV === 'development' ? 'draft' : 'published',
+        resolve_links: 'story',
+        resolve_relations:
+          'case-studies-container.case_studies,case_studies.case-study,case-studies-container.case-study,faqs-container.list_of_faqs',
+      })
+      return {
+        story: res.data.story || null,
+      }
+    } catch (err) {
+      console.warn('Storyblok error:', err?.response?.status)
+      return { story: null }
+    }
+  },
   head() {
+    if (!this.story) return { title: 'Page not found' }
     return {
-      title: `${this.story.content.title}`,
+      title: this.story.content.title || 'Case Study',
       meta: [
         {
           hid: 'description',
@@ -194,76 +96,24 @@ export default {
       ]
     }
   },
-
   computed: {
-    getSingleCsHero() {
-      return this.story.content.cs_full_details.find(function (obj) {
-        return obj.component === 'single-cs-hero';
-      })
+    allSections() {
+      return this.story?.content?.cs_full_details || []
     },
-    Brief() {
-      return this.story.content.cs_full_details.find(function (obj) {
-        return obj.component === 'cs-fw-brief';
-      })
-    },
-    Scope() {
-      return this.story.content.cs_full_details.find(function (obj) {
-        return obj.component === 'cs-scope';
-      })
-    },
-    Review() {
-      return this.story.content.cs_full_details.find(function (obj) {
-        return obj.component === 'cs-review';
-      })
-    },
-    getSingleCsFeaturedImage1() {
-      return this.story.content.cs_full_details.find(function (obj) {
-        return obj.component === 'single-cs-featured-image-1';
-      })
-    },
-    Approach() {
-      return this.story.content.cs_full_details.find(function (obj) {
-        return obj.component === 'cs-approach_with_cards';
-      })
-    },
-    getSingleCsFeaturedImage2() {
-      return this.story.content.cs_full_details.find(function (obj) {
-        return obj.component === 'single-cs-featured-image-2';
-      })
-    },
-    TechnicalStack() {
-      return this.story.content.cs_full_details.find(function (obj) {
-        return obj.component === 'cs-technical-stack';
-      })
-    },
-    Team() {
-      return this.story.content.cs_full_details.find(function (obj) {
-        return obj.component === 'cs_team';
-      })
-    },
-    Result() {
-      return this.story.content.cs_full_details.find(function (obj) {
-        return obj.component === 'cs-result';
-      })
-    },
-    FAQs() {
-      return this.story.content.cs_full_details.find(function (obj) {
-        return obj.component === 'faqs-container';
-      })
+    componentMap() {
+      return {
+        'single-cs-hero': CsHero,
+        'cs-fw-brief': CsBrief,
+        'cs-fw-featured-image': CsFeaturedImage,
+        'cs-scope': CsScope,
+        'cs-review': CsReview,
+        'cs-approach_with_cards': CsApproachWithCards,
+        'cs-technical-stack': CsTechStack,
+        'cs_team': CsTeam,
+        'cs-result': CsResult,
+        'faqs-container': CsFAQs,
+      }
     },
   },
-
-  mounted() {
-    this.$storybridge.on(['input', 'published', 'change'], (event) => {
-      if (event.action === 'input') {
-        if (event.story.id === this.story.id) {
-          this.story.content = event.story.content
-        }
-      } else if (!event.slugChanged) {
-        window.location.reload()
-      }
-    })
-  }
-
 }
 </script>

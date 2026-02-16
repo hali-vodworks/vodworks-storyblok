@@ -3,10 +3,10 @@
         <div class="mx-auto container">
             <div class="mx-auto md:max-w-4/5">
                 <div class="text-center color-white">
-                    <h3>{{ data.content.title }}</h3>
+                    <h3>{{ data.title }}</h3>
                 </div>
                 <div class="logos mt-8 lg:mt-16" :class="data.layout">
-                    <template v-for="(item, index) in data.content.block">
+                    <template v-for="(item, index) in data.block">
                         <div :key="index" class="item my-0 md:my-4">
                             <img class="hvr-top" :src="item.image.filename" :alt="item.image.alt" />
                         </div>

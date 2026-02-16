@@ -1,150 +1,60 @@
 <!-- eslint-disable vue/no-v-html -->
 <template>
-  <div>
-    <!-----------  Hero section --------------------------------------------------->
-    <CsHero :data="{
-      content: getSingleCsHero,
-      hasMorePadding: true,
-      imageHeightFull: false,
-    }" />
-    <!----------------------------------------------------------------------------->
-
-    <!-------------- About the Client --------------------------------------------------->
-    <CsBrief :data="Brief" />
-    <!----------------------------------------------------------------------------------->
-
-    <!--------------- The Scope  -------------------------------------------------------->
-    <CsScope :data="Scope" />
-    <!----------------------------------------------------------------------------------->
-
-
-    <!-------------- Featured Image 1---------------------------------------------------->
-    <CsFeaturedImage :data="getSingleCsFeaturedImage1" />
-    <!----------------------------------------------------------------------------------->
-
-    <!--------------- Why Customer Connect Chose Vodworks ----------------------->
-    <section v-if="FullWidthWhiteBgSection" class="lg:py-32 py-14 single-cs">
-      <div class="mx-auto container">
-        <div class="row md:max-w-4/5 mx-auto">
-          <div class="text-center">
-            <h3> {{ FullWidthWhiteBgSection.title }}</h3>
-          </div>
-          <div class="mt-8" v-html="$md.render(FullWidthWhiteBgSection.description)"></div>
-        </div>
+  <div v-if="!story" class="text-center py-20">
+    <h2 class="text-2xl font-bold">Oops! Page not found</h2>
+    <p class="mt-8">The requested content is not available.</p>
+  </div>
+  <div v-else>
+    <div v-for="(section, index) in allSections" :key="index">
+      <component :is="componentMap[section.component]" v-if="componentMap[section.component]" :data="section" />
+      <div v-else class="text-center py-12 lg:py-24">
+        <p>No component found for {{ section.component }}</p>
       </div>
-    </section>
-    <!----------------------------------------------------------------------------------->
-    <!--------------- How Vodworks Helped ----------------------------------------------->
-    <section v-if="Approach" class="single-cs lg:py-32 py-14 bgColor-normal-grey">
-      <div class="mx-auto container">
-        <div class="row md:max-w-4/5 mx-auto">
-          <div class="text-center">
-            <AnimatedHeading :data="{
-              simpleWords: null,
-              animatedWords: Approach.title,
-              isBgDark: false
-            }" />
-          </div>
-          <div class="mt-8 lg:mt-16 text-left" v-html="$md.render(Approach.description)"> </div>
-        </div>
-      </div>
-    </section>
-    <!----------------------------------------------------------------------------------->
-
-    <!---------------  Technical Stack -------------------------------------------------->
-    <CsTechStack :data="{
-      content: TechnicalStack,
-      layout: 'cols-3',
-    }" />
-    <!----------------------------------------------------------------------------------->
-
-    <!------------------------ The Team ------------------------------------------------->
-    <CsTeam :data="{
-      content: Team,
-      layout: 'center-two-ele-in-grid'
-    }" />
-    <!----------------------------------------------------------------------------------->
-    <!--------------- The Result -------------------------------------------------------->
-    <CsResult :data="Result" />
-    <!----------------------------------------------------------------------------------->
-
-    <!-------------------------------------------FAQs------------------------------------>
-    <FAQs :payload="FAQs" />
-    <!----------------------------------------------------------------------------------->
-
+    </div>
     <!------------------------------- Get in Touch with us------------------------------->
     <GetInTouchWithUs :data="{
       title: 'Get in Touch with us',
       isDarkSectionAtTop: true
     }" />
-    <!----------------------------------------------------------------------------------->
-
+    <!---------------------------------------------------------------------------------->
   </div>
 </template>
-<script>
-const loadData = function ({
-  api,
-  cacheVersion,
-  errorCallback,
-  version,
-  path,
-}) {
-  return api
-    .get(`cdn/stories${path}`, {
-      version,
-      resolve_links: 'story,url',
-      resolve_relations: 'case-studies-container.case_studies,case_studies.case-study,case-studies-container.case-study,faqs-container.list_of_faqs',
-      cv: cacheVersion,
-    })
-    .then((res) => {
-      return res.data
-    })
-    .catch((res) => {
-      if (!res.response) {
-        errorCallback({
-          statusCode: 404,
-          message: 'Failed to receive content form api',
-        })
-      } else {
-        errorCallback({
-          statusCode: res.response.status,
-          message: res.response.data,
-        })
-      }
-    })
-}
-export default {
-  asyncData(context) {
-    // Check if we are in the editing mode
-    let editMode = true
-    if (
-      context.query._storyblok ||
-      context.isDev ||
-      (typeof window !== 'undefined' &&
-        window.localStorage.getItem('_storyblok_draft_mode'))
-    ) {
-      if (typeof window !== 'undefined') {
-        window.localStorage.setItem('_storyblok_draft_mode', '1')
-        if (window.location === window.parent.location) {
-          window.localStorage.removeItem('_storyblok_draft_mode')
-        }
-      }
-      editMode = true
-    }
-    const version = editMode ? 'draft' : 'published'
-    const path = context.route.path === '/' ? '/home' : context.route.path
-    // Load the JSON from the API
-    return loadData({
-      version,
-      api: context.app.$storyapi,
-      errorCallback: context.error,
-      path,
-    })
-  },
 
+<script>
+import CsHero from '~/components/Sections/Cases/CsHero.vue'
+import CsBrief from '~/components/Sections/Cases/CsBrief.vue'
+import CsScope from '~/components/Sections/Cases/CsScope.vue'
+import CsFeaturedImage from '~/components/Sections/Cases/CsFeaturedImage.vue'
+import CsApproachWithCards from '~/components/Sections/Cases/CsApproachWithCards.vue'
+import CsFullWidthWhiteBg from '~/components/Sections/Cases/CsFullWidthWhiteBg.vue'
+import CsTechStack from '~/components/Sections/Cases/CsTechStack.vue'
+import CsTeam from '~/components/Sections/Cases/CsTeam.vue'
+import CsResult from '~/components/Sections/Cases/CsResult.vue'
+import CsFAQs from '~/components/Sections/Cases/FAQs.vue'
+
+export default {
+  async asyncData({ app, route }) {
+    try {
+      const slug = route.path === '/' ? 'home' : route.path
+      
+      const res = await app.$storyapi.get(`cdn/stories/${slug}`, {
+        version: process.env.NODE_ENV === 'development' ? 'draft' : 'published',
+        resolve_links: 'story',
+        resolve_relations:
+          'case-studies-container.case_studies,case_studies.case-study,case-studies-container.case-study,faqs-container.list_of_faqs',
+      })
+      return {
+        story: res.data.story || null,
+      }
+    } catch (err) {
+      console.warn('Storyblok error:', err?.response?.status)
+      return { story: null }
+    }
+  },
   head() {
+    if (!this.story) return { title: 'Page not found' }
     return {
-      title: `${this.story.content.title}`,
+      title: this.story.content.title || 'Case Study',
       meta: [
         {
           hid: 'description',
@@ -186,71 +96,24 @@ export default {
       ]
     }
   },
-
   computed: {
-    getSingleCsHero() {
-      return this.story.content.cs_full_details.find(function (obj) {
-        return obj.component === 'single-cs-hero';
-      })
+    allSections() {
+      return this.story?.content?.cs_full_details || []
     },
-    Brief() {
-      return this.story.content.cs_full_details.find(function (obj) {
-        return obj.component === 'cs-fw-brief';
-      })
-    },
-    Scope() {
-      return this.story.content.cs_full_details.find(function (obj) {
-        return obj.component === 'cs-scope';
-      })
-    },
-    getSingleCsFeaturedImage1() {
-      return this.story.content.cs_full_details.find(function (obj) {
-        return obj.component === 'single-cs-featured-image-1';
-      })
-    },
-    FullWidthWhiteBgSection() {
-      return this.story.content.cs_full_details.find(function (obj) {
-        return obj.component === 'single-cs-full-width-white-bg';
-      })
-    },
-    Approach() {
-      return this.story.content.cs_full_details.find(function (obj) {
-        return obj.component === 'cs-approach_with_cards';
-      })
-    },
-    TechnicalStack() {
-      return this.story.content.cs_full_details.find(function (obj) {
-        return obj.component === 'cs-technical-stack';
-      })
-    },
-    Team() {
-      return this.story.content.cs_full_details.find(function (obj) {
-        return obj.component === 'cs_team';
-      })
-    },
-    Result() {
-      return this.story.content.cs_full_details.find(function (obj) {
-        return obj.component === 'cs-result';
-      })
-    },
-    FAQs() {
-      return this.story.content.cs_full_details.find(function (obj) {
-        return obj.component === 'faqs-container';
-      })
-    },
-
-  },
-
-  mounted() {
-    this.$storybridge.on(['input', 'published', 'change'], (event) => {
-      if (event.action === 'input') {
-        if (event.story.id === this.story.id) {
-          this.story.content = event.story.content
-        }
-      } else if (!event.slugChanged) {
-        window.location.reload()
+    componentMap() {
+      return {
+        'single-cs-hero': CsHero,
+        'cs-fw-brief': CsBrief,
+        'cs-scope': CsScope,
+        'cs-fw-featured-image': CsFeaturedImage,
+        'cs-approach_with_cards': CsApproachWithCards,
+        'single-cs-full-width-white-bg': CsFullWidthWhiteBg,
+        'cs-technical-stack': CsTechStack,
+        'cs_team': CsTeam,
+        'cs-result': CsResult,
+        'faqs-container': CsFAQs,
       }
-    })
-  }
+    },
+  },
 }
 </script>
