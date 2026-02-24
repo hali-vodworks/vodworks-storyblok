@@ -63,11 +63,11 @@
         <div class="chatbot-buttons">
           <p class="mb-2" style="color: #ADB2C9;">Summarize this article with:</p>
           <a v-if="chatgptUrl" target="_blank" :href="chatgptUrl">
-            <img src="~/assets/img/icon/chatGPT-icon.svg" alt="chatGPT-icon" />
+            <img src="~/assets/img/icons/chatGPT-icon.svg" alt="chatGPT-icon" />
             ChatGPT
           </a>
           <a v-if="perplexityUrl" target="_blank" :href="perplexityUrl">
-            <img src="~/assets/img/icon/perplexity-ai-icon.svg" alt="perplexity-ai-icon" />
+            <img src="~/assets/img/icons/perplexity-ai-icon.svg" alt="perplexity-ai-icon" />
             Perplexity
           </a>
         </div>
@@ -137,7 +137,7 @@
           </div>
           <div class="blog-rightsidebar">
             <div class="wrapper">
-              <img src="~/assets/img/dev-partner.jpg" alt="img" />
+              <img src="~/assets/img/dev-partner.webp" alt="img" />
               <div class="content">
                 <h4 class="color-white">Accelerate Your Projects With Our On-Demand Developers</h4>
                 <a href="/contact/" target="_blank" rel="noopener noreferrer"

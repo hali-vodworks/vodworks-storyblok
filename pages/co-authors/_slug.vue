@@ -20,7 +20,7 @@
             </p>
             <a class="font-medium underline color-primary-red mt-4 flex gap-2" target="_blank"
               :href="getAuthoData.content.Linkedin_Url">View LinkedIn Profile <img
-                src="~assets/img/icon/external-link.svg" alt="Lnkedin-icon" /></a>
+                src="~assets/img/icons/external-link.svg" alt="Lnkedin-icon" /></a>
           </div>
         </div>
       </div>

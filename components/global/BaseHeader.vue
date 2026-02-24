@@ -40,12 +40,12 @@
               <ul>
                 <li><a class="flex items-center gap-2 underline" target="_blank"
                     href="https://www.linkedin.com/company/vodworks" rel="noopener noreferrer nofollow"><img
-                      src="~/assets/img/icon/linkedin.svg" alt="icon" /> LinkedIn <img
-                      src="~/assets/img/icon/arrow-up-right.svg" alt="icon" /></a></li>
+                      src="~/assets/img/icons/linkedin.svg" alt="icon" /> LinkedIn <img
+                      src="~/assets/img/icons/arrow-up-right.svg" alt="icon" /></a></li>
                 <li><a class="flex items-center gap-2 underline" target="_blank"
                     href="https://www.youtube.com/@vodworks" rel="noopener noreferrer nofollow"><img
-                      src="~/assets/img/icon/youtube.svg" alt="icon" /> YouTube <img
-                      src="~/assets/img/icon/arrow-up-right.svg" alt="icon" /></a></li>
+                      src="~/assets/img/icons/youtube.svg" alt="icon" /> YouTube <img
+                      src="~/assets/img/icons/arrow-up-right.svg" alt="icon" /></a></li>
               </ul>
             </div>
           </ul>
