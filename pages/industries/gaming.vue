@@ -30,7 +30,7 @@
     <!-------------------------------------------------------------------------------------------------->
 
     <!------------------------------------Featured CTA Version-1 --------------------------------------->
-    <div v-if="featuredCTAVersion1" class="bgColor-normal-grey">
+    <div v-if="featuredCTAVersion1">
       <FeaturedCTA :data="{
         title: featuredCTAVersion1.title,
         btnText: featuredCTAVersion1.btn_text,
