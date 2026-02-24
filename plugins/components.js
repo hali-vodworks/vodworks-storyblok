@@ -29,6 +29,7 @@ import IndustriesHeroSection from '~/components/Sections/IndustriesHeroSection.v
 import IndustriesSolutionCardsSection from '~/components/Sections/IndustriesSolutionCardsSection.vue'
 import ArticlesSections from '~/components/Sections/ArticlesSections.vue'
 import Web3ExpertsSection from '~/components/Sections/Web3ExpertsSection.vue'
+import FAQs from '~/components/Sections/FAQs.vue'
 import FeaturedDetailedCtaSection from '~/components/Sections/FeaturedDetailedCtaSection.vue'
 import AccordionNew from '~/components/GeneralCards/AccordionNew.vue'
 import Faq from '~/components/GeneralCards/Faq.vue'
@@ -40,6 +41,7 @@ import AnimatedHeading1 from '~/components/headings/AnimatedHeading1'
 import AnimatedHeading from '~/components/headings/AnimatedHeading'
 import AnimatedHeading3 from '~/components/headings/AnimatedHeading3'
 import AnimatedParagraph from '~/components/headings/AnimatedParagraph'
+
 
 Vue.component('WhatOurClientsSay', WhatOurClientsSay)
 Vue.component('AnimatedHeading1', AnimatedHeading1)
@@ -78,6 +80,7 @@ Vue.component('CustomSoftwareForYourBusiness', CustomSoftwareForYourBusiness)
 Vue.component('IndustriesSolutionCardsSection', IndustriesSolutionCardsSection)
 Vue.component('ArticlesSections', ArticlesSections)
 Vue.component('Web3ExpertsSection', Web3ExpertsSection)
+Vue.component('FAQs', FAQs)
 Vue.component('FeaturedDetailedCtaSection', FeaturedDetailedCtaSection)
 Vue.component('AccordionNew', AccordionNew)
 Vue.component('Faq', Faq)
