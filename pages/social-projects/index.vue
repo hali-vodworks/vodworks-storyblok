@@ -1,18 +1,24 @@
 <template>
-  <div>
+  <div v-if="!pageData || !pageData.story">
+    <div class="text-center py-20">
+      <h2 class="text-2xl font-bold">Oops! Page not found</h2>
+      <p class="mt-8">The requested content is not available.</p>
+    </div>
+  </div>
+  <div v-else>
     <!--------------------------------- HERO -------------------------------------------->
-    <PageHeroWithAnimatedTitle :data="{
-      title: 'Social ',
-      animated_word: 'Projects',
-      description: 'We strive to create a world where technology breaks down barriers and improves the lives of people while protecting our planet.'
+    <PageHeroWithAnimatedTitle v-if="heroContent.title" :data="{
+      title: heroContent.title,
+      animated_word: heroContent.animated_word,
+      description: heroContent.description
     }" />
     <!----------------------------------------------------------------------------------->
 
     <!-------------------------- Social Projects Listing -------------------------------->
-    <section v-if="getSocialProjectsData" class="lg:py-32 py-14 bgColor-normal-grey">
+    <section v-if="socialProjects" class="lg:py-32 py-14 bgColor-normal-grey">
       <div class="mx-auto container">
         <div class="mx-auto md:max-w-4/5">
-          <template v-for="(project, i) in getSocialProjectsData.stories">
+          <template v-for="(project, i) in socialProjects.social_projects">
             <div :key="i" class="default-card card-utilities hvr-effect text-left mb-4 lg:mb-10">
               <div class="grid lg:grid-cols-2 xl:grid-cols-2 gap-4 items-center lg:gap-16">
                 <div>
@@ -27,6 +33,7 @@
 
                   <!-- eslint-disable vue/no-v-html -->
                   <div class="text-card sproject-list" v-html="$md.render(project.content.features)"></div>
+
                   <div v-if="project.content.technologies.filename" class="mt-8">
                     <img :src="project.content.technologies.filename" :alt="project.content.technologies.alt" />
                   </div>
@@ -47,29 +54,37 @@
 
     <!------------------------------- Get in Touch with us------------------------------->
     <GetInTouchWithUs :data="{
-      title:'Discuss Your Social Project With Us!',
+      title: 'Discuss Your Social Project With Us!',
       isDarkSectionAtTop: false
     }" />
     <!----------------------------------------------------------------------------------->
-
   </div>
 </template>
 
 <script>
 export default {
   async asyncData(context) {
-    const [socialProjectsRes] = await Promise.all([
-      context.app.$storyapi.get(`cdn/stories/`, {
+    try {
+      const path =
+        context.route.path === '/'
+          ? 'home'
+          : context.route.path.replace(/^\/+/, '')
+      const pageDataRes = await context.app.$storyapi.get(`cdn/stories/${path}`, {
         version: 'published',
-        starts_with: 'social-projects/',
         resolve_relations: 'social-projects-container.social_projects'
-      }),
-    ])
-    return {
-      allSocialProjects: socialProjectsRes.data,
+      })
+      return {
+        pageData: pageDataRes.data,
+      }
+    }
+    catch (err) {
+      // eslint-disable-next-line no-console
+      console.error("404 happened on route:", context.route.path)
+      // eslint-disable-next-line no-console
+      console.error(err.response?.data || err)
+      return { pageData: null }
     }
   },
-
   head() {
     return {
       title: 'Social Projects in Software development | Vodworks',
@@ -94,12 +109,20 @@ export default {
       ],
     }
   },
-
   computed: {
-    getSocialProjectsData() {
-      return this.allSocialProjects
+    heroContent() {
+      // Guard against pageData not loaded yet
+      const body = this.pageData?.story?.content?.body || []
+      // Find the hero section
+      const hero = body.find(obj => obj.component === 'simple_hero_section')
+      // Return empty object if not found to avoid runtime errors
+      return hero || {}
     },
-  },
-
+    socialProjects() {
+      const body = this.pageData?.story?.content?.body || []
+      const projects = body.find(obj => obj.component === 'social-projects-container')
+      return projects || { social_projects: [] }
+    }
+  }
 }
 </script>
