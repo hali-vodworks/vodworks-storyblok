@@ -3,7 +3,7 @@
     <NuxtLink :to="`/blogs/${data.blog_post.slug}` + '/'">
         <div v-if="getFeaturedImage(data.blog_post)" class="blog-thumbnail-wrapper">
             <img :src="getFeaturedImage(data.blog_post).filename" class="scaleable-img"
-                :alt="getFeaturedImage(data.blog_post).alt" />
+                :alt="getFeaturedImage(data.blog_post).alt" loading="lazy" />
         </div>
         <div class="article-content">
 
@@ -62,8 +62,6 @@
 </template>
 
 <script>
-
-
 export default {
     name: 'BlogPostCard',
     props: {
@@ -72,12 +70,10 @@ export default {
             default: null
         }
     },
-
     methods: {
         getFeaturedImage(blog) {
             return blog.content.featured_image
         },
     }
-
 }
 </script>

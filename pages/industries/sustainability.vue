@@ -11,37 +11,37 @@
     <IndustriesHeroSection :data="industryHeroSection" />
     <!---------------------------------------------------------------------------------------------------->
 
-    <!------------------- Fintech and Compliance Industry Solutions ----------------------------------------->
-    <IndustriesSolutionCardsSection :data="{
-      industrySolutionSection,
-      gridlayout: 'three-cols'
-    }" />
-    <!---------------------------------------------------------------------------------------------------->
+    <!------------------------- Our Sustainability Software Development ---------------------------------->
+    <!--<IndustriesSolutionCardsSection :data="{
+        industrySolutionSection,
+        gridlayout: 'three-cols'
+      }" />-->
 
-    <!------------------------- Our Sustainability Software Development --------------------------------
-    <section class="lg:py-32 py-14 bgColor-normal-grey">
+    <section v-if="industrySolutionSection" class="lg:py-32 py-14 bgColor-normal-grey">
       <div class="mx-auto container">
         <div class="mx-auto w-full lg:w-4/5">
           <div class="text-center">
-            <h2>{{ SingleIndustrySolutionData.title }}</h2>
+            <AnimatedHeading :data="{
+              simpleWords: industrySolutionSection.title,
+              animatedWords: industrySolutionSection.animated_word,
+              isBgDark: false
+            }" />
           </div>
-          <div class="center-two-ele-in-grid mx-auto mt-8 lg:mt-16 gap-4">
-            <template v-for="(card, i) in SingleIndustrySolutionData.list">
-              <div :key="i" class="default-card card-utilities hvr-effect item">
-                <img class="hvr-top" :src="`${require('~/assets/img/icons/industries/' + card.icon)}`"
-                  :alt="card.alt" />
-                <h4 class="mt-4 lg:mt-8 mb-4 lg:mb-4">{{ card.title }}</h4>
-                <p class="text-card flex-grow-1">{{ card.description }}</p>
 
-                <div v-scroll-to="card.btnURL" class="btn-text mt-8 inline-block cursor-pointer">
-                  {{ card.btnText }}
-                </div>
+          <div class="center-two-ele-in-grid mx-auto mt-8 lg:mt-16 gap-4">
+            <div v-for="card in industrySolutionSection.cards" :key="card.id || card.title"
+              class="default-card card-utilities hvr-effect item">
+              <img class="hvr-top" :src="card.icon.filename" :alt="card.icon.alt" loading="lazy" />
+              <h4 class="mt-4 lg:mt-8 mb-4 lg:mb-4">{{ card.title }}</h4>
+              <p class="text-card flex-grow-1">{{ card.description }}</p>
+              <div v-scroll-to="card.cta_url" class="btn-text mt-8 inline-block cursor-pointer">
+                {{ card.cta_text }}
               </div>
-            </template>
-</div>
-</div>
-</div>
-</section>-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
     <!---------------------------------------------------------------------------------------------------->
 
     <!--------------------------------Our Success Stories------------------------------------------------->
@@ -68,25 +68,25 @@
     <!---------------------------------------------------------------------------------------------------->
 
     <!---------------------------- Our Values ------------------------------------------------------------>
-    <section class="lg:py-32 py-14 bgColor-normal-grey">
+    <section v-if="industriesCards" class="lg:py-32 py-14 bgColor-normal-grey">
       <div class="mx-auto container">
         <div class="mx-auto w-full lg:w-4/5">
           <div class="text-center">
-            <h2>{{ Our_Values.title }}</h2>
+            <h2>{{ industriesCards.title }}</h2>
           </div>
           <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 mx-auto gap-4 mt-8 lg:mt-16">
-            <template v-for="(card, i) in Our_Values.list">
-              <div :key="i" class="default-card card-utilities hvr-effect">
-                <img class="hvr-top" :src="`${require('~/assets/img/icons/industries/' + card.icon)}`"
-                  :alt="card.alt" />
+            <div v-for="(card, i) in industriesCards.cards" :key="i" >
+              <div class="default-card card-utilities hvr-effect">
+                <img class="hvr-top" :src="card.icon.filename"
+                  :alt="card.icon.alt" laoding="lazy" />
                 <h4 class="mt-4 lg:mt-8 mb-4 lg:mb-4">{{ card.title }}</h4>
                 <p class="text-card flex-grow-1">{{ card.description }}</p>
 
-                <div v-scroll-to="card.btnURL" class="btn-text mt-8 inline-block cursor-pointer">
-                  {{ card.btnText }}
+                <div v-scroll-to="card.cta_url" class="btn-text mt-8 inline-block cursor-pointer">
+                  {{ card.cta_text }}
                 </div>
               </div>
-            </template>
+            </div>
           </div>
         </div>
       </div>
@@ -158,67 +158,6 @@ export default {
     }
   },
 
-  data() {
-    return {
-      story: { content: {} },
-
-      Our_Values: {
-        title: "Our Values",
-        animated_word: "",
-        list: [
-          {
-            icon: "hand-metal.svg",
-            alt: "hand-metal icon",
-            title: "Keep it real",
-            description: "We’re all about honesty, integrity, and transparency here. No fancy talk or hidden agendas, just straight-up truthfulness in everything we do. We believe in treating others as we would like to be treated ourselves, with respect and authenticity.",
-            btnText: "Let's talk",
-            btnURL: "#GetInTouchWithUs",
-          },
-          {
-            icon: "brain.svg",
-            alt: "brain icon",
-            title: "Embrace the new",
-            description: "We’re always pushing boundaries, challenging ourselves, and exploring new ideas. We believe that innovation comes from curiosity and a willingness to learn, grow, and adapt. So, we never stop listening and learning, and we never stop striving to be better.",
-            btnText: "Let's talk",
-            btnURL: "#GetInTouchWithUs",
-          },
-          {
-            icon: "orbit.svg",
-            alt: "orbit icon",
-            title: "Tech enthusiasts at heart",
-            description: "We’re passionate about technology, and we believe it has the power to change the world. We love nothing more than getting stuck into the latest trends, exploring new tools and techniques, and helping our clients stay ahead of the game.",
-            btnText: "Let's talk",
-            btnURL: "#GetInTouchWithUs",
-          },
-          {
-            icon: "users.svg",
-            alt: "users icon",
-            title: "Teamwork makes the dream work",
-            description: "We’re a diverse and inclusive bunch, spread across departments, countries, and cultures. But no matter where we are or what we do, we’re united by a common goal: to support each other and work together to achieve great things.",
-            btnText: "Let's talk",
-            btnURL: "#GetInTouchWithUs",
-          },
-          {
-            icon: "smile-plus.svg",
-            alt: "smile-plus icon",
-            title: "Come together as a community",
-            description: "We believe people are the backbone of any great community. We take our commitment to our communities very seriously, both inside and outside of our company, and we do whatever we can to support our communities.",
-            btnText: "Let's talk",
-            btnURL: "#GetInTouchWithUs",
-          },
-          {
-            icon: "heart-handshake.svg",
-            alt: "heart-handshake icon",
-            title: "Customers first, always",
-            description: "We’re customer-focused to our core, and we believe the delivering quality work and building strong relationships is key to success. We never lose sight of our clients’ needs and priorities, and we’re always looking for ways to exceed their expectations and earn their trust.",
-            btnText: "Let's talk",
-            btnURL: "#GetInTouchWithUs",
-          }
-        ]
-      },
-    }
-  },
-
   head() {
     return {
       title: 'Sustainability Software Development Solutions | Vodworks',
@@ -268,7 +207,11 @@ export default {
         return obj.component === 'featured_CTA_version_1';
       })
     },
-    // --- Our Values----
+    industriesCards() {
+      return this.pageData.story.content.body.find(function (obj) {
+        return obj.component === 'industries_cards_section';
+      })
+    },
     FAQs() {
       return this.pageData.story.content.body.find(obj => obj.component === 'faqs-container');
     },

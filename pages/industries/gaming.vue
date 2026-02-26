@@ -54,27 +54,18 @@
     <!---------------------------------------------------------------------------------------------------->
 
     <!---------------Why Vodworks as your Gaming Development Partner? ------------------------------------>
-    <section class="lg:py-32 py-14 bgColor-tertiary-black">
+    <section v-if="featuredDetails" class="lg:py-32 py-14 bgColor-tertiary-black">
       <div class="mx-auto container">
         <div class="text-center mx-auto md:max-w-3/5 ">
-          <h2 class="color-white">Why Vodworks as your Gaming Development Partner?</h2>
+          <h2 class="color-white">{{ featuredDetails.title }}</h2>
         </div>
         <div class="grid lg:grid-cols-2 xl:grid-cols-2 items-center mx-auto gap-8 lg:gap-16 mt-8 lg:mt-16">
-          <div>
-            <p class="mb-4 lg:mb-6 text-big color-white">Our comprehensive set of software solutions for gaming,
-              combined
-              with our commitment to driving innovation and delivering value to our clients, makes Vodworks your
-              ultimate
-              gaming development partner.
-            </p>
-            <p class="text-big color-white">
-              Our comprehensive set of software solutions for gaming, combined with our commitment to driving innovation
-              and delivering value to our clients, makes Vodworks your ultimate gaming development partner.
-            </p>
-          </div>
+          <div class="mb-4 lg:mb-6 text-big color-white"
+            v-html="$storyapi.richTextResolver.render(featuredDetails.description)"></div>
           <div>
             <div class="zoom-in overflow-hidden">
-              <img class="w-full" src="~/assets/img/IMG_9662_2.jpg" alt="Development Partner" />
+              <img class="w-full" :src="featuredDetails.image.filename" :alt="featuredDetails.image.alt"
+                loading="lazy" />
             </div>
           </div>
         </div>
@@ -210,13 +201,15 @@ export default {
       return this.pageData.story.content.body.find(function (obj) {
         return obj.component === 'featured_CTA_version_1';
       })
-    },    
+    },
     getBlogData() {
       return this.allArticles
     },
-
-    // Why Vodworks as your Gaming Development Partner
-
+    featuredDetails() {
+      return this.pageData.story.content.body.find(function (obj) {
+        return obj.component === 'industries_featured_details_section';
+      })
+    },
     FAQs() {
       return this.pageData.story.content.body.find(obj => obj.component === 'faqs-container');
     },
