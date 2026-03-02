@@ -15,7 +15,7 @@
             </div>
           </div>
           <div class="order-1 lg:order-2">
-            <img class="w-full" :src="`${require('~/assets/img/' + hero.image)}`" :alt="hero.alt" />
+            <img class="w-full" :src="`${require('~/assets/img/' + hero.image)}`" loading="lazy" :alt="hero.alt" />
           </div>
         </div>
       </div>
@@ -29,14 +29,15 @@
           <template v-for="(card, i) in statistics.list">
             <div :key="card.id" class="stats-card relative" :class="i == 3 ? 'last-item' : ''">
               <!-- <img :src="resolveImage('/img/icons/'+card.icon)" :alt="card.alt" /> -->
-              <img class="hvr-top" :src="`${require('~/assets/img/icons/' + card.icon)}`" :alt="card.alt" />
+              <img class="hvr-top" :src="`${require('~/assets/img/icons/' + card.icon)}`" loading="lazy"
+                :alt="card.alt" />
               <div>
                 <h3>{{ card.count }}</h3>
                 <p class="color-white text-regular">{{ card.title }}</p>
               </div>
             </div>
             <img :key="i" class="v-line-border" :class="i == 3 ? 'hidden' : ''" src="~assets/img/v-line.svg"
-              alt="line-image" />
+              loading="lazy" alt="line-image" />
           </template>
         </div>
       </div>
@@ -57,9 +58,7 @@
           </p>
         </div>
         <div class="center-two-ele-in-grid mx-auto mt-8 lg:mt-16 gap-4">
-          <template v-for="(card, i) in getServicesData.services">
-            <ServiceCard :key="i" :data="card" />
-          </template>
+          <ServiceCard v-for="(card, i) in getServicesData.services" :key="i" :data="card" />
         </div>
       </div>
     </section>
@@ -102,7 +101,7 @@
     <BenefitsOfChoosingVodworks :data="{
       isDarkMode: true
     }
-    " />
+      " />
     <!----------------------------------------------------------------------------------->
 
     <!--------------------------- Meet Our Team --------------------------->

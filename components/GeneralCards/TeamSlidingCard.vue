@@ -2,7 +2,7 @@
 <template>
     <div class="card-utilities hvr-effect team-card">
         <div class="team-avatar-wrapper">
-            <img class="lazyload" :src="data.content.Avatar.filename" :alt="data.content.Avatar.alt" />
+            <img class="lazyload" :src="data.content.Avatar.filename" loading="lazy" :alt="data.content.Avatar.alt" />
         </div>
         <div class="flex items-center gap-4 p-4 justify-between">
             <div>
@@ -11,7 +11,6 @@
                     {{ data.content.Designation }}</p>
             </div>
         </div>
-
         <div class="team-content-overlay">
             <div class="px-4 py-8 text-center v-center">
                 <span class="bgColor-primary-red"></span>
@@ -19,21 +18,16 @@
                     <h4 class="color-primary-black">{{ data.content.Name }}</h4>
                     <p class="color-main-grey font-medium text-small leading-5">{{ data.content.Designation }}
                     </p>
-
                 </div>
-                <p class="text-card color-primary-black line-clamp-9    ">{{ data.content.short_intro }}</p>
+                <p class="text-card color-primary-black line-clamp-9">{{ data.content.short_intro }}</p>
                 <a class="inline-block mt-4" target="_blank" :href="data.content.Linkedin_Url">
-                    <img class="lazyload" src="~/assets/img/icons/Linkedin-icon.svg" alt="Lnkedin-icon" />
+                    <img class="lazyload" src="~/assets/img/icons/Linkedin-icon.svg" loading="lazy" alt="Lnkedin-icon" />
                 </a>
-
             </div>
         </div>
     </div>
 </template>
-
 <script>
-
-
 export default {
     name: 'TeamSlidingCard',
     props: {
@@ -42,8 +36,5 @@ export default {
             default: null
         }
     }
-
-
-
 }
 </script>

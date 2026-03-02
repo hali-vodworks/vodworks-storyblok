@@ -13,22 +13,19 @@
                 </p>
             </div>
             <div class="grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 mx-auto gap-4 mt-8 lg:mt-16">
-                <template v-for="(card, i) in custom_software_for_your_business.list">
-                    <div :key="i" class="default-card card-utilities hvr-effect business-card">
-                        <img class="card-icon hvr-top lazyload" :src="`${require('~/assets/img/icons/' + card.icon)}`"
-                            :alt="card.alt" />
-                        <h3 class="mt-4 lg:mt-8 mb-4 lg:mb-4">{{ card.title }}</h3>
-                        <p class="text-card">{{ card.description }}</p>
-                        <ul class="mt-4 md:mt-8 flex-grow-1 text-card">
-                            <template v-for="(item, index) in card.market_prospects">
-                                <li :key="index">{{ item.title }} </li>
-                            </template>
-                        </ul>
-                        <NuxtLink :to="card.btnURL" class="btn-text mt-8 inline-block">
-                            Read More
-                        </NuxtLink>
-                    </div>
-                </template>
+                <div v-for="(card, i) in custom_software_for_your_business.list" :key="i"
+                    class="default-card card-utilities hvr-effect business-card">
+                    <img class="card-icon hvr-top lazyload" :src="`${require('~/assets/img/icons/' + card.icon)}`"
+                        loading="lazy" :alt="card.alt" />
+                    <h3 class="mt-4 lg:mt-8 mb-4 lg:mb-4">{{ card.title }}</h3>
+                    <p class="text-card">{{ card.description }}</p>
+                    <ul class="mt-4 md:mt-8 flex-grow-1 text-card">
+                        <li v-for="(item, index) in card.market_prospects" :key="index">{{ item.title }} </li>
+                    </ul>
+                    <NuxtLink :to="card.btnURL" class="btn-text mt-8 inline-block">
+                        Read More
+                    </NuxtLink>
+                </div>
             </div>
         </div>
     </section>
