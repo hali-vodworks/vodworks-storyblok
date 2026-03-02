@@ -3,7 +3,6 @@
   <head {{ HEAD_ATTRS }}>
     {{ HEAD }}
     <meta name="google-site-verification" content="UrUQg3bQHXiEJqH-ia7FY_1tKZ090I6ytLR2EYB-p5w"/>
-
     <!-- Google Tag Manager -->
     <script>
       (function (w, d, s, l, i) {
@@ -21,9 +20,8 @@
           .insertBefore(j, f);
       })(window, document, 'script', 'dataLayer', 'GTM-KP3SXBDM');
     </script>
-    <!-- End Google Tag Manager -->
-    <!-- Google Analytics -->
-    <script src="https://www.googletagmanager.com/gtag/js?id={{ process.env.NUXT_ENV_GOOGLE_ANALYTICS_KEY }}"></script>
+    <!-- Google Analytics (async) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ process.env.NUXT_ENV_GOOGLE_ANALYTICS_KEY }}"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag() {
@@ -32,66 +30,52 @@
       gtag('js', new Date());
       gtag('config', '{{ process.env.NUXT_ENV_GOOGLE_ANALYTICS_KEY }}');
     </script>
-    <!-- End Google Analytics -->
-
-    <!-- leafLeader tracking code -->
-    <script>
-      (function (ss, ex) {
-        window.ldfdr = window.ldfdr || function () {
-          (ldfdr._q = ldfdr._q || []).push([].slice.call(arguments));
-        };
-        (function (d, s) {
-          fs = d.getElementsByTagName(s)[0];
-          function ce(src) {
-            var cs = d.createElement(s);
-            cs.src = src;
-            cs.async = 1;
-            fs
-              .parentNode
-              .insertBefore(cs, fs);
-          };
-          ce('https://sc.lfeeder.com/lftracker_v1_' + ss + (
-            ex
-            ? '_' + ex
-            : '') + '.js');
-        })(document, 'script');
-      })('p1e024BQg97GB6dz');
-    </script>
-
-    <!-- Leadinfo tracking code -->
-    <script>
-      (function (l, e, a, d, i, n, f, o) {
-        if (!l[i]) {
-          l.GlobalLeadinfoNamespace = l.GlobalLeadinfoNamespace || [];
-          l
-            .GlobalLeadinfoNamespace
-            .push(i);
-          l[i] = function () {
-            (l[i].q = l[i].q || []).push(arguments)
-          };
-          l[i].t = l[i].t || n;
-          l[i].q = l[i].q || [];
-          o = e.createElement(a);
-          f = e.getElementsByTagName(a)[0];
-          o.async = 1;
-          o.src = d;
-          f
-            .parentNode
-            .insertBefore(o, f);
-        }
-      }(window, document, 'script', 'https://cdn.leadinfo.net/ping.js', 'leadinfo', 'LI-643D208B99046'));
-    </script>
-
   </head>
   <body {{ BODY_ATTRS }}>
-
-    <!-- Google Tag Manager -->
+    <!-- Google Tag Manager (noscript fallback) -->
     <noscript>
-      <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KP3SXBDM" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+      <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KP3SXBDM"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe>
     </noscript>
-    <!-- End Google Tag Manager -->
-
+    <!-- End GTM noscript -->
     {{ APP }}
+    <!-- LeafLeader tracking (deferred) -->
+    <script>
+      window.addEventListener('load', function() {
+        (function(ss, ex) {
+          window.ldfdr = window.ldfdr || function() { (ldfdr._q = ldfdr._q || []).push([].slice.call(arguments)); };
+          (function(d,s){
+            var fs = d.getElementsByTagName(s)[0];
+            function ce(src){
+              var cs = d.createElement(s);
+              cs.src = src;
+              cs.async = 1;
+              fs.parentNode.insertBefore(cs,fs);
+            }
+            ce('https://sc.lfeeder.com/lftracker_v1_'+ss+(ex? '_' + ex:'')+'.js');
+          })(document,'script');
+        })('p1e024BQg97GB6dz');
+      });
+    </script>
+    <!-- Leadinfo tracking (deferred) -->
+    <script>
+      window.addEventListener('load', function() {
+        (function(l,e,a,d,i,n,f,o){
+          if(!l[i]){
+            l.GlobalLeadinfoNamespace=l.GlobalLeadinfoNamespace||[];
+            l.GlobalLeadinfoNamespace.push(i);
+            l[i]=function(){(l[i].q=l[i].q||[]).push(arguments);};
+            l[i].t=l[i].t||n;
+            l[i].q=l[i].q||[];
+            o=e.createElement(a);
+            f=e.getElementsByTagName(a)[0];
+            o.async=1;
+            o.src=d;
+            f.parentNode.insertBefore(o,f);
+          }
+        })(window,document,'script','https://cdn.leadinfo.net/ping.js','leadinfo','LI-643D208B99046');
+      });
+    </script>
 
   </body>
 </html>
