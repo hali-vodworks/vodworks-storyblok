@@ -104,38 +104,42 @@ export default {
 
     script: [
       {
-        json: {
-            "@context": "https://schema.org/",
-            "@type": "WebSite",
-            "name": "vodworks.com",
-            "url": "https://vodworks.com/",
-            "sameAs": [
-              "https://www.facebook.com/vodworks/",
-              "https://www.linkedin.com/company/vodworks",
-              "https://x.com/vodworksit"
-            ],
-            "description": "Experience End-to-end software and product engineering services with Vodworks: Software Development, POCs, Augmented Teams, DevOps and much more",
-            "image": {
-              "@type": "ImageObject",
-              "url": "https://vodworks.com/_nuxt/img/vw-logo.bda932c.svg"
-            },
-            "alternateName": "Vodworks"
-        },
-        type: 'application/ld+json'
-      },
-      {
+        type: 'application/ld+json',
+        hid: 'organization-schema',
         json: {
           "@context": "https://schema.org/",
           "@type": "Organization",
+          "name": "Vodworks",
+          "alternateName": "vodworks.com",
+          "legalName": "VODWORK PS LIMITED",
           "url": "https://vodworks.com/",
-          "logo": {
+          "logo":{
             "@type": "ImageObject",
             "url": "https://vodworks.com/_nuxt/img/vw-logo.bda932c.svg"
-          }
-        },
-        type: 'application/ld+json'
+          },
+          "description": "Vodworks is a global software development firm providing end-to-end engineering solutions. The company facilitates the creation of custom software products and the provision of managed engineering teams to drive enterprise-level innovation.",
+          "foundingDate": "2012-02-07",
+          "email": "hello@vodworks.com",
+          "telephone": "+44 (0) 84 3289 7925",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Preston House 1 Carlton Parade, Preston Road",
+            "addressLocality": "London",
+            "postalCode": "HA9 8NE",
+            "addressCountry": "UK"
+          },
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+44 (0) 84 3289 7925",
+            "email": "hello@vodworks.com"
+          },
+          "sameAs": [
+              "https://www.linkedin.com/company/vodworks",
+              "https://www.facebook.com/vodworks/",
+              "https://x.com/vodworksit"
+            ]
+        }
       },
-      
       // Hubspot CTA Tracking Code
       {
         src: "https://js.hs-scripts.com/1873794.js",
@@ -143,7 +147,7 @@ export default {
         defer: true,
         id: "hs-script-loader"
       }
-    ]
+    ],
   },
 
   css: [
