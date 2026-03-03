@@ -25,9 +25,16 @@
             <div class="grid lg:grid-cols-3 xl:grid-cols-3 gap-4 lg:gap-8">
               <template v-for="(blog, index) in getBlogData">
                 <!-- v-if="currentFilter === 'All' || blog.content.categories.some(cat => cat.content?.name === currentFilter)" -->
-                <article 
-                  v-if="currentFilter === blog.content.categories[0].name || currentFilter === 'All'"
-                  :key="index" class="zoom-in overflow-hidden cursor-pointer mb-8 lazyload">
+                <article
+                    v-if="
+                      currentFilter === 'All' ||
+                      (blog.content.categories &&
+                      blog.content.categories.length &&
+                      blog.content.categories.some(cat => cat.name === currentFilter))
+                    "
+                    :key="index"
+                    class="zoom-in overflow-hidden cursor-pointer mb-8 lazyload"
+                  >
                   <BlogPostCard :data="{
                     blog_post: blog
                   }" />
