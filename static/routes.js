@@ -164,6 +164,10 @@ export default {
             {
                 name: "Contact Us",
                 path: "/contact/",
+            },
+            {
+                name: "Privacy Policy",
+                path: "/privacy-policy/"
             }
         ]
     },
