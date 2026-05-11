@@ -24,6 +24,20 @@
             padding-left: calc(100% - 88%) !important;
         }
     }
+    header.container {
+        width: 96%;
+    }
+    .header {
+        .header-btn {
+            display: none;
+        }
+        ul {
+            margin-left: auto;
+            li a {
+                margin: 0 4px;
+            }
+        }
+    }
 }
 
 
@@ -374,8 +388,10 @@
             }
         }
     }
-    
 
+    .mobileNavigation > ul > li:last-child a {
+        margin-left: 14px;
+    }
 }
 
 /* ------------------------- md ------------------------- */

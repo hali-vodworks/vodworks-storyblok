@@ -1,21 +1,25 @@
 <template>
   <div class="header bgColor-light-grey py-4 md:py-2">
-    <header class="flex flex-row items-center justify-between mx-auto container">
+    <header class="flex flex-row items-center mx-auto container">
       <!-- logo -->
       <NuxtLink to="/" class="lg:justify-self-end mr-5 cursor-pointer" active-class="bg-transparent">
         <img class="logo-img" src="~/assets/img/vw-logo.svg" alt="Vodworks Logo" loading="lazy" />
       </NuxtLink>
 
       <!-- Main Navigation bar -->
-      <ul class="hidden md:inline-block">
+      <ul class="hidden lg:inline-block">
         <li v-for="(item, index) in Navigations.navigationItems" :key="index" class="relative color-primary-black"
           :class="item.list ? 'dropdown-parent hasDropdown' : ''">
-          <NuxtLink :to="item.path" class="flex gap-2 items-center">
+          <NuxtLink :to="item.path" :target="item.newTab ? '_blank' : null"
+            :rel="item.newTab ? 'noopener noreferrer' : null" class="flex gap-1 items-center">
+            <span v-if="item.isNew" class="logo-dot"></span>
             {{ item.name }}
             <div v-if="item.list">
               <TiltedArrow />
             </div>
+            <span v-if="item.isNew" class="rounded">NEW</span>
           </NuxtLink>
+
           <ul v-if="item.list" class="dropdown bgColor-light-grey gap-8 p-4" :class="{
             'mega-menu': item.isMegaMenu,
             'has-social-media': item.path === '/blogs/'
@@ -48,26 +52,32 @@
       </ul>
 
       <!-- button -->
-      <NuxtLink to="/contact/" class="btn-primary btn-md hidden lg:inline-block invisible md:visible">
-        Get in touch
-      </NuxtLink>
+      <div class="header-btn hidden lg:inline-block invisible lg:visible">
+        <NuxtLink to="/contact/" class="btn-primary btn-md">
+          Get in touch
+        </NuxtLink>
+      </div>
+
       <!-- icon menu -->
       <img v-show="!showMenu" src="~/assets/img/icons/Burger.svg"
-        class="self-center justify-self-end md:hidden cursor-pointer hamburger" alt="hamburger icon" loading="lazy"
+        class="self-center justify-self-end lg:hidden cursor-pointer hamburger ml-auto" alt="hamburger icon" loading="lazy"
         @click="showMenu = true" />
-      <div v-show="showMenu" class="self-center justify-self-end md:hidden cursor-pointer" @click="showMenu = false">
+      <div v-show="showMenu" class="self-center justify-self-end lg:hidden cursor-pointer ml-auto" @click="showMenu = false">
         <img class="cross-icon" src="~/assets/img/icons/x.svg" alt="cross icon" loading="lazy" />
       </div>
     </header>
 
     <!-- Mobile Navigation -->
     <div class="mobileNavigation">
-      <ul v-show="showMenu" class="text-h-font md:hidden flex flex-col items-start px-8 py-8 gap-2">
+      <ul v-show="showMenu" class="text-h-font lg:hidden flex flex-col items-start px-8 py-8 gap-2">
         <li v-for="(item, index) in Navigations.navigationItems" :key="index" class="relative dropdown-parent w-full">
           <!-- Parent Row -->
           <div class="flex items-center justify-between" :class="{ isActive: activeMobileDropdown === index }">
-            <NuxtLink :to="item.mobilePath || item.path" @click.native="showMenu = false">
-              {{ item.name }}
+            <NuxtLink :to="item.mobilePath || item.path" :target="item.newTab ? '_blank' : null"
+              @click.native="showMenu = false">
+              <span v-if="item.isNew" class="logo-dot"></span>
+              {{ item.name }} <span v-if="item.isNew"
+                class="rounded">NEW</span>
             </NuxtLink>
             <!-- Arrow -->
             <TiltedArrow v-if="item.hasDropDown" @click.native.stop="toggleMobileDropdown(index)" />

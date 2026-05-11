@@ -1,7 +1,4 @@
 /* ------------------- Header Css ------------------- */
-// header li:last-child ul li:last-child {
-//   display: none;
-// }
 .header {
   position: sticky;
   top: 0;
@@ -10,9 +7,10 @@
     display: inline-block;
 
     a {
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 700;
-      padding: 20px 16px;
+      padding: 20px 0;
+      margin: 0 14px;
       svg {
         -webkit-transition: all 0.3s ease;
         -moz-transition: all 0.3s ease;
@@ -42,6 +40,43 @@
     }
   }
 }
+header > ul > li:last-child a, .mobileNavigation >ul> li:last-child a {
+    font-weight: 400;
+    margin-left: 80px;
+    font-family: "Instrument Serif", sans-serif !important;
+    font-size: 18px;
+    letter-spacing: 0.3px;
+  span {
+    font-size: 10px;
+    padding: 1px 4px;
+    background-color: var(--bgColor_shipyard);
+    color: var(--color_white);
+  }
+  &:hover{
+    color: var(--bgColor_shipyard);
+  }
+}
+header > ul > li:last-child::after {
+  content: "";
+  position: absolute;
+  left: 32px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2px;
+  height: 40%;
+  background-color: var(--bgColor_intense_grey);
+
+}
+header .header-btn {
+  margin-left: auto;
+}
+header .logo-dot, .mobileNavigation .logo-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--bgColor_shipyard);
+  border-radius: 50%;
+  display: inline-block;
+}
 .dropdown {
   position: absolute;
   width: -moz-max-content;
@@ -53,6 +88,7 @@
     display: block;
     a {
       padding: 6px 16px !important;
+      margin: 0;
     }
   }
 }

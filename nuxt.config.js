@@ -3,22 +3,17 @@ import axios from "axios"
 async function fetchStories(token, version, startsWith, page = 1, perPage = 25) {
   const spaceRes = await axios.get(`https://api.storyblok.com/v2/cdn/spaces/me?token=${token}`);
   const cacheVersion = spaceRes.data.space.version;
-
   const stories = [];
   let hasMore = true;
-
   while (hasMore) {
     const res = await axios.get(
       `https://api.storyblok.com/v2/cdn/stories?cv=${cacheVersion}&token=${token}&version=${version}&starts_with=${startsWith}&page=${page}&per_page=${perPage}`
     );
-
     stories.push(...res.data.stories);
-
     // Check if there are more stories
     hasMore = res.data.stories.length === perPage;
     page++;
   }
-
   return stories.map(blog => '/blogs/' + blog.slug);
 }
 

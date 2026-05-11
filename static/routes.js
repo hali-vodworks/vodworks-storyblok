@@ -145,7 +145,15 @@ export default {
                     path: "/careers/",
                 }
             ]
-        }
+        },
+        {
+            name: "Shipyard",
+            isNew: true,
+            path: "/shipyard/",
+            mobilePath: "/shipyard/",
+            hasDropDown: false,
+            newTab: true
+        },
     ],
     quick_links: {
         list: [

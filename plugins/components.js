@@ -42,6 +42,29 @@ import AnimatedHeading from '~/components/headings/AnimatedHeading'
 import AnimatedHeading3 from '~/components/headings/AnimatedHeading3'
 import AnimatedParagraph from '~/components/headings/AnimatedParagraph'
 
+import CtaBand from '~/components/shipyard/CtaBand.vue'
+import FaqSection from '~/components/shipyard/FaqSection.vue'
+import HeroSection from '~/components/shipyard/HeroSection.vue'
+import HowItWorks from '~/components/shipyard/HowItWorks.vue'
+import LeadForm from '~/components/shipyard/LeadForm.vue'
+import PersonasSection from '~/components/shipyard/PersonasSection.vue'
+import PricingSection from '~/components/shipyard/PricingSection.vue'
+import TestimonialsSection from '~/components/shipyard/TestimonialsSection.vue'
+import ToolsStripSection from '~/components/shipyard/ToolsStripSection.vue'
+import VodworksSection from '~/components/shipyard/VodworksSection.vue'
+import SecuritySection from '~/components/shipyard/SecuritySection.vue'
+
+Vue.component('CtaBand', CtaBand)
+Vue.component('FaqSection', FaqSection)
+Vue.component('HeroSection', HeroSection)
+Vue.component('HowItWorks', HowItWorks)
+Vue.component('LeadForm', LeadForm)
+Vue.component('PersonasSection', PersonasSection)
+Vue.component('PricingSection', PricingSection)
+Vue.component('TestimonialsSection', TestimonialsSection)
+Vue.component('ToolsStripSection', ToolsStripSection)
+Vue.component('VodworksSection', VodworksSection)
+Vue.component('SecuritySection', SecuritySection)
 
 Vue.component('WhatOurClientsSay', WhatOurClientsSay)
 Vue.component('AnimatedHeading1', AnimatedHeading1)
