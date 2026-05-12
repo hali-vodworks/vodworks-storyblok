@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import ogImage from '~/static/preview.jpg';
+import ogImage from '~/static/shipyerd-og-image.png';
 
 import HeroSection from '~/components/shipyard/HeroSection.vue'
 import ToolsStripSection from '~/components/shipyard/ToolsStripSection.vue'
