@@ -9,7 +9,8 @@
                         isBgDark: true
                     }" />
                 </div>
-                <ul class=" lg:pt-16 grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 mx-auto gap-4">
+                <div v-if="data.description" class="color-white" v-html="$md.render(data.description)"></div>
+                <ul v-if="data.cards && data.cards.length" class=" lg:pt-16 grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 mx-auto gap-4">
                     <template v-for="card, i in data.cards">
                         <li :key="i">
                             <h4 class="color-primary-red">{{ card.title }}</h4>
