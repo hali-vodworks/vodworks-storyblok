@@ -37,6 +37,12 @@ import GetInTouchWithUs from '~/components/Sections/GetInTouchWithUs.vue'
 import FeaturedCards3sInRow from '~/components/Sections/FeaturedCards3sInRow.vue'
 import ToolsAndTechs from '~/components/Sections/ToolsAndTechs.vue'
 import SubscribeToOurBlog from '~/components/Sections/SubscribeToOurBlog.vue'
+import AboutAuthor from '~/components/Sections/Blog/AboutAuthor.vue'
+import AuthorCard from '~/components/Sections/Blog/AuthorCard.vue'
+import BlogCTA from '~/components/Sections/Blog/BlogCTA.vue'
+import ChatButton from '~/components/Sections/Blog/ChatButton.vue'
+import FAQSection from '~/components/Sections/Blog/FAQSection.vue'
+import RightSidebar from '~/components/Sections/Blog/RightSidebar.vue'
 import AnimatedHeading1 from '~/components/headings/AnimatedHeading1'
 import AnimatedHeading from '~/components/headings/AnimatedHeading'
 import AnimatedHeading3 from '~/components/headings/AnimatedHeading3'
@@ -66,6 +72,13 @@ Vue.component('ToolsStripSection', ToolsStripSection)
 Vue.component('VodworksSection', VodworksSection)
 Vue.component('SecuritySection', SecuritySection)
 
+
+Vue.component('AboutAuthor', AboutAuthor)
+Vue.component('AuthorCard', AuthorCard)
+Vue.component('BlogCTA', BlogCTA)
+Vue.component('ChatButton', ChatButton)
+Vue.component('FAQSection', FAQSection)
+Vue.component('RightSidebar', RightSidebar)
 Vue.component('WhatOurClientsSay', WhatOurClientsSay)
 Vue.component('AnimatedHeading1', AnimatedHeading1)
 Vue.component('AnimatedHeading', AnimatedHeading)
