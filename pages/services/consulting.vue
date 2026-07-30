@@ -18,9 +18,8 @@
         </div>
         <div class="text-center mx-auto md:max-w-4/5 mt-8 lg:mt-16">
           <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 mx-auto gap-2 md:gap-4 lg:gap-6">
-            <template v-for="(card, i) in getConsultingServiceData.service_consulting_details">
-              <ServiceCtaCard :key="i" :data="card" />
-            </template>
+            <ServiceCtaCard v-for="card in getConsultingServiceData.service_consulting_details" :key="card._uid"
+              :data="card" />
           </div>
         </div>
 
@@ -37,11 +36,9 @@
             animatedWords: getConsultingServiceData.animated_word,
             isBgDark: false
           }" />
-          <div class="mx-auto md:max-w-4/5  mt-4 lg:mt-12">
-            <template v-for="(card, i) in getConsultingServiceData.service_consulting_details">
-              <ServiceLargeCard :key="i" :data="card" :button="{ text: `Let's Talk`, btnURL: 'isStatic' }" />
-            </template>
-
+          <div class="mx-auto md:max-w-4/5 mt-4 lg:mt-12">
+            <ServiceLargeCard v-for="card in getConsultingServiceData.service_consulting_details" :key="card._uid"
+              :data="card" :button="{ text: `Let's Talk`, btnURL: 'isStatic' }" />
           </div>
         </div>
       </div>
@@ -57,23 +54,20 @@
         </div>
         <div class="mt-8 lg:mt-16 color-white">
           <div class="consulting_timeline grid md:grid-cols-1 lg:grid-cols-3 xl:grid-cols-3 mx-auto gap-4">
-            <template v-for="(approach, i) in consulting_approach.approaches">
-              <div :key="i" class="approach_wrapper">
-                <div class="approach_heading">
-                  <img :src="`${require('~/assets/img/icons/' + approach.icon)}`" alt="icon" />
-                  <h3 class="mt-0 lg:mt-2 line-clamp-1">{{ approach.title }}</h3>
-                </div>
-                <div class="steps_wrapper">
-                  <template v-for="(step, index) in approach.steps">
-                    <div :key="index" class="approach_step hvr-top">
-                      <span>{{ step.count }}</span>
-                      <h6 class="color-pink">{{ step.title }}</h6>
-                      <p class="text-xsmall mt-2">{{ step.description }}</p>
-                    </div>
-                  </template>
+            <div v-for="approach in consulting_approach.approaches" :key="approach._uid" class="approach_wrapper">
+              <div class="approach_heading">
+                <img :src="`${require('~/assets/img/icons/' + approach.icon)}`" alt="icon" />
+                <h3 class="mt-0 lg:mt-2 line-clamp-1">{{ approach.title }}</h3>
+              </div>
+
+              <div class="steps_wrapper">
+                <div v-for="step in approach.steps" :key="step._uid" class="approach_step hvr-top">
+                  <span>{{ step.count }}</span>
+                  <h6 class="color-pink">{{ step.title }}</h6>
+                  <p class="text-xsmall mt-2">{{ step.description }}</p>
                 </div>
               </div>
-            </template>
+            </div>
           </div>
         </div>
       </div>
@@ -261,8 +255,8 @@ export default {
           hid: 't-type',
           name: 'twitter:card',
           content: `${this.getConsultingServiceData.service_consulting_details[0].content.thumbnail.filename}`,
-        },
-      ],
+        }
+      ]
     }
   },
 
@@ -278,7 +272,7 @@ export default {
 
     getTeamsData() {
       return this.ConsultingTeam
-    },
-  },
+    }
+  }
 }
 </script>

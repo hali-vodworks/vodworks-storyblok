@@ -15,9 +15,8 @@
         </div>
         <div class="text-center mx-auto md:max-w-4/5 mt-8 lg:mt-16">
           <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 mx-auto gap-2 md:gap-4 lg:gap-6">
-            <template v-for="(card, i) in getEngineeringServiceData.service_engineering_details">
-              <ServiceCtaCard :key="i" :data="card" />
-            </template>
+            <ServiceCtaCard v-for="card in getEngineeringServiceData.service_engineering_details" :key="card._uid"
+              :data="card" />
           </div>
         </div>
       </div>
@@ -33,12 +32,10 @@
             animatedWords: getEngineeringServiceData.animated_word,
             isBgDark: false
           }" />
-          <div class="mx-auto md:max-w-4/5  mt-4 lg:mt-12">
-            <template v-for="(card, i) in getEngineeringServiceData.service_engineering_details">
-              <ServiceLargeCard :key="i" :data="card" :button="{ text: `Start a conversation`, btnURL: 'isStatic' }" />
-            </template>
+          <div class="mx-auto md:max-w-4/5 mt-4 lg:mt-12">
+            <ServiceLargeCard v-for="card in getEngineeringServiceData.service_engineering_details" :key="card._uid"
+              :data="card" :button="{ text: 'Start a conversation', btnURL: 'isStatic' }" />
           </div>
-
         </div>
       </div>
     </section>
@@ -102,6 +99,8 @@ export default {
       context.app.$storyapi.get('cdn/stories/', {
         version: 'published',
         starts_with: 'cases/',
+        per_page: 3,
+        sort_by: 'first_published_at:desc',
         resolve_relations: 'case-studies-container.case_studies',
       }),
     ])
@@ -158,8 +157,8 @@ export default {
           hid: 't-type',
           name: 'twitter:card',
           content: `${this.getEngineeringServiceData.service_engineering_details[0].content.thumbnail.filename}`,
-        },
-      ],
+        }
+      ]
     }
   },
 
@@ -176,7 +175,7 @@ export default {
       return this.pageData.story.content.Services_Detailed_Content.find(function (obj) {
         return obj.component === 'industries-container';
       })
-    },
-  },
+    }
+  }
 }
 </script>

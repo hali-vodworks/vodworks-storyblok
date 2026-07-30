@@ -14,8 +14,8 @@
             Discuss your project
           </div>
         </div>
-        <div class="text-center mx-auto mt-8 lg:mt-16">
-          <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-5 xl:grid-cols-5 mx-auto gap-2 md:gap-4 lg:gap-6">
+        <div class="text-center mx-auto md:max-w-4/5 mt-8 lg:mt-16">
+          <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 mx-auto gap-2 md:gap-4 lg:gap-6">
             <template v-for="(card, i) in getServicesData.services">
               <ServiceCtaCard :key="i" :data="card" />
             </template>
@@ -106,6 +106,8 @@ export default {
       context.app.$storyapi.get('cdn/stories/', {
         version: 'published',
         starts_with: 'cases/',
+        per_page: 3,
+        sort_by: 'first_published_at:desc',
         resolve_relations: 'case-studies-container.case_studies',
       }),
       context.app.$storyapi.get('cdn/stories/', {

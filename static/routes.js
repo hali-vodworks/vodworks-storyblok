@@ -36,6 +36,12 @@ export default {
                     description: "Expand your team with trusted experts",
                     path: "/services/teams/",
                 },
+                {
+                    // name: "Cybersecurity",
+                    name: "Cybersecurity",
+                    description: "Secure your applications, data, and infrastructure",
+                    path: "/services/cyber-security/",
+                }
             ]
         },
         {

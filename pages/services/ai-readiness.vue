@@ -24,9 +24,8 @@
         </div>
         <div class="text-center mx-auto md:max-w-4/5 mt-8 lg:mt-16">
           <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 mx-auto gap-2 md:gap-4 lg:gap-6">
-            <template v-for="(card, i) in getAIReadinessServiceData.service_ai_readiness_details">
-              <ServiceCtaCard :key="i" :data="card" />
-            </template>
+            <ServiceCtaCard v-for="card in getAIReadinessServiceData.service_ai_readiness_details" :key="card._uid"
+              :data="card" />
           </div>
         </div>
       </div>
@@ -42,12 +41,10 @@
             animatedWords: getAIReadinessServiceData.animated_word,
             isBgDark: false
           }" />
-          <div class="mx-auto md:max-w-4/5  mt-4 lg:mt-12">
-            <template v-for="(card, i) in getAIReadinessServiceData.service_ai_readiness_details">
-              <ServiceLargeCard :key="i" :data="card" :button="{ text: `Get in touch`, btnURL: 'isStatic' }" />
-            </template>
+          <div class="mx-auto md:max-w-4/5 mt-4 lg:mt-12">
+            <ServiceLargeCard v-for="card in getAIReadinessServiceData.service_ai_readiness_details" :key="card._uid"
+              :data="card" :button="{ text: 'Get in touch', btnURL: 'isStatic' }" />
           </div>
-
         </div>
       </div>
     </section>
@@ -70,15 +67,14 @@
           <h2>{{ why_use_our_data_services.title }}</h2>
         </div>
         <div class="mt-4 lg:mt-12 center-two-ele-in-grid">
-          <template v-for="(card, i) in why_use_our_data_services.list">
-            <div :key="i" class="my-4 lg:my-4 text-center md:text-left item">
-              <AnimatedHeading3 :data="{
-                title: card.title,
-                isBgDark: false
-              }" />
-              <p class=" text-regular">{{ card.description }}</p>
-            </div>
-          </template>
+          <div v-for="card in why_use_our_data_services.list" :key="card._uid"
+            class="my-4 lg:my-4 text-center md:text-left item">
+            <AnimatedHeading3 :data="{
+              title: card.title,
+              isBgDark: false
+            }" />
+            <p class="text-regular">{{ card.description }}</p>
+          </div>
         </div>
       </div>
     </section>
@@ -137,6 +133,8 @@ export default {
       context.app.$storyapi.get('cdn/stories/', {
         version: 'published',
         starts_with: 'cases/',
+        per_page: 3,
+        sort_by: 'first_published_at:desc',
         resolve_relations: 'case-studies-container.case_studies',
       }),
       // Core:       24d738a4-ad30-45f7-9ec6-3584eb0ddbe0
@@ -209,7 +207,7 @@ export default {
             remaning_title: "on the main data pillars"
           },
         ]
-      },
+      }
     }
   },
 
@@ -254,8 +252,8 @@ export default {
           hid: 't-type',
           name: 'twitter:card',
           content: `${this.getAIReadinessServiceData.service_ai_readiness_details[0].content.thumbnail.filename}`,
-        },
-      ],
+        }
+      ]
     }
   },
   computed: {
@@ -277,7 +275,7 @@ export default {
     },
     getBlogData() {
       return this.allArticles
-    },
-  },
+    }
+  }
 }
 </script>

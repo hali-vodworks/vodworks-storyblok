@@ -16,9 +16,7 @@
         </div>
         <div class="text-center mx-auto md:max-w-4/5 mt-8 lg:mt-16">
           <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 mx-auto gap-2 md:gap-4 lg:gap-6">
-            <template v-for="(card, i) in getTeamsServiceData.service_teams_details">
-              <ServiceCtaCard :key="i" :data="card" />
-            </template>
+            <ServiceCtaCard v-for="card in getTeamsServiceData.service_teams_details" :key="card._uid" :data="card" />
           </div>
         </div>
       </div>
@@ -34,10 +32,9 @@
             animatedWords: getTeamsServiceData.animated_word,
             isBgDark: false
           }" />
-          <div class="mx-auto md:max-w-4/5  mt-4 lg:mt-12">
-            <template v-for="(card, i) in getTeamsServiceData.service_teams_details">
-              <ServiceLargeCard :key="i" :data="card" :button="{ text: `Let's discuss`, btnURL: 'isStatic' }" />
-            </template>
+          <div class="mx-auto md:max-w-4/5 mt-4 lg:mt-12">
+            <ServiceLargeCard v-for="card in getTeamsServiceData.service_teams_details" :key="card._uid" :data="card"
+              :button="{ text: `Let's discuss`, btnURL: 'isStatic' }" />
           </div>
         </div>
       </div>
@@ -53,17 +50,15 @@
         <div class="mt-4 lg:mt-12">
           <div class="teams_approach_timeline">
             <div class="approach_wrapper">
-              <template v-for="(step, i) in teams_building_approach.steps">
-                <div :key="i" class="approach_step">
-                  <div class="inner-content">
-                    <span>{{ step.count }}</span>
-                    <div class="hvr-top">
-                      <h6 class="color-pink">{{ step.title }}</h6>
-                      <p class="text-xsmall mt-2">{{ step.description }}</p>
-                    </div>
+              <div v-for="step in teams_building_approach.steps" :key="step._uid" class="approach_step">
+                <div class="inner-content">
+                  <span>{{ step.count }}</span>
+                  <div class="hvr-top">
+                    <h6 class="color-pink">{{ step.title }}</h6>
+                    <p class="text-xsmall mt-2">{{ step.description }}</p>
                   </div>
                 </div>
-              </template>
+              </div>
             </div>
           </div>
         </div>
@@ -73,13 +68,13 @@
 
     <!------------------------------------Featured CTA Version-1 ----------------------------------------->
     <FeaturedCTA :data="{
-        title: featuredCTAVersion1.title,
-        btnText: featuredCTAVersion1.btn_text,
-        btnURL: featuredCTAVersion1.btn_url,
-        imgSrc: featuredCTAVersion1.expert_image.filename,
-        col_1: 'md:col-span-6',
-        col_2: 'md:col-span-6',
-      }" />
+      title: featuredCTAVersion1.title,
+      btnText: featuredCTAVersion1.btn_text,
+      btnURL: featuredCTAVersion1.btn_url,
+      imgSrc: featuredCTAVersion1.expert_image.filename,
+      col_1: 'md:col-span-6',
+      col_2: 'md:col-span-6',
+    }" />
     <!---------------------------------------------------------------------------------------------------->
 
     <!------------------------------ Why Choose Vodworks?-------------------------------->
@@ -120,7 +115,6 @@ export default {
   async asyncData(context) {
     const path = context.route.path === '/' ? '/home' : context.route.path
     const [pageDataRes, allCasesRes] = await Promise.all([
-
       context.app.$storyapi.get(`cdn/stories/${path}`, {
         version: 'published',
         resolve_relations: 'service_teams_details_container.service_teams_details'
@@ -128,9 +122,10 @@ export default {
       context.app.$storyapi.get('cdn/stories/', {
         version: 'published',
         starts_with: 'cases/',
+        per_page: 3,
+        sort_by: 'first_published_at:desc',
         resolve_relations: 'case-studies-container.case_studies',
       }),
-
     ])
     return {
       pageData: pageDataRes.data,
@@ -170,6 +165,7 @@ export default {
           }
         ]
       },
+      
       teams_building_approach: {
         title: "Our Unique Approach to Building Teams",
         steps: [
@@ -212,9 +208,7 @@ export default {
             count: "08",
             title: "Happy client, Happy life",
             description: "We regularly ask for feedback and do our best to exceed your expectations"
-          },
-
-
+          }
         ]
       }
     }
@@ -262,8 +256,8 @@ export default {
           hid: 't-type',
           name: 'twitter:card',
           content: `${this.getTeamsServiceData.service_teams_details[0].content.thumbnail.filename}`,
-        },
-      ],
+        }
+      ]
     }
   },
 
@@ -280,7 +274,7 @@ export default {
       return this.pageData.story.content.Services_Detailed_Content.find(function (obj) {
         return obj.component === 'featured_CTA_version_1';
       })
-    },
-  },
+    }
+  }
 }
 </script>
