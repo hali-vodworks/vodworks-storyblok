@@ -842,13 +842,14 @@
             font-size: 18px;   
         }
     }
-
-
     .outcome{
         .total-info:first-child{
           border-right: none;
         }
-      }
+    }
+    .filters {
+        flex-direction: column;
+    }
 
 }
 
