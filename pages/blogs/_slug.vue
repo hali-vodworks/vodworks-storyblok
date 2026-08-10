@@ -2,41 +2,49 @@
 <template>
   <div>
     <component :is="pageData.story.content.component" v-if="pageData.story.content.component"
-      :key="pageData.story.content._uid" :blok="pageData.story.content" :faqsdata="faqs" :getBlogData="relatedPosts" />
+      :key="pageData.story.content._uid" :blok="pageData.story.content" :getBlogData="relatedPosts" />
   </div>
 </template>
 <script>
 
 export default {
-  async asyncData(context ) {
+    async asyncData(context) {
     const path = context.route.path === '/' ? '/home' : context.route.path
-    const [pageDataRes, faqsRes, relatedPostsRes] = await Promise.all([
-      context.app.$storyapi.get(`cdn/stories/${path}`, {
-        version: 'published',
-        resolve_relations: 'blog-container.blog,blog.author,blog.co_author',
-      }),
-      context.app.$storyapi.get('cdn/stories/', {
-        version: 'published',
-        starts_with: 'faqs/',
-      }),
-      context.app.$storyapi.get('cdn/stories/', {
+
+    // 1️⃣ Fetch main blog post
+    const pageDataRes = await context.app.$storyapi.get(`cdn/stories/${path}`, {
+      version: 'published',
+      resolve_relations: 'blog-container.blog,blog.author,blog.co_author,blog.FAQs'
+    })
+
+    const currentBlog = pageDataRes.data.story
+    const categoryIds = currentBlog.content.categories || []
+
+    // 2️⃣ Fetch automatic related posts based on categories
+    let relatedPosts = { stories: [] }
+
+    if (categoryIds.length > 0) {
+      const relatedPostsRes = await context.app.$storyapi.get('cdn/stories/', {
         version: 'published',
         starts_with: 'blogs/',
         per_page: 4,
-        sort_by: 'first_published_at:desc',
-      }),
-    ])
+        excluding_slugs: currentBlog.full_slug,
+        filter_query: {
+          categories: {
+            any_in_array: categoryIds.join(',') // Works with UUID array
+          }
+        },
+        sort_by: 'first_published_at:desc'
+      })
+      relatedPosts = relatedPostsRes.data
+    }
+
     return {
       pageData: pageDataRes.data,
-      faqs: faqsRes.data,
-      relatedPosts: relatedPostsRes.data
+      relatedPosts
     }
   },
-  data() {
-    return {
-      story: { content: {} },
-    }
-  },
+
   head() {
     return {
       title: `${this.pageData.story.content.meta_title}`,
