@@ -18,11 +18,14 @@
                 <div class="mx-auto">
                     <div class="mt-8 lg:mt-16">
                         <client-only>
-                            <VueSlickCarousel class="our-team-slider"
+                            <!-- 2 or fewer cards: static, centered -->
+                            <div v-if="data.getTeamsData.stories.length <= 2" class="grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-8 mx-auto max-w-4/5 our-team-static">
+                                <TeamSlidingCard v-for="(card, i) in data.getTeamsData.stories" :key="i" :data="card" />
+                            </div>
+                            <!-- More than 2 cards: slider -->
+                            <VueSlickCarousel v-else class="our-team-slider"
                                 v-bind="$store.state.sliders_configurations.our_team">
-                                <template v-for="(card, i) in data.getTeamsData.stories">
-                                    <TeamSlidingCard :key="i" :data="card" />
-                                </template>
+                                <TeamSlidingCard v-for="(card, i) in data.getTeamsData.stories" :key="i" :data="card" />
                             </VueSlickCarousel>
                         </client-only>
                     </div>

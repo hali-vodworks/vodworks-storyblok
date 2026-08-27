@@ -10,7 +10,14 @@
     }
   }
 }
-
+.our-team-static{
+  .team-avatar-wrapper {
+    img {
+      min-width: 260px;
+      height: 420px;
+    }
+  }
+}
 // ========================================================================================================
 
 .success-stories-slider {
