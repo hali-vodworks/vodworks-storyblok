@@ -325,6 +325,15 @@ li {
   img{
     width: 64px;
   }
+  &.vidscape div:last-child img {
+    width: 120px;
+  }
+
+  &.large-logos{
+    img {
+      width: 108px;
+    }
+  }
 }
 
 .review{

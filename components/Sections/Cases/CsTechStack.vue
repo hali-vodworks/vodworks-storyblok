@@ -5,7 +5,7 @@
                 <div class="text-center color-white">
                     <h3>{{ data.title }}</h3>
                 </div>
-                <div class="logos mt-8 lg:mt-16" :class="data.layout">
+                <div class="logos mt-8 lg:mt-16" :class="[ data.layout, { 'large-logos': data.large_logos }]">
                     <template v-for="(item, index) in data.block">
                         <div :key="index" class="item my-0 md:my-4">
                             <img class="hvr-top" :src="item.image.filename" :alt="item.image.alt" />
