@@ -63,7 +63,7 @@
 
     <!-- Static Sections -->
     <BlogCTA v-once />
-    <FAQSection v-if="blok.FAQs && blok.FAQs.length"  v-once :faqs="blok.FAQs" />
+    <FAQSection v-if="blok.FAQs && blok.FAQs.length" v-once :faqs="blok.FAQs" />
     <SubscribeToOurBlog v-once />
     <ArticlesSections v-once :data="{ title: 'Related', animated_word: 'Posts', getBlogData, isDarkMode: false }" />
     <GetInTouchWithUs v-once :data="{ title: 'Get in Touch with us', isDarkSectionAtTop: true }" />
@@ -85,12 +85,14 @@ export default {
       perplexityUrl: null,
       sections: [],
       activeSection: null,
-      renderedContent: '',
       observer: null,
     };
   },
 
   computed: {
+    renderedContent() {
+      return this.$md.render(this.blok.content || '');
+    },
     formattedDate() {
       const options = { year: 'numeric', month: 'long', day: 'numeric' };
       return new Date(this.blok.published_date.split(' ')[0]).toLocaleDateString('en-US', options);
@@ -113,9 +115,6 @@ export default {
   },
 
   mounted() {
-    // Render markdown once
-    this.renderedContent = this.$md.render(this.blok.content);
-
     // Set links target _blank safely
     this.$nextTick(() => {
       this.$refs.details.querySelectorAll('a').forEach(a => {
